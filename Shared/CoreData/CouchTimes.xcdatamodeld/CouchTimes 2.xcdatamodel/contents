@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Episode" representedClassName=".Episode" syncable="YES">
+        <attribute name="availableTranslations" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
+        <attribute name="episodeNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="first_aired" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="imdbId" optional="YES" attributeType="String"/>
+        <attribute name="numberAbsolute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="runtime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="seasonNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="tmdbId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="traktId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tvdbId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="watched" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="season" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Season" inverseName="episodes" inverseEntity="Season"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Show" inverseName="episodes" inverseEntity="Show"/>
+    </entity>
+    <entity name="Season" representedClassName=".Season" syncable="YES">
+        <attribute name="airedEpisodes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="episodeCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="first_aired" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="network" optional="YES" attributeType="String"/>
+        <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="tmdbId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="traktId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tvdbId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Episode" inverseName="season" inverseEntity="Episode"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Show" inverseName="seasons" inverseEntity="Show"/>
+    </entity>
+    <entity name="Show" representedClassName=".Show" syncable="YES">
+        <attribute name="airedEpisodes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="airsDay" optional="YES" attributeType="String"/>
+        <attribute name="airsTime" optional="YES" attributeType="String"/>
+        <attribute name="airsTimezone" optional="YES" attributeType="String"/>
+        <attribute name="availableTranslations" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
+        <attribute name="certification" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="firstAirDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="genres" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
+        <attribute name="homepage" optional="YES" attributeType="String"/>
+        <attribute name="imdbId" optional="YES" attributeType="String"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="language" optional="YES" attributeType="String"/>
+        <attribute name="network" optional="YES" attributeType="String"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="runtime" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="slug" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="tmdbId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="trailer" optional="YES" attributeType="String"/>
+        <attribute name="traktId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="tvdbId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="year" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Episode" inverseName="show" inverseEntity="Episode"/>
+        <relationship name="seasons" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Season" inverseName="show" inverseEntity="Season"/>
+        <relationship name="showImages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ShowImage" inverseName="show" inverseEntity="ShowImage"/>
+    </entity>
+    <entity name="ShowImage" representedClassName=".ShowImage" syncable="YES">
+        <attribute name="aspectRatio" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="fileData" optional="YES" attributeType="Binary"/>
+        <attribute name="filePath" optional="YES" attributeType="String"/>
+        <attribute name="isPoster" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Show" inverseName="showImages" inverseEntity="Show"/>
+    </entity>
+    <elements>
+        <element name="Episode" positionX="-416.40234375" positionY="-218.99609375" width="128" height="284"/>
+        <element name="Season" positionX="-701.25390625" positionY="388.375" width="128" height="238"/>
+        <element name="Show" positionX="-773.88671875" positionY="-241.81640625" width="128" height="493"/>
+        <element name="ShowImage" positionX="-1086.94921875" positionY="-13.046875" width="128" height="133"/>
+    </elements>
+</model>
