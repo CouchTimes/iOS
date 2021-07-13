@@ -24,12 +24,8 @@ struct Watchlist: View {
         switch showSorting {
         case .byEpisodesAsc:
             return viewModel.shows.sorted { $0.episodeCount < $1.episodeCount }
-        case .byEpisodesDesc:
-            return viewModel.shows.sorted { $0.episodeCount > $1.episodeCount }
         case .byNameAsc:
             return viewModel.shows.sorted { $0.title < $1.title }
-        case .byNameDesc:
-            return viewModel.shows.sorted { $0.title > $1.title }
         }
     }
 
@@ -61,15 +57,7 @@ struct Watchlist: View {
                         Image(systemName: "checkmark.circle")
                     }
 
-                    Text("Least episodes")
-                }
-                
-                Button(action: sortShowsByEpisodesDesc) {
-                    if showSorting == .byEpisodesDesc  {
-                        Image(systemName: "checkmark.circle")
-                    }
-
-                    Text("Most episodes")
+                    Text("Episodes")
                 }
 
                 Button(action: sortShowsByNameAsc) {
@@ -77,15 +65,7 @@ struct Watchlist: View {
                         Image(systemName: "checkmark.circle")
                     }
                     
-                    Text("Name (A→Z)")
-                }
-                
-                Button(action: sortShowsByNameDesc) {
-                    if showSorting == .byNameDesc {
-                        Image(systemName: "checkmark.circle")
-                    }
-                    
-                    Text("Name (Z→A)")
+                    Text("Alphabetical")
                 }
             } label: {
                 Image(systemName: "arrow.up.arrow.down.circle")
@@ -93,34 +73,26 @@ struct Watchlist: View {
                     .foregroundColor(Color("tintColor"))
             })
         }
-        .onReceive(self.didManagedObjectContextSave) { _ in
-            viewModel.fetchAllShows()
-        }
-        .onReceive(self.didStoreRemoteChange) { _ in
-            viewModel.fetchAllShows()
-        }
+        
+        // TODO: Fix background changes bug
+//        .onReceive(self.didManagedObjectContextSave) { _ in
+//            viewModel.fetchAllShows()
+//        }
+//        .onReceive(self.didStoreRemoteChange) { _ in
+//            viewModel.fetchAllShows()
+//        }
     }
 
     private func sortShowsByEpisodesAsc() {
         showSorting = .byEpisodesAsc
     }
-    
-    private func sortShowsByEpisodesDesc() {
-        showSorting = .byEpisodesDesc
-    }
 
     private func sortShowsByNameAsc() {
         showSorting = .byNameAsc
-    }
-    
-    private func sortShowsByNameDesc() {
-        showSorting = .byNameDesc
     }
 }
 
 enum ShowFilter {
     case byEpisodesAsc
-    case byEpisodesDesc
     case byNameAsc
-    case byNameDesc
 }
