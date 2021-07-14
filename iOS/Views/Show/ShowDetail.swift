@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct ShowDetail: View {
-    private var didManagedObjectContextSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
-    
     @State private var showDetailMode = 0
     @State private var selectedSeason: Season?
     @State private var showingSeasonDetails = false
@@ -19,6 +17,10 @@ struct ShowDetail: View {
 
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
+    
+    private var didManagedObjectContextSave = NotificationCenter.default
+        .publisher(for: .NSManagedObjectContextDidSave)
+        .receive(on: RunLoop.main)
     
     init(showId: Int) {
         _viewModel = StateObject(wrappedValue: ShowViewModel(showId: showId))
@@ -78,11 +80,10 @@ struct ShowDetail: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color("backgroundColor"))
             .edgesIgnoringSafeArea(.all)
-            // TODO: Fix background changes bug
-//            .onReceive(self.didManagedObjectContextSave) { _ in
-//                viewModel.fetchShowById(Int(viewModel.show!.tmdbId))
-//                viewModel.showWatched()
-//            }
+            .onReceive(self.didManagedObjectContextSave) { _ in
+                viewModel.fetchShowById(Int(viewModel.show!.tmdbId))
+                viewModel.showWatched()
+            }
         }
     }
 }

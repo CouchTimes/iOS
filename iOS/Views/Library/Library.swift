@@ -13,8 +13,13 @@ struct Library: View {
     @State private var showingSettings = false
     @ObservedObject var viewModel = LibraryViewModel()
     
-    private var didManagedObjectContextSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
-    private var didStoreRemoteChange = NotificationCenter.default.publisher(for: .NSPersistentStoreRemoteChange)
+    private var didManagedObjectContextSave = NotificationCenter.default
+        .publisher(for: .NSManagedObjectContextDidSave)
+        .receive(on: RunLoop.main)
+
+    private var didStoreRemoteChange = NotificationCenter.default
+        .publisher(for: .NSPersistentStoreRemoteChange)
+        .receive(on: RunLoop.main)
     
     let layout = [
         GridItem(.adaptive(minimum: 96, maximum: 128)),
@@ -62,15 +67,14 @@ struct Library: View {
                 }
             }
         }
-        // TODO: Fix background changes bug
-//        .onReceive(self.didManagedObjectContextSave) { _ in
-//            viewModel.fetchAllShows()
-//            viewModel.fetchFavoriteShows()
-//        }
-//        .onReceive(self.didStoreRemoteChange) { _ in
-//            viewModel.fetchAllShows()
-//            viewModel.fetchFavoriteShows()
-//        }
+        .onReceive(self.didManagedObjectContextSave) { _ in
+            viewModel.fetchAllShows()
+            viewModel.fetchFavoriteShows()
+        }
+        .onReceive(self.didStoreRemoteChange) { _ in
+            viewModel.fetchAllShows()
+            viewModel.fetchFavoriteShows()
+        }
         .sheet(isPresented: $showingSettings) {
             Settings().accentColor(Color("tintColor"))
         }

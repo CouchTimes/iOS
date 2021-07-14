@@ -6,16 +6,22 @@
 //  Copyright © 2019 Jan Früchtl. All rights reserved.
 //
 
-import CoreData
+import Combine
 import SwiftUI
+import CoreData
 
 struct Watchlist: View {
     @State private var isPresented = false
     @State private var showSorting: ShowFilter = .byEpisodesAsc
     @ObservedObject var viewModel = WatchlistViewModel()
+    
+    private var didManagedObjectContextSave = NotificationCenter.default
+        .publisher(for: .NSManagedObjectContextDidSave)
+        .receive(on: RunLoop.main)
 
-    private var didManagedObjectContextSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
-    private var didStoreRemoteChange = NotificationCenter.default.publisher(for: .NSPersistentStoreRemoteChange)
+    private var didStoreRemoteChange = NotificationCenter.default
+        .publisher(for: .NSPersistentStoreRemoteChange)
+        .receive(on: RunLoop.main)
 
     let layout = [
         GridItem(.flexible())
@@ -75,13 +81,12 @@ struct Watchlist: View {
             })
         }
         
-        // TODO: Fix background changes bug
-//        .onReceive(self.didManagedObjectContextSave) { _ in
-//            viewModel.fetchAllShows()
-//        }
-//        .onReceive(self.didStoreRemoteChange) { _ in
-//            viewModel.fetchAllShows()
-//        }
+        .onReceive(self.didManagedObjectContextSave) { _ in
+            viewModel.fetchAllShows()
+        }
+        .onReceive(self.didStoreRemoteChange) { _ in
+            viewModel.fetchAllShows()
+        }
     }
 
     private func sortShowsByEpisodesAsc() {
