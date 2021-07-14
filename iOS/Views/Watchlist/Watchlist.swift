@@ -10,6 +10,7 @@ import CoreData
 import SwiftUI
 
 struct Watchlist: View {
+    @State private var isPresented = false
     @State private var showSorting: ShowFilter = .byEpisodesAsc
     @ObservedObject var viewModel = WatchlistViewModel()
 

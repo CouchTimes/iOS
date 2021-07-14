@@ -18,60 +18,60 @@ struct Settings: View {
     @State private var selectedAppIconMode = 0
 
     var body: some View {
-        Form {
-            Section(footer: Text("Last updated \(viewModel.lastUpdatedDateHuman)")) {
-                HStack {
-                    Button("Sync") {
-                        updateShows()
+            Form {
+                Section(footer: Text("Last updated \(viewModel.lastUpdatedDateHuman)")) {
+                    HStack {
+                        Button("Sync") {
+                            updateShows()
+                        }
+                        
+                        if viewModel.syncing == true {
+                            Spacer()
+                            ProgressView()
+                        }
                     }
-                    
-                    if viewModel.syncing == true {
-                        Spacer()
-                        ProgressView()
-                    }
-                }
-            }
-            
-            Section(header: Text("General")) {
-                NavigationLink(destination: SettingsAppearance()) {
-                    Text("Appearance")
                 }
                 
+                Section(header: Text("General")) {
+                    NavigationLink(destination: SettingsAppearance()) {
+                        Text("Appearance")
+                    }
+
+
+                    NavigationLink(destination: SettingsAppIcon()) {
+                        Text("App Icon")
+                    }
+                }
                 
-                NavigationLink(destination: SettingsAppIcon()) {
-                    Text("App Icon")
+                Section(header: Text("Feedback")) {
+                    HStack {
+                        Link("Send Feedback", destination: URL(string: "mailto:support@couchtim.es")!)
+                    }
+                    HStack {
+                        Link("Please Rate CouchTimes", destination: URL(string: "https://www.youtube.com/watch?v=oHg5SJYRHA0")!)
+                    }
+                }
+                
+                Section(header: Text("Information")) {
+                    NavigationLink(destination: SettingsAbout()) {
+                        Text("About")
+                    }
+                    HStack {
+                        Link("Privacy Policy", destination: URL(string: "https://couchtim.es/privacy-policy/")!)
+                    }
                 }
             }
-            
-            Section(header: Text("Feedback")) {
-                HStack {
-                    Link("Send Feedback", destination: URL(string: "mailto:support@couchtim.es")!)
-                }
-                HStack {
-                    Link("Please Rate CouchTimes", destination: URL(string: "https://www.youtube.com/watch?v=oHg5SJYRHA0")!)
-                }
+            .navigationBarTitle("Settings", displayMode: .inline)
+            .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
+                self.showingAlert = true
             }
-            
-            Section(header: Text("Information")) {
-                HStack {
-                    Link("Help", destination: URL(string: "https://www.youtube.com/watch?v=oHg5SJYRHA0")!)
-                }
-                HStack {
-                    Link("Privacy Policy", destination: URL(string: "https://www.youtube.com/watch?v=oHg5SJYRHA0")!)
-                }
-            }
-        }
-        .navigationBarTitle("Settings", displayMode: .inline)
-        .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
-            self.showingAlert = true
-        }
-        .alert(isPresented: $showingAlert) {
-            Alert(
-                title: Text("Update all shows"),
-                message: Text("Do you want to force update all your saved shows? This can take a while..."),
-                primaryButton: .default(Text("Update"), action: forceUpdateAllShows),
-                secondaryButton: .destructive(Text("Cancel"))
-            )
+            .alert(isPresented: $showingAlert) {
+                Alert(
+                    title: Text("Update all shows"),
+                    message: Text("Do you want to force update all your saved shows? This can take a while..."),
+                    primaryButton: .default(Text("Update"), action: forceUpdateAllShows),
+                    secondaryButton: .destructive(Text("Cancel"))
+                )
         }
     }
 }

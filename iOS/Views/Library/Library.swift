@@ -62,14 +62,15 @@ struct Library: View {
                 }
             }
         }
-        .onReceive(self.didManagedObjectContextSave) { _ in
-            viewModel.fetchAllShows()
-            viewModel.fetchFavoriteShows()
-        }
-        .onReceive(self.didStoreRemoteChange) { _ in
-            viewModel.fetchAllShows()
-            viewModel.fetchFavoriteShows()
-        }
+        // TODO: Fix background changes bug
+//        .onReceive(self.didManagedObjectContextSave) { _ in
+//            viewModel.fetchAllShows()
+//            viewModel.fetchFavoriteShows()
+//        }
+//        .onReceive(self.didStoreRemoteChange) { _ in
+//            viewModel.fetchAllShows()
+//            viewModel.fetchFavoriteShows()
+//        }
         .sheet(isPresented: $showingSettings) {
             Settings().accentColor(Color("tintColor"))
         }

@@ -78,10 +78,11 @@ struct ShowDetail: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color("backgroundColor"))
             .edgesIgnoringSafeArea(.all)
-            .onReceive(self.didManagedObjectContextSave) { _ in
-                viewModel.fetchShowById(Int(viewModel.show!.tmdbId))
-                viewModel.showWatched()
-            }
+            // TODO: Fix background changes bug
+//            .onReceive(self.didManagedObjectContextSave) { _ in
+//                viewModel.fetchShowById(Int(viewModel.show!.tmdbId))
+//                viewModel.showWatched()
+//            }
         }
     }
 }
