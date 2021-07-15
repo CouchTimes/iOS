@@ -9,11 +9,14 @@
 import Combine
 import SwiftUI
 import CoreData
+import WidgetKit
 
 struct Watchlist: View {
     @State private var isPresented = false
     @State private var showSorting: ShowFilter = .byEpisodesAsc
     @ObservedObject var viewModel = WatchlistViewModel()
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     private var didManagedObjectContextSave = NotificationCenter.default
         .publisher(for: .NSManagedObjectContextDidSave)
@@ -40,13 +43,30 @@ struct Watchlist: View {
         NavigationView {
             Group {
                 if viewModel.shows.count > 0 {
-                    ScrollView {
-                        LazyVGrid(columns: layout, spacing: 16.0) {
-                            ForEach(filteredShows, id: \.objectID) { show in
-                                WatchlistCell(show: Binding.constant(show))
+                    List {
+                        ForEach(filteredShows, id: \.objectID) { show in
+                            WatchlistCell(show: Binding.constant(show))
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button {
+                                    managedObjectContext.performAndWait {
+                                        show.nextEpisode!.watched = true
+                                        do {
+                                            try managedObjectContext.save()
+                                            WidgetCenter.shared.reloadAllTimelines()
+                                        } catch {
+                                            print(error)
+                                        }
+                                    }
+                                } label: {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .imageScale(.large)
+                                }.tint(.green)
                             }
-                        }.padding(.vertical)
+                        }
                     }
+                    .listStyle(.grouped)
+                    .listSectionSeparator(.hidden, edges: .all)
+                    .refreshable { print("Test") }
                 } else {
                     EmptyState(title: "Keep track for your shows",
                                text: "Add shows to your Watchlist for quick access. Freshly added shows will automatically also appear in your Watchlist.",

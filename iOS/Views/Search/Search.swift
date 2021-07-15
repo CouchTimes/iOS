@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct Search: View {
+    @State private var query: String = ""
     @State private var showingSettings = false
     @ObservedObject var viewModel = SearchViewModel()
 
@@ -21,7 +22,11 @@ struct Search: View {
             .onAppear {
                 viewModel.getInitialData()
             }
-            .navigationBarTitle("Search", displayMode: .inline)
+            .navigationBarTitle("Search")
+            .searchable(text: $query)
+            .onChange(of: query) { newQuery in
+                print(query)
+            }
             .environmentObject(viewModel)
         }
     }

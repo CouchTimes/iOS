@@ -13,7 +13,7 @@ struct SearchContentView: View {
 
     var body: some View {
         VStack {
-            SearchTextField()
+//            SearchTextField()
             if searchViewModel.isLoading {
                 VStack {
                     Spacer()

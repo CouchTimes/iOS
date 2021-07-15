@@ -21,7 +21,6 @@ struct LibraryItem: View {
         .sheet(isPresented: $isPresented) {
             ShowDetail(showId: Int(show.tmdbId))
         }
-        .buttonStyle(MyButtonStyle())
     }
 }
 
