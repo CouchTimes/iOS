@@ -13,17 +13,33 @@ struct Search: View {
     @ObservedObject var viewModel = SearchViewModel()
 
     var body: some View {
-        NavigationView {
-            SearchContentView()
-            .sheet(isPresented: $viewModel.showDetailsPresented) {
-                SearchShowDetail(show: viewModel.selectedShow!, savedShowIds: viewModel.savedShows)
+        VStack {
+            SearchTextField()
+            if viewModel.isLoading {
+                VStack {
+                    Spacer()
+                    SearchLoading()
+                    Spacer()
+                }
+            } else {
+                if viewModel.searchedShows.count > 0 || viewModel.searchMode {
+                    SearchResults()
+                } else {
+                    ScrollView {
+                        VStack {
+                            SearchRecommendations()
+                        }
+                    }
+                }
             }
-            .onAppear {
-                viewModel.getInitialData()
-            }
-            .navigationBarTitle("Search", displayMode: .inline)
-            .environmentObject(viewModel)
         }
+        .sheet(isPresented: $viewModel.showDetailsPresented) {
+            SearchShowDetail(show: viewModel.selectedShow!, savedShowIds: viewModel.savedShows)
+        }
+        .onAppear {
+            viewModel.getInitialData()
+        }
+        .environmentObject(viewModel)
     }
 }
 
