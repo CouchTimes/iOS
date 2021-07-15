@@ -15,20 +15,12 @@ struct Search: View {
     var body: some View {
         VStack {
             SearchTextField()
-            if viewModel.isLoading {
-                VStack {
-                    Spacer()
-                    SearchLoading()
-                    Spacer()
-                }
+            if viewModel.searchMode {
+                SearchResults()
             } else {
-                if viewModel.searchedShows.count > 0 || viewModel.searchMode {
-                    SearchResults()
-                } else {
-                    ScrollView {
-                        VStack {
-                            SearchRecommendations()
-                        }
+                ScrollView {
+                    VStack {
+                        SearchRecommendations()
                     }
                 }
             }

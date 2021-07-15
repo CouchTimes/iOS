@@ -30,7 +30,7 @@ struct SearchResultItem: View {
                 SearchResultItemPoster(poster: poster)
                 VStack(alignment: .leading, spacing: 2.0) {
                     ItemTitle(text: title)
-                        .minimumScaleFactor(0.5)
+                        .lineLimit(2)
                     ItemCaption(text: show.wrappedYearString)
                 }
                 Spacer()

@@ -134,20 +134,14 @@ class SearchViewModel: ObservableObject {
     }
 
     func searchShowByName(_ name: String) {
-        searchMode = true
-        isLoading = true
-
         NetworkService.shared.searchShowByName(name) { result in
             switch result {
             case let .success(shows):
-                print(shows)
                 self.searchedShows = shows
                 self.isLoading = false
-                print("isLoading = false")
 
             case let .failure(error):
                 print(error)
-                self.isLoading = false
             }
         }
     }
