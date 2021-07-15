@@ -16,8 +16,8 @@
         <attribute name="tvdbId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="watched" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <relationship name="season" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Season" inverseName="episodes" inverseEntity="Season"/>
-        <relationship name="show" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Show" inverseName="episodes" inverseEntity="Show"/>
+        <relationship name="season" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Season" inverseName="episodes" inverseEntity="Season"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="episodes" inverseEntity="Show"/>
     </entity>
     <entity name="Season" representedClassName=".Season" syncable="YES">
         <attribute name="airedEpisodes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -31,8 +31,8 @@
         <attribute name="tmdbId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="traktId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tvdbId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Episode" inverseName="season" inverseEntity="Episode"/>
-        <relationship name="show" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Show" inverseName="seasons" inverseEntity="Show"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Episode" inverseName="season" inverseEntity="Episode"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="seasons" inverseEntity="Show"/>
     </entity>
     <entity name="Show" representedClassName=".Show" syncable="YES">
         <attribute name="airedEpisodes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -62,9 +62,9 @@
         <attribute name="tvdbId" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="year" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
-        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Episode" inverseName="show" inverseEntity="Episode"/>
-        <relationship name="seasons" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Season" inverseName="show" inverseEntity="Season"/>
-        <relationship name="showImages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ShowImage" inverseName="show" inverseEntity="ShowImage"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Episode" inverseName="show" inverseEntity="Episode"/>
+        <relationship name="seasons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Season" inverseName="show" inverseEntity="Season"/>
+        <relationship name="showImages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShowImage" inverseName="show" inverseEntity="ShowImage"/>
     </entity>
     <entity name="ShowImage" representedClassName=".ShowImage" syncable="YES">
         <attribute name="aspectRatio" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -72,12 +72,12 @@
         <attribute name="filePath" optional="YES" attributeType="String"/>
         <attribute name="isPoster" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
-        <relationship name="show" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Show" inverseName="showImages" inverseEntity="Show"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="showImages" inverseEntity="Show"/>
     </entity>
     <elements>
         <element name="Episode" positionX="-416.40234375" positionY="-218.99609375" width="128" height="284"/>
-        <element name="Season" positionX="-701.25390625" positionY="388.375" width="128" height="238"/>
-        <element name="Show" positionX="-773.88671875" positionY="-241.81640625" width="128" height="493"/>
-        <element name="ShowImage" positionX="-1086.94921875" positionY="-13.046875" width="128" height="133"/>
+        <element name="Season" positionX="-701.25390625" positionY="388.375" width="128" height="224"/>
+        <element name="Show" positionX="-773.88671875" positionY="-241.81640625" width="128" height="479"/>
+        <element name="ShowImage" positionX="-1086.94921875" positionY="-13.046875" width="128" height="119"/>
     </elements>
 </model>
