@@ -15,6 +15,8 @@ struct SearchTextField: View {
     var body: some View {
         SearchBar(text: $searchText)
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.SearchAction)) { _ in
+                self.searchViewModel.isLoading = true
+                self.searchViewModel.searchMode = true
                 self.searchViewModel.searchShowByName(self.searchText)
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.SearchCancelAction)) { _ in

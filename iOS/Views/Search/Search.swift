@@ -9,26 +9,29 @@
 import SwiftUI
 
 struct Search: View {
-    @State private var query: String = ""
     @State private var showingSettings = false
     @ObservedObject var viewModel = SearchViewModel()
 
     var body: some View {
-        NavigationView {
-            SearchContentView()
-            .sheet(isPresented: $viewModel.showDetailsPresented) {
-                SearchShowDetail(show: viewModel.selectedShow!, savedShowIds: viewModel.savedShows)
+        VStack {
+            SearchTextField()
+            if viewModel.searchMode {
+                SearchResults()
+            } else {
+                ScrollView {
+                    VStack {
+                        SearchRecommendations()
+                    }
+                }
             }
-            .onAppear {
-                viewModel.getInitialData()
-            }
-            .navigationBarTitle("Search")
-            .searchable(text: $query)
-            .onChange(of: query) { newQuery in
-                print(query)
-            }
-            .environmentObject(viewModel)
         }
+        .sheet(isPresented: $viewModel.showDetailsPresented) {
+            SearchShowDetail(show: viewModel.selectedShow!, savedShowIds: viewModel.savedShows)
+        }
+        .onAppear {
+            viewModel.getInitialData()
+        }
+        .environmentObject(viewModel)
     }
 }
 
