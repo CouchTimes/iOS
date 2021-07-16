@@ -45,6 +45,7 @@
 		B22ABAD3261B2D110002EF41 /* Episode+CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22ABAD1261B2D110002EF41 /* Episode+CRUD.swift */; };
 		B22ABAD9261B2DA50002EF41 /* ShowImage+CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22ABAD8261B2DA50002EF41 /* ShowImage+CRUD.swift */; };
 		B22ABADA261B2DA50002EF41 /* ShowImage+CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22ABAD8261B2DA50002EF41 /* ShowImage+CRUD.swift */; };
+		B2331FEA26A1628400A2D6AC /* LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B2331FE926A1628400A2D6AC /* LaunchScreen.png */; };
 		B2371CCC244729D4003D2631 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2371CCB244729D4003D2631 /* Search.swift */; };
 		B24A3496254D8FCF00A5F08E /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24A3495254D8FCF00A5F08E /* EmptyState.swift */; };
 		B24A34A4254DA1AD00A5F08E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24A34A3254DA1AD00A5F08E /* OnboardingView.swift */; };
@@ -245,6 +246,7 @@
 		B22ABAC6261B2BFB0002EF41 /* Season+CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Season+CRUD.swift"; sourceTree = "<group>"; };
 		B22ABAD1261B2D110002EF41 /* Episode+CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Episode+CRUD.swift"; sourceTree = "<group>"; };
 		B22ABAD8261B2DA50002EF41 /* ShowImage+CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowImage+CRUD.swift"; sourceTree = "<group>"; };
+		B2331FE926A1628400A2D6AC /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
 		B2371CCB244729D4003D2631 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		B24A3495254D8FCF00A5F08E /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
 		B24A34A3254DA1AD00A5F08E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -405,11 +407,11 @@
 				B2D4C3D22476E30D000AD496 /* ViewModel */,
 				B263D0572358ED81009E8CA9 /* Views */,
 				B24E780D2358EEB70015025F /* Components */,
+				B2331FEB26A1654600A2D6AC /* LaunchScreen */,
 				B202D18423492C0A00A31A2A /* Assets.xcassets */,
 				B2BE9D95259B68A800511DE7 /* AppDelegate.swift */,
 				B202D18023492C0900A31A2A /* SceneDelegate.swift */,
 				B268D691259CAAF100125E78 /* Themes.swift */,
-				B202D18923492C0A00A31A2A /* LaunchScreen.storyboard */,
 				B202D18C23492C0A00A31A2A /* Info.plist */,
 				B21D11AA254BE79300E461C7 /* CouchTimes.entitlements */,
 				B2BE9E36259B6D2300511DE7 /* CouchTimesDebug.entitlements */,
@@ -485,6 +487,15 @@
 				B2E870C524B1F20E005D6BD2 /* SearchNoResult.swift */,
 			);
 			path = Results;
+			sourceTree = "<group>";
+		};
+		B2331FEB26A1654600A2D6AC /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B2331FE926A1628400A2D6AC /* LaunchScreen.png */,
+				B202D18923492C0A00A31A2A /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		B24E780D2358EEB70015025F /* Components */ = {
@@ -945,6 +956,7 @@
 				B22970032561A91300C61BBD /* Colorful.png in Resources */,
 				B202D18B23492C0A00A31A2A /* LaunchScreen.storyboard in Resources */,
 				B22970042561A91300C61BBD /* Dark.png in Resources */,
+				B2331FEA26A1628400A2D6AC /* LaunchScreen.png in Resources */,
 				B202D18823492C0A00A31A2A /* Preview Assets.xcassets in Resources */,
 				B202D18523492C0A00A31A2A /* Assets.xcassets in Resources */,
 			);
@@ -1453,7 +1465,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1478,7 +1490,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
