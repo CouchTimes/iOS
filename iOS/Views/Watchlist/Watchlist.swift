@@ -43,29 +43,27 @@ struct Watchlist: View {
         NavigationView {
             Group {
                 if viewModel.shows.count > 0 {
-                    List {
-                        ForEach(filteredShows, id: \.objectID) { show in
-                            WatchlistCell(show: Binding.constant(show))
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button {
-                                    managedObjectContext.performAndWait {
-                                        show.nextEpisode!.watched = true
-                                        do {
-                                            try managedObjectContext.save()
-                                            WidgetCenter.shared.reloadAllTimelines()
-                                        } catch {
-                                            print(error)
-                                        }
+                    List(filteredShows, id: \.objectID) { show in
+                        WatchlistCell(show: Binding.constant(show))
+                        .listRowSeparator(.hidden)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button {
+                                managedObjectContext.performAndWait {
+                                    show.nextEpisode!.watched = true
+                                    do {
+                                        try managedObjectContext.save()
+                                        WidgetCenter.shared.reloadAllTimelines()
+                                    } catch {
+                                        print(error)
                                     }
-                                } label: {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .imageScale(.large)
-                                }.tint(.green)
-                            }
+                                }
+                            } label: {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .imageScale(.large)
+                            }.tint(.green)
                         }
                     }
-                    .listStyle(.grouped)
-                    .listSectionSeparator(.hidden, edges: .all)
+                    .listStyle(.plain)
                     .refreshable { print("Test") }
                 } else {
                     EmptyState(title: "Keep track for your shows",
