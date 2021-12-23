@@ -17,15 +17,14 @@ struct WatchlistCell: View {
 
     var body: some View {
         VStack {
-                HStack(alignment: .center, spacing: 16) {
-                    WatchlistCover(cover: show.poster)
-                    WatchlistCellContent(title: show.title, nextEpisode: show.nextEpisodeToWatch)
-                    Spacer()
-                    WatchlistCellEpisodeCounter(text: count)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal)
-                .background(Color("backgroundColor"))
+            HStack(alignment: .center, spacing: 16) {
+                WatchlistCover(cover: show.poster)
+                WatchlistCellContent(title: show.title, nextEpisode: show.nextEpisodeToWatch)
+                Spacer()
+                WatchlistCellEpisodeCounter(text: count)
+            }
+            .frame(maxWidth: .infinity)
+            .background(Color("backgroundColor"))
         }
     }
 }

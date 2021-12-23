@@ -46,6 +46,7 @@ struct Watchlist: View {
                     List(filteredShows, id: \.objectID) { show in
                         WatchlistCell(show: Binding.constant(show))
                         .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button {
                                 managedObjectContext.performAndWait {
@@ -74,7 +75,7 @@ struct Watchlist: View {
             .navigationBarTitle("Watchlist", displayMode: .inline)
             .navigationBarItems(leading: NavigationLink(destination: Settings().accentColor(Color("tintColor"))) {
                 Image(systemName: "gearshape")
-                    .font(Font.system(size: 20, weight: .bold))
+                    .font(Font.system(size: 16, weight: .bold))
                     .foregroundColor(Color("tintColor"))
             }, trailing: Menu {
                 Button(action: sortShowsByEpisodesAsc) {
@@ -94,7 +95,7 @@ struct Watchlist: View {
                 }
             } label: {
                 Image(systemName: "arrow.up.arrow.down.circle")
-                    .font(Font.system(size: 20, weight: .bold))
+                    .font(Font.system(size: 16, weight: .bold))
                     .foregroundColor(Color("tintColor"))
             })
         }

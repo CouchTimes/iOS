@@ -22,8 +22,7 @@ struct LibraryCover: View {
     var body: some View {
         Image(uiImage: imageData)
             .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 104)
+            .aspectRatio(contentMode: .fit)
             .cornerRadius(8)
     }
 }

@@ -24,7 +24,7 @@ struct SearchTextField: View {
                 self.searchViewModel.searchMode = false
                 self.searchViewModel.searchedShows = []
             }
-            .padding(.top, 8)
+            .padding(.top, -5)
             .padding(.horizontal, 4)
     }
 }
