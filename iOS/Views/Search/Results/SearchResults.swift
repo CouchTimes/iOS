@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SearchResults: View {
+    var query: String
     @EnvironmentObject var searchViewModel: SearchViewModel
 
     var body: some View {
@@ -19,7 +20,7 @@ struct SearchResults: View {
                 Spacer()
             }
         } else {
-            if searchViewModel.searchedShows.count > 0  {
+            if searchViewModel.searchedShows.count > 0 && !query.isEmpty  {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         ForEach(searchViewModel.searchedShows, id: \.id) { show in
@@ -29,17 +30,17 @@ struct SearchResults: View {
                     .padding(.horizontal)
                     .padding(.bottom, 24)
                 }
+            } else if searchViewModel.searchedShows.count == 0 && !query.isEmpty {
+                VStack {
+                    Spacer()
+                    SearchLoading()
+                    Spacer()
+                }
             } else {
                 EmptyState(title: "No shows found",
                            text: "Try searching for a different name or show you are looking for.",
                            iconName: "eyeglasses")
             }
         }
-    }
-}
-
-struct SearchResults_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResults()
     }
 }

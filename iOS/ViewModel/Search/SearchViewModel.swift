@@ -14,7 +14,6 @@ import UIKit
 class SearchViewModel: ObservableObject {
     private var cancellables = [AnyCancellable]()
 
-    @Published var searchMode = false
     @Published var isLoading = false
     @Published var isSavingShow = false
 
