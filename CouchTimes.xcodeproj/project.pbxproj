@@ -106,6 +106,7 @@
 		B2900B9724DDAA5B00276812 /* ShowSeasonsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2900B9624DDAA5B00276812 /* ShowSeasonsList.swift */; };
 		B2900B9924DDABAE00276812 /* ShowInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2900B9824DDABAE00276812 /* ShowInformation.swift */; };
 		B2909D6E248D21FA004BD25B /* WatchlistCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909D6D248D21FA004BD25B /* WatchlistCover.swift */; };
+		B29995B6277B371D00671A8D /* WatchlistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29995B5277B371D00671A8D /* WatchlistList.swift */; };
 		B2A1C9A5265BA3BA00441F49 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2A1C9A4265BA3BA00441F49 /* Keys.plist */; };
 		B2AB4C01250545E400631B3A /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AB4C00250545E400631B3A /* Blur.swift */; };
 		B2B043C524B1078B0089482C /* SearchLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B043C424B1078B0089482C /* SearchLoading.swift */; };
@@ -292,6 +293,7 @@
 		B2900B9624DDAA5B00276812 /* ShowSeasonsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSeasonsList.swift; sourceTree = "<group>"; };
 		B2900B9824DDABAE00276812 /* ShowInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInformation.swift; sourceTree = "<group>"; };
 		B2909D6D248D21FA004BD25B /* WatchlistCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistCover.swift; sourceTree = "<group>"; };
+		B29995B5277B371D00671A8D /* WatchlistList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistList.swift; sourceTree = "<group>"; };
 		B2A1C9A4265BA3BA00441F49 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		B2AB4C00250545E400631B3A /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		B2B043C424B1078B0089482C /* SearchLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLoading.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				B202D18223492C0900A31A2A /* Watchlist.swift */,
+				B29995B5277B371D00671A8D /* WatchlistList.swift */,
 				B202D1B1234930FB00A31A2A /* WatchlistCell.swift */,
 				B2E7E09C2493F8BC008B2EC5 /* WatchlistCellContent.swift */,
 				B2E7E09A2493F80A008B2EC5 /* WatchlistCellEpisodeCounter.swift */,
@@ -1011,6 +1014,7 @@
 				B2D7F0002615D40000476A96 /* GenreResponse.swift in Sources */,
 				B278D42B248AC71700834F81 /* AppView.swift in Sources */,
 				B22A750824967018000EDEF4 /* SearchResultItemPoster.swift in Sources */,
+				B29995B6277B371D00671A8D /* WatchlistList.swift in Sources */,
 				B2D4C3D42476E341000AD496 /* SearchViewModel.swift in Sources */,
 				B22A750A24968427000EDEF4 /* ShowInfoBlock.swift in Sources */,
 				B257314D23C0CDE1006AD477 /* CouchTimes.xcdatamodeld in Sources */,

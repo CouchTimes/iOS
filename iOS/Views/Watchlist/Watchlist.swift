@@ -9,7 +9,6 @@
 import Combine
 import SwiftUI
 import CoreData
-import WidgetKit
 
 struct Watchlist: View {
     @State private var query: String = ""
@@ -42,37 +41,7 @@ struct Watchlist: View {
 
     var body: some View {
         NavigationView {
-            Group {
-                if viewModel.shows.count > 0 {
-                    List(filteredShows, id: \.objectID) { show in
-                        WatchlistCell(show: Binding.constant(show))
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button {
-                                managedObjectContext.performAndWait {
-                                    show.nextEpisode!.watched = true
-                                    do {
-                                        try managedObjectContext.save()
-                                        WidgetCenter.shared.reloadAllTimelines()
-                                    } catch {
-                                        print(error)
-                                    }
-                                }
-                            } label: {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .imageScale(.large)
-                            }.tint(.green)
-                        }
-                    }
-                    .listStyle(.plain)
-                    .refreshable { print("Test") }
-                } else {
-                    EmptyState(title: "Keep track for your shows",
-                               text: "Add shows to your Watchlist for quick access. Freshly added shows will automatically also appear in your Watchlist.",
-                               iconName: "tv")
-                }
-            }
+            WatchlistList(shows: filteredShows, showsCount: viewModel.shows.count)
             .navigationBarTitle("Watchlist", displayMode: .large)
             .navigationBarItems(leading: NavigationLink(destination: Settings().accentColor(Color("tintColor"))) {
                 Image(systemName: "gearshape")
