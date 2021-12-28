@@ -12,6 +12,7 @@ import CoreData
 import WidgetKit
 
 struct Watchlist: View {
+    @State private var query: String = ""
     @State private var isPresented = false
     @State private var showSorting: ShowFilter = .byEpisodesAsc
     @ObservedObject var viewModel = WatchlistViewModel()
@@ -72,7 +73,7 @@ struct Watchlist: View {
                                iconName: "tv")
                 }
             }
-            .navigationBarTitle("Watchlist", displayMode: .inline)
+            .navigationBarTitle("Watchlist", displayMode: .large)
             .navigationBarItems(leading: NavigationLink(destination: Settings().accentColor(Color("tintColor"))) {
                 Image(systemName: "gearshape")
                     .font(Font.system(size: 16, weight: .bold))
@@ -98,6 +99,10 @@ struct Watchlist: View {
                     .font(Font.system(size: 16, weight: .bold))
                     .foregroundColor(Color("tintColor"))
             })
+            .searchable(text: $query, placement: .automatic, prompt: "Search")
+            .refreshable {
+                print("Reload")
+            }
         }
         
         .onReceive(self.didManagedObjectContextSave) { _ in
