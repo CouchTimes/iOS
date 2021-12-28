@@ -12,8 +12,6 @@ import SwiftUI
 class SettingsViewModel: ObservableObject {
     private let managedContext = StorageProvider.shared.persistentContainer.viewContext
     private let defaults = UserDefaults.standard
-    private var shows = [Show]()
-    private var showIdsWithUpdates = [Int]()
     
     @Published var syncing = false
     @Published var lastUpdatedDate: TimeInterval
@@ -29,8 +27,6 @@ class SettingsViewModel: ObservableObject {
         } else {
             lastUpdatedDate = Date().timeIntervalSince1970
         }
-        
-        fetchAllShows()
     }
     
     var lastUpdatedDateHuman: String {
@@ -48,56 +44,28 @@ class SettingsViewModel: ObservableObject {
         
         return dateFormatter.string(from: date)
     }
-}
-
-extension SettingsViewModel {
-    private func fetchAllShows() {
-        let shows = try! managedContext.fetch(Show.getAllShows())
-        self.shows = shows
-    }
     
-    func checkForUpdates(allShows: Bool) {
-        var changeIds = [Int]()
-        var showIdsThatNeedUpdates = [Show]()
+    func updateShows(forceUpdateAllShows: Bool) {
+        let shows = try! managedContext.fetch(Show.getAllShows())
+        self.syncing = true
         
-        if(allShows) {
-            self.updateShows(shows)
-        } else {
-            NetworkService.shared.getShowChanges { result in
+        if forceUpdateAllShows {
+            SyncProvider.shared.updateShows(shows) { result in
                 switch result {
-                case let .success(changes):
-                    for change in changes.results {
-                        changeIds.append(change.id)
-                    }
-                    
-                    self.shows.forEach { show in
-                        if changeIds.contains(Int(show.tmdbId)) {
-                            showIdsThatNeedUpdates.append(show)
-                        }
-                    }
-                    
-                    self.updateShows(showIdsThatNeedUpdates)
-                    
+                case .success(_):
+                    self.syncing = false
                 case let .failure(error):
                     print(error)
                 }
             }
-        }
-    }
-    
-    private func updateShows(_ shows: [Show]) {
-        let fetchGroup = DispatchGroup()
-        
-        shows.forEach { show in
-            fetchGroup.enter()
-            
-            NetworkService.shared.getShowDetails(showId: Int(show.tmdbId)) { result in
+        } else {
+            SyncProvider.shared.checkForUpdatedShows(shows) { result in
                 switch result {
-                case let .success(showResponse):
-                    NetworkService.shared.getAllSeasons(show: showResponse) { result in
+                case let .success(show):
+                    SyncProvider.shared.updateShows(show) { result in
                         switch result {
-                        case let .success(seasons):
-                            show.updateShow(managedObjectContext: self.managedContext, showResponse: showResponse, seasons: seasons)
+                        case .success(_):
+                            self.syncing = false
                         case let .failure(error):
                             print(error)
                         }
@@ -105,15 +73,7 @@ extension SettingsViewModel {
                 case let .failure(error):
                     print(error)
                 }
-                
-                fetchGroup.leave()
             }
-        }
-        
-        fetchGroup.notify(queue: .main) {
-            self.syncing = false
-            self.defaults.set(Date().timeIntervalSince1970, forKey: "lastUpdatedShowData")
-            self.lastUpdatedDate = Date().timeIntervalSince1970
         }
     }
 }

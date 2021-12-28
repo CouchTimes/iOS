@@ -23,4 +23,22 @@ class WatchlistViewModel: ObservableObject {
         let shows = try! managedObjectContext.fetch(Show.getAllActiveShows())
         self.shows = shows
     }
+    
+    func updateShows() async {
+        SyncProvider.shared.checkForUpdatedShows(shows) { result in
+            switch result {
+            case let .success(show):
+                SyncProvider.shared.updateShows(show) { result in
+                    switch result {
+                    case .success(_):
+                        print("MEGA NOICE")
+                    case let .failure(error):
+                        print(error)
+                    }
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
 }

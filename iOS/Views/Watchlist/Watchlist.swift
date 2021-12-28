@@ -70,7 +70,7 @@ struct Watchlist: View {
             })
             .searchable(text: $query, placement: .automatic, prompt: "Search")
             .refreshable {
-                print("Reload")
+                await viewModel.updateShows()
             }
         }
         

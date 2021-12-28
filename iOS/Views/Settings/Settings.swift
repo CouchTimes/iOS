@@ -78,13 +78,12 @@ struct Settings: View {
 
 extension Settings {
     private func forceUpdateAllShows() {
-        viewModel.syncing = true
-        viewModel.checkForUpdates(allShows: true)
+        viewModel.updateShows(forceUpdateAllShows: true)
     }
     
     private func updateShows() {
-        viewModel.syncing = true
-        viewModel.checkForUpdates(allShows: false)
+        print("updateShows")
+        viewModel.updateShows(forceUpdateAllShows: false)
     }
 }
 
