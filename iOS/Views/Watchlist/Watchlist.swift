@@ -46,7 +46,7 @@ struct Watchlist: View {
                     List(filteredShows, id: \.objectID) { show in
                         WatchlistCell(show: Binding.constant(show))
                         .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                        .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button {
                                 managedObjectContext.performAndWait {

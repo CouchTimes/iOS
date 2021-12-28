@@ -22,7 +22,9 @@ struct Library: View {
         .receive(on: RunLoop.main)
     
     let layout = [
-        GridItem(.adaptive(minimum: 96))
+        GridItem(.flexible(minimum: 96), spacing: 20),
+        GridItem(.flexible(minimum: 96), spacing: 20),
+        GridItem(.flexible(minimum: 96))
     ]
     
     var shows: [Show] {
@@ -38,13 +40,13 @@ struct Library: View {
             Group {
                 if shows.count > 0 {
                     ScrollView {
-                        LazyVGrid(columns: layout, alignment: .leading, spacing: 16) {
+                        LazyVGrid(columns: layout, alignment: .center) {
                             ForEach(shows, id: \.objectID) { show in
                                 LibraryItem(show: Binding.constant(show))
                             }
                         }
                     }
-                    .padding(.top, 8)
+                    .padding(.top, 10)
                     .padding(.horizontal, 20)
                 } else {
                     if libraryViewState == 0 {
