@@ -14,7 +14,7 @@ struct InfoLinkCell: View {
     var destination: String
 
     var body: some View {
-        HStack(alignment: .center, spacing: 8) {
+        HStack(alignment: .center, spacing: 10) {
             SectionTitle(text: label)
             Spacer()
             Link(value, destination: URL(string: destination)!)

@@ -13,7 +13,7 @@ struct ShowInfoTitle: View {
     var subtitle: String?
 
     var body: some View {
-        VStack(alignment: .center, spacing: 4) {
+        VStack(alignment: .center, spacing: 10) {
             Text(title)
                 .font(.largeTitle)
                 .fontWeight(.bold)

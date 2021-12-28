@@ -12,10 +12,10 @@ struct ShowInformation: View {
     var show: Show
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 20) {
             ShowDetailDescription(description: show.wrappedOverview)
             Divider()
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 20) {
                 InfoTextCell(label: "Airs", value: show.wrappedAirs)
                 InfoTextCell(label: "Runtime", value: show.wrappedRuntime)
                 InfoTextCell(label: "Network", value: show.wrappedNetwork)
@@ -24,10 +24,10 @@ struct ShowInformation: View {
 
             Divider()
             Group {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 20) {
                     SectionTitle(text: "Open In")
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(alignment: .center, spacing: 16) {
+                        HStack(alignment: .center, spacing: 20) {
                             if show.homepage != nil {
                                 if !show.homepage!.isEmpty {
                                     OpenIn(label: "Homepage", url: URL(string: show.homepage!)!)

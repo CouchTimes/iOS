@@ -12,7 +12,7 @@ struct ShowDetailDescription: View {
     var description: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8.0) {
+        VStack(alignment: .leading, spacing: 10.0) {
             SectionTitle(text: "Description")
             Text(description)
                 .lineLimit(nil)

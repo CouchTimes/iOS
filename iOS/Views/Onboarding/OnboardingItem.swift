@@ -14,13 +14,13 @@ struct OnboardingItem: View {
     var iconName: String
     
     var body: some View {
-        HStack (alignment: .center, spacing: 8) {
+        HStack (alignment: .center, spacing: 10) {
             ZStack(alignment: .center) {
                 Image(systemName: iconName)
                     .foregroundColor(Color("tintColor"))
                     .font(Font.system(size: 32, weight: .bold))
             }.frame(width: 72, height: 72)
-            VStack (alignment: .leading, spacing: 8) {
+            VStack (alignment: .leading, spacing: 10) {
                 Text(title)
                     .font(Font.headline.bold())
                 Text(text)

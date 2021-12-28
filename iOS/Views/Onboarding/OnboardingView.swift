@@ -12,7 +12,7 @@ struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack (alignment: .leading, spacing: 48) {
+        VStack (alignment: .leading, spacing: 108) {
             VStack(alignment: .leading) {
                 Text("Welcome to").font(.system(size: 48)).fontWeight(.heavy).foregroundColor(.primary)
                 Text("CouchTimes").font(.system(size: 48)).fontWeight(.heavy).foregroundColor(Color("tintColor"))

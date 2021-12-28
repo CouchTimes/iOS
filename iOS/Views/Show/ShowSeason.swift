@@ -37,7 +37,7 @@ struct ShowSeason: View {
                         .cornerRadius(4)
                         .padding(.top, 16)
 
-                    VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 20) {
                         HStack(alignment: .center) {
                             Text("Season \(viewModel.season.number)")
                                 .font(Font.system(size: 32, weight: .bold))
@@ -64,8 +64,8 @@ struct ShowSeason: View {
                                 Button(action: {
                                     self.viewModel.toggleWatchedStatusOfEpisode(episode: episode)
                                 }) {
-                                    HStack(alignment: .center, spacing: 16) {
-                                        VStack(alignment: .leading, spacing: 4) {
+                                    HStack(alignment: .center, spacing: 20) {
+                                        VStack(alignment: .leading, spacing: 10) {
                                             Text("\(episode.episodeNumber). \(episode.title)")
                                                 .font(.headline)
                                                 .foregroundColor(Color("titleColor"))

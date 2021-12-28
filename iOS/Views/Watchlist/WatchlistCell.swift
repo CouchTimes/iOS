@@ -16,8 +16,10 @@ struct WatchlistCell: View {
     @Environment(\.managedObjectContext) var managedObjectContext
 
     var body: some View {
-        VStack {
-            HStack(alignment: .center, spacing: 16) {
+        Button(action: {
+            self.isPresented.toggle()
+        }) {
+            HStack(alignment: .center, spacing: 20) {
                 WatchlistCover(cover: show.poster)
                 WatchlistCellContent(title: show.title, nextEpisode: show.nextEpisodeToWatch)
                 Spacer()
@@ -26,7 +28,16 @@ struct WatchlistCell: View {
             .frame(maxWidth: .infinity)
             .background(Color("backgroundColor"))
         }
+        .sheet(isPresented: $isPresented) {
+            ShowDetail(showId: Int(show.tmdbId))
+        }.buttonStyle(WatchlistCellButtonStyle())
     }
+}
+
+struct WatchlistCellButtonStyle: ButtonStyle {
+  func makeBody(configuration: Self.Configuration) -> some View {
+    configuration.label
+  }
 }
 
 extension WatchlistCell {

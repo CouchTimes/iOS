@@ -14,13 +14,13 @@ struct LargeWidgetView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             ForEach(shows, id: \.self) { show in
-                HStack(alignment: .center, spacing: 16) {
+                HStack(alignment: .center, spacing: 20) {
                     Image(uiImage: UIImage(data: show.poster!)!)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 60)
                         .cornerRadius(4)
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 10) {
                         ItemTitle(text: show.title)
                             .lineLimit(2)
                             .truncationMode(.tail)

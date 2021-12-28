@@ -26,7 +26,7 @@ struct SearchResultItem: View {
             searchViewModel.selectedShow = show
             searchViewModel.showDetailsPresented.toggle()
         }) {
-            HStack(alignment: .center, spacing: 16) {
+            HStack(alignment: .center, spacing: 20) {
                 SearchResultItemPoster(poster: poster)
                 VStack(alignment: .leading, spacing: 2.0) {
                     ItemTitle(text: title)

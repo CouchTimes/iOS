@@ -20,7 +20,7 @@ struct EmptyState: View {
                 Image(systemName: iconName)
                     .font(Font.system(size: 48, weight: .bold))
                     .foregroundColor(Color("tintColor"))
-                VStack(alignment: .center, spacing: 8) {
+                VStack(alignment: .center, spacing: 10) {
                     Text(title)
                         .font(Font.title2.bold())
                     Text(text)

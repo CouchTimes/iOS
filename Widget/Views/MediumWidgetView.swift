@@ -17,9 +17,9 @@ struct MediumWidgetView: View {
     }
     
     var body: some View {
-        HStack(alignment: .center, spacing: 16) {
+        HStack(alignment: .center, spacing: 20) {
             ForEach(shows, id: \.self) { show in
-                VStack(alignment: .center, spacing: 8) {
+                VStack(alignment: .center, spacing: 10) {
                     Image(uiImage: UIImage(data: show.poster!)!)
                         .resizable()
                         .aspectRatio(contentMode: .fill)

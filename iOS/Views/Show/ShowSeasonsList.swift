@@ -21,7 +21,7 @@ struct ShowSeasonsList: View {
                     self.showingSeasonDetails.toggle()
                 }) {
                     HStack(alignment: .center) {
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading, spacing: 10) {
                             ItemTitle(text: "Season \(season.number)")
                             ItemCaption(text: "\(season.episodesToGo) episodes left")
                         }

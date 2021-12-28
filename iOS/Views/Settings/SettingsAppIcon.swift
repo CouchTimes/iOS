@@ -15,7 +15,7 @@ struct SettingsAppIcon: View {
         List {
             ForEach(0..<viewModel.iconNames.count, id: \.self) { index in
                 HStack {
-                    HStack(alignment: .center, spacing: 8) {
+                    HStack(alignment: .center, spacing: 10) {
                         Image(uiImage: UIImage(named: viewModel.iconNames[index] ?? "AppIcon") ?? UIImage())
                             .resizable()
                             .renderingMode(.original)

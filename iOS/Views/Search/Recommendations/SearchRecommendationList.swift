@@ -15,14 +15,14 @@ struct SearchRecommendationList: View {
     @EnvironmentObject var searchViewModel: SearchViewModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(Color("captionColor"))
                 .padding(.horizontal)
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(alignment: .center, spacing: 16) {
+                LazyHStack(alignment: .center, spacing: 20) {
                     if shows.count > 0 {
                         ForEach(shows, id: \.id) { show in
                             SearchRecommendationListItem(show: show, savedShowIds: searchViewModel.savedShows)
