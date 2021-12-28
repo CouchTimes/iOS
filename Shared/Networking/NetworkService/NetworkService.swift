@@ -21,7 +21,15 @@ extension NetworkService {
         self.getShowDetails(shows: shows) { result in
             switch result {
                 case let .success(shows):
-                    completion(.success(shows))
+                    self.getShowImageDataForMultipleShows(shows: shows) { result in
+                        switch result {
+                            case let .success(showsWithImages):
+                                completion(.success(showsWithImages))
+                            case let .failure(error):
+                                completion(.failure(error))
+                                // TODO: Add error handling
+                        }
+                    }
                 case let .failure(error):
                     completion(.failure(error))
                     // TODO: Add error handling

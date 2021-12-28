@@ -29,7 +29,8 @@ struct SearchRecommendationList: View {
                         }
                     } else {
                         ForEach(0 ..< 20) { _ in
-                            ProgressView()
+                            Rectangle()
+                                .fill(Color("dividerColor"))
                                 .frame(width: 128, height: 192)
                                 .cornerRadius(6)
                         }

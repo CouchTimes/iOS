@@ -11,39 +11,20 @@ import SwiftUI
 struct SearchRecommendationListItemCover: View {
     var show: ShowDetailsResponse
 
-    var posterURL: URL? {
-        if let posterPath = show.poster_path {
-            return URL(string: "https://image.tmdb.org/t/p/w500\(String(describing: posterPath))")!
-        } else {
-            return nil
+    var poster: Image {
+        if let poster = show.poster_data {
+            return Image(uiImage: UIImage(data: poster)!)
         }
+
+        return Image("cover_placeholder")
     }
 
     var body: some View {
-        if posterURL != nil {
-            AsyncImage(url: posterURL) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFit()
-                case .failure:
-                    Image(systemName: "wifi.slash")
-                @unknown default:
-                    EmptyView()
-                }
-            }
+        poster
+            .resizable()
+            .scaledToFill()
             .frame(width: 128, height: 192)
             .cornerRadius(6)
-        } else {
-            Image("cover_placeholder")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 128, height: 192)
-                .cornerRadius(6)
-        }
     }
 }
 
