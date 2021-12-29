@@ -75,7 +75,7 @@ extension Show {
                 createSeason(season)
             }
         
-        // If the count of "filteredSeaonResponse" is bigger OR equal the count of seasons inside CoreData
+        // If the count of "seasonsFromResponse" is bigger OR equal the count of seasons inside CoreData
         } else if (seasonsFromResponse.count >= seasons.count) {
             updateSeasons(seasonsResponse)
         }
@@ -127,8 +127,6 @@ extension Show {
                             // Update the season with all the data
                             singleSeason.updateSeasonFromResponse(seasonResponse)
                             self.updateEpisodes(season: singleSeason, seasonResponse: seasonResponse)
-                            
-                            print("Successfully updated '\(self.title)', season \(singleSeason.number)")
                         }
                     }
                 }
@@ -141,8 +139,6 @@ extension Show {
                         if let singleSeason = seasons.filter({ $0.number == seasonResponseSeasonNumber}).first {
                             singleSeason.updateSeasonFromResponse(response)
                             self.updateEpisodes(season: singleSeason, seasonResponse: response)
-                            
-                            print("Successfully updated \(singleSeason.title), season \(singleSeason.number)")
                         } else {
                             createSeason(response)
                         }
@@ -155,22 +151,33 @@ extension Show {
     // MARK: Handle everything episode-related for shows
     
     private func updateEpisodes(season: Season, seasonResponse: ShowSeasonResponse) {
+        guard let managedObjectContext = self.managedObjectContext else {
+            print("Couldn't unwrap the managedObjectContext (CoreData) from the show object.")
+            return
+        }
+        
         // Unwrap all optional episodes as an NSSet
-        guard let episodes = season.episodes?.allObjects as? [Episode] else {
+        guard let coreDataEpisodes = season.episodes?.allObjects as? [Episode] else {
             print("Couldn't unwrap and cast the 'episodes' property from the show object.")
             return
         }
         
-        // Loop through all CoreData episodes
-        episodes.forEach { episode in
-            // Unwrap all episodes from ShowSeasonResponse
-            guard let episodesResponse = seasonResponse.episodes else { return }
-            
-            // Unwrap matching episode based on the episode number of the CoreData entry and the ShowSeasonResponse entry
-            if let episodeResponse = episodesResponse.filter({ $0.episode_number == episode.episodeNumber }).first {
-                episode.updateEpisodeFromResponse(episodeResponse, coreDataShow: self)
+        guard let responseEpisodes = seasonResponse.episodes else {
+            print("Couldn't unwrap and cast the 'episodes' property from the show object.")
+            return
+        }
+        
+        
+        // Loop through all response episodes
+        responseEpisodes.forEach { episode in
+            if let coreDataEpisode = coreDataEpisodes.first(where: { $0.title == episode.name }) {
+                coreDataEpisode.updateEpisodeFromResponse(episode, coreDataShow: self)
             } else {
-                print("DAHAHAHAHAHA SAD")
+                let coreDataEpisode = Episode(context: managedObjectContext)
+                coreDataEpisode.updateEpisodeFromResponse(episode, coreDataShow: self)
+                    
+                // Add episodes to the season
+                season.addToEpisodes(coreDataEpisode)
             }
         }
     }
