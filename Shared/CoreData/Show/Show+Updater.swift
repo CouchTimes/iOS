@@ -185,16 +185,24 @@ extension Show {
             return
         }
         
-        if images.count == 0 {
-            guard let managedObjectContext = self.managedObjectContext else {
-                print("Couldn't unwrap the managedObjectContext (CoreData) from the show object.")
-                return
-            }
-            
-            if let path = showResponse.poster_path, let data = showResponse.poster_data {
+        guard let managedObjectContext = self.managedObjectContext else {
+            print("Couldn't unwrap the managedObjectContext (CoreData) from the show object.")
+            return
+        }
+        
+        if let path = showResponse.poster_path, let data = showResponse.poster_data {
+            if images.count == 0 {
                 let coreDataShowImage = ShowImage(context: managedObjectContext)
                 coreDataShowImage.updateShowImageFromResponse(path: path, data: data)
                 self.addToShowImages(coreDataShowImage)
+            } else {
+                if let oldShowImage = self.showImages?.allObjects.first {
+                    self.removeFromShowImages(oldShowImage as! ShowImage)
+                    
+                    let coreDataShowImage = ShowImage(context: managedObjectContext)
+                    coreDataShowImage.updateShowImageFromResponse(path: path, data: data)
+                    self.addToShowImages(coreDataShowImage)
+                }
             }
         }
     }

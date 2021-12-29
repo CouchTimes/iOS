@@ -87,7 +87,7 @@ extension NetworkService {
         }
     }
     
-    private func getShowImageData(show: ShowDetailsResponse, completion: @escaping (Result<ShowDetailsResponse, Error>) -> Void) {
+    func getShowImageData(show: ShowDetailsResponse, completion: @escaping (Result<ShowDetailsResponse, Error>) -> Void) {
         if let posterPath = show.poster_path {
             downloadShowImages(filePath: posterPath) { downloadResult in
                 switch downloadResult {

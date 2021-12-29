@@ -56,7 +56,15 @@ class SyncProvider {
                     NetworkService.shared.getAllSeasons(show: showResponse) { result in
                         switch result {
                         case let .success(seasons):
-                            show.updateShow(managedObjectContext: self.managedContext, showResponse: showResponse, seasons: seasons)
+                            NetworkService.shared.getShowImageData(show: showResponse) { result in
+                                switch result {
+                                    case let .success(showResponseWithImage):
+                                    show.updateShow(managedObjectContext: self.managedContext, showResponse: showResponseWithImage, seasons: seasons)
+                                    case let .failure(error):
+                                        completion(.failure(error))
+                                        // TODO: Add error handling
+                                }
+                            }
                         case let .failure(error):
                             print(error)
                             completion(.failure(error))
