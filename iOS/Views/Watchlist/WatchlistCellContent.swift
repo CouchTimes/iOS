@@ -13,7 +13,7 @@ struct WatchlistCellContent: View {
     var nextEpisode: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 4) {
             ItemTitle(text: title)
                 .lineLimit(2)
                 .truncationMode(.tail)

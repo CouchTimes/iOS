@@ -19,9 +19,11 @@ struct WatchlistCell: View {
         Button(action: {
             self.isPresented.toggle()
         }) {
-            HStack(alignment: .center, spacing: 20) {
-                WatchlistCover(cover: show.poster)
-                WatchlistCellContent(title: show.title, nextEpisode: show.nextEpisodeToWatch)
+            HStack(alignment: .center, spacing: 0) {
+                HStack(alignment: .center, spacing: 16) {
+                    WatchlistCover(cover: show.poster)
+                    WatchlistCellContent(title: show.title, nextEpisode: show.nextEpisodeToWatch)
+                }.padding(.trailing, 16)
                 Spacer()
                 WatchlistCellEpisodeCounter(text: count)
             }

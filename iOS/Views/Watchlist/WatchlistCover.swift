@@ -23,7 +23,7 @@ struct WatchlistCover: View {
         Image(uiImage: imageData)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 96)
+            .frame(width: 80)
             .cornerRadius(8)
     }
 }
