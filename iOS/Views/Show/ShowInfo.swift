@@ -12,17 +12,21 @@ struct ShowInfo: View {
     var genre: String
     var rating: String
     var status: String
+    
+    let layout = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
 
     var body: some View {
-        HStack {
+        HStack(alignment: .center, spacing: 16) {
             ShowInfoBlock(label: "Genre", value: genre)
             ShowInfoBlockDivider()
             ShowInfoBlock(label: "Rating", value: rating)
             ShowInfoBlockDivider()
             ShowInfoBlock(label: "Status", value: status)
         }
-        .padding(.horizontal, 16)
-        .padding(.bottom, 8)
     }
 }
 

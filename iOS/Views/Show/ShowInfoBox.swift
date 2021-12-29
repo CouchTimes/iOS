@@ -21,6 +21,7 @@ struct ShowInfoBox: View {
             ShowInfoCover(poster: poster)
                 .padding(.top, 16)
             ShowInfoTitle(title: title, subtitle: subtitle)
+                .padding(.horizontal, 16)
             ShowInfo(genre: genre, rating: rating, status: status)
         }
     }

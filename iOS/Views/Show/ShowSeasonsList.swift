@@ -21,13 +21,11 @@ struct ShowSeasonsList: View {
                     self.showingSeasonDetails.toggle()
                 }) {
                     HStack(alignment: .center) {
-                        VStack(alignment: .leading, spacing: 10) {
+                        VStack(alignment: .leading, spacing: 4) {
                             ItemTitle(text: "Season \(season.number)")
                             ItemCaption(text: "\(season.episodesToGo) episodes left")
                         }
                         Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(Color("captionColor"))
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)

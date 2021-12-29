@@ -16,7 +16,6 @@ struct ShowInfoBlock: View {
         VStack(spacing: 2) {
             Text(value)
                 .font(Font.system(size: 16, weight: .bold))
-                .minimumScaleFactor(0.75)
                 .lineLimit(1)
                 .truncationMode(.tail)
                 .lineSpacing(24)
