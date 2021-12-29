@@ -11,12 +11,13 @@ import SwiftUI
 import CoreData
 
 struct Watchlist: View {
-    @State private var query: String = ""
+    @State private var searchText: String = ""
     @State private var isPresented = false
-    @State private var showSorting: ShowFilter = .byEpisodesAsc
+    @State private var showSorting: ShowFilter = .episodesAscending
     @ObservedObject var viewModel = WatchlistViewModel()
     
-    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.managedObjectContext) private var managedObjectContext
+    @Environment(\.isSearching) private var isSearching: Bool
     
     private var didManagedObjectContextSave = NotificationCenter.default
         .publisher(for: .NSManagedObjectContextDidSave)
@@ -30,45 +31,80 @@ struct Watchlist: View {
         GridItem(.flexible())
     ]
     
-    private var filteredShows: [Show] {
-        switch showSorting {
-        case .byEpisodesAsc:
-            return viewModel.shows.sorted { $0.episodeCount < $1.episodeCount }
-        case .byNameAsc:
-            return viewModel.shows.sorted { $0.title < $1.title }
+    private var shows: [Show] {
+        if searchText.isEmpty {
+            switch showSorting {
+            case .episodesAscending:
+                return viewModel.shows.sorted { $0.episodeCount < $1.episodeCount }
+            case .episodesDescending:
+                return viewModel.shows.sorted { $0.title > $1.title }
+            case .nameAscending:
+                return viewModel.shows.sorted { $0.title < $1.title }
+            case .nameDescending:
+                return viewModel.shows.sorted { $0.title > $1.title }
+            }
+        } else {
+            return viewModel.shows.filter { $0.title.contains(searchText) }
         }
     }
 
     var body: some View {
         NavigationView {
-            WatchlistList(shows: filteredShows, showsCount: viewModel.shows.count)
+            WatchlistList(shows: shows, showsCount: viewModel.shows.count)
             .navigationBarTitle("Watchlist", displayMode: .large)
             .navigationBarItems(leading: NavigationLink(destination: Settings().accentColor(Color("tintColor"))) {
                 Image(systemName: "gearshape")
                     .font(Font.system(size: 16, weight: .bold))
                     .foregroundColor(Color("tintColor"))
             }, trailing: Menu {
-                Button(action: sortShowsByEpisodesAsc) {
-                    if showSorting == .byEpisodesAsc {
-                        Image(systemName: "checkmark.circle")
+                Menu {
+                    Button(action: sortShowsByAscendingEpisodes) {
+                        if showSorting == .episodesAscending {
+                            Image(systemName: "checkmark.circle")
+                        }
+
+                        Text("Ascending")
                     }
 
-                    Text("Episodes")
+                    Button(action: sortShowsByDescendingEpisodes) {
+                        if showSorting == .episodesDescending {
+                            Image(systemName: "checkmark.circle")
+                        }
+                        
+                        Text("Descending")
+                    }
+                } label: {
+                    Text("Episodes To Watch")
+                        .font(Font.system(size: 16, weight: .bold))
+                        .foregroundColor(Color("tintColor"))
                 }
+                Menu {
+                    Button(action: sortShowsByAscendingNames) {
+                        if showSorting == .nameAscending {
+                            Image(systemName: "checkmark.circle")
+                        }
 
-                Button(action: sortShowsByNameAsc) {
-                    if showSorting == .byNameAsc {
-                        Image(systemName: "checkmark.circle")
+                        Text("Ascending")
                     }
-                    
+
+                    Button(action: sortShowsByDescendingName) {
+                        if showSorting == .nameDescending {
+                            Image(systemName: "checkmark.circle")
+                        }
+                        
+                        Text("Descending")
+                    }
+                } label: {
                     Text("Alphabetical")
+                        .font(Font.system(size: 16, weight: .bold))
+                        .foregroundColor(Color("tintColor"))
                 }
             } label: {
                 Image(systemName: "arrow.up.arrow.down.circle")
                     .font(Font.system(size: 16, weight: .bold))
                     .foregroundColor(Color("tintColor"))
             })
-            .searchable(text: $query, placement: .automatic, prompt: "Search")
+            .searchable(text: $searchText, placement: .automatic, prompt: "Search")
             .refreshable {
                 await viewModel.updateShows()
             }
@@ -82,16 +118,26 @@ struct Watchlist: View {
         }
     }
 
-    private func sortShowsByEpisodesAsc() {
-        showSorting = .byEpisodesAsc
+    private func sortShowsByAscendingEpisodes() {
+        showSorting = .episodesAscending
     }
 
-    private func sortShowsByNameAsc() {
-        showSorting = .byNameAsc
+    private func sortShowsByDescendingEpisodes() {
+        showSorting = .episodesDescending
+    }
+    
+    private func sortShowsByAscendingNames() {
+        showSorting = .nameAscending
+    }
+
+    private func sortShowsByDescendingName() {
+        showSorting = .nameDescending
     }
 }
 
 enum ShowFilter {
-    case byEpisodesAsc
-    case byNameAsc
+    case episodesAscending
+    case episodesDescending
+    case nameAscending
+    case nameDescending
 }
