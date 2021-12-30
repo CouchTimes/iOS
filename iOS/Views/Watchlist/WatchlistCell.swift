@@ -13,7 +13,7 @@ struct WatchlistCell: View {
     @Binding var show: Show
 
     var body: some View {
-        NavigationLink(destination: ShowDetail(show: show)) {
+        ZStack {
             HStack(alignment: .center, spacing: 0) {
                 HStack(alignment: .center, spacing: 16) {
                     WatchlistCover(cover: show.poster)
@@ -22,9 +22,12 @@ struct WatchlistCell: View {
                 Spacer()
                 WatchlistCellEpisodeCounter(text: count)
             }
-            .frame(maxWidth: .infinity)
-            .background(Color("backgroundColor"))
+            NavigationLink(destination: ShowDetail(show: show)) {
+                EmptyView()
+            }
         }
+        .frame(maxWidth: .infinity)
+        .background(Color("backgroundColor"))
     }
 }
 

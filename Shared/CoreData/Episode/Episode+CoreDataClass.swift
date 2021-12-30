@@ -21,4 +21,21 @@ public class Episode: NSManagedObject, Identifiable {
         
         return request
     }
+    
+    public func toggleWatchedStatus() {
+        guard let managedObjectContext = self.managedObjectContext else {
+            print("Couldn't unwrap the managedObjectContext (CoreData) from the show object.")
+            return
+        }
+        
+        managedObjectContext.performAndWait {
+            self.watched = !self.watched
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
 }

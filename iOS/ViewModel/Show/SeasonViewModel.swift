@@ -36,20 +36,6 @@ extension SeasonDetailViewViewModel {
         episodes = episodeArray
     }
 
-    func toggleWatchedStatusOfEpisode(episode: Episode) {
-        managedObjectContext.performAndWait {
-            episode.watched = !episode.watched
-            do {
-                try managedObjectContext.save()
-                self.isThisSeasonWatched()
-                
-                WidgetCenter.shared.reloadAllTimelines()
-            } catch {
-                print(error)
-            }
-        }
-    }
-
     func markAllEpisodesAsWatched(season: Season) {
         guard let episodes = season.episodes?.allObjects as? [Episode]  else { return }
         let watchableEpisodes = episodes.filter { $0.watchable == true }

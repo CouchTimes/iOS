@@ -22,7 +22,10 @@ struct ShowSeason: View {
         LazyVStack(alignment: .leading) {
             ForEach(episodes, id: \.self) { episode in
                 Button(action: {
-//                    self.viewModel.toggleWatchedStatusOfEpisode(episode: episode)
+                    episode.toggleWatchedStatus()
+                    
+//                    self.isThisSeasonWatched()
+//                    WidgetCenter.shared.reloadAllTimelines()
                 }) {
                     HStack(alignment: .center, spacing: 16) {
                         VStack(alignment: .leading, spacing: 4) {
