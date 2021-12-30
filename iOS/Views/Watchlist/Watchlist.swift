@@ -52,10 +52,10 @@ struct Watchlist: View {
         NavigationView {
             WatchlistList(shows: shows, showsCount: viewModel.shows.count)
             .navigationBarTitle("Watchlist", displayMode: .large)
-            .navigationBarItems(leading: NavigationLink(destination: Settings().accentColor(Color("tintColor"))) {
+            .navigationBarItems(leading: NavigationLink(destination: Settings().tint(Color("titleColor"))) {
                 Image(systemName: "gearshape")
                     .font(Font.system(size: 16, weight: .bold))
-                    .foregroundColor(Color("tintColor"))
+                    .foregroundColor(Color("captionColor"))
             }, trailing: Menu {
                 Menu {
                     Button(action: sortShowsByAscendingEpisodes) {
@@ -102,7 +102,7 @@ struct Watchlist: View {
             } label: {
                 Image(systemName: "arrow.up.arrow.down.circle")
                     .font(Font.system(size: 16, weight: .bold))
-                    .foregroundColor(Color("tintColor"))
+                    .foregroundColor(Color("captionColor"))
             })
             .searchable(text: $searchText, placement: .automatic, prompt: "Search")
             .refreshable {

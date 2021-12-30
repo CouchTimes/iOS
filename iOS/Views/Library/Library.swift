@@ -80,7 +80,7 @@ struct Library: View {
             viewModel.fetchFavoriteShows()
         }
         .sheet(isPresented: $showingSettings) {
-            Settings().accentColor(Color("tintColor"))
+            Settings().tint(Color("titleColor"))
         }
     }
 }

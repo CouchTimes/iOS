@@ -19,7 +19,6 @@ struct WatchlistCellEpisodeCounter: View {
                 .fontWeight(.bold)
                 .foregroundColor(Color("titleColor"))
                 .frame(width: 40, height: 32)
-                .background(Color("backgroundColor"))
                 .multilineTextAlignment(.leading)
                 .lineLimit(1)
                 .truncationMode(.tail)

@@ -24,10 +24,8 @@ struct WatchlistCell: View {
             }
             NavigationLink(destination: ShowDetail(show: show)) {
                 EmptyView()
-            }
+            }.buttonStyle(PlainButtonStyle())
         }
-        .frame(maxWidth: .infinity)
-        .background(Color("backgroundColor"))
     }
 }
 

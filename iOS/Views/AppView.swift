@@ -34,12 +34,11 @@ struct AppView: View {
                         .imageScale(.large)
                     Text("Library")
                 }.tag(2)
-        }
-        .accentColor(Color("tintColor"))
+        }.accentColor(Color("titleColor"))
         .fullScreenCover(isPresented: $showOnboarding) {
             OnboardingView()
-                .accentColor(Color("tintColor"))
         }
+        .tint(Color("titleColor"))
     }
 }
 
