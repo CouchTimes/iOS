@@ -20,6 +20,15 @@ public class Show: NSManagedObject, Identifiable {
         return seasonsArray
     }
     
+    public func getSingleSeason(_ number: Int) -> Season? {
+        guard let seasons = self.seasons else { return nil }
+        
+        let seasonsArray = seasons.allObjects as! [Season]
+        let season = seasonsArray.first(where: { Int($0.number) == number })
+        
+        return season
+    }
+    
     public func getAllEpisodes() -> [Episode]? {
         guard let episodes = self.episodes else { return nil }
         

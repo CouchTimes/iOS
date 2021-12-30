@@ -19,7 +19,7 @@ struct LibraryItem: View {
             LibraryCover(cover: show.poster)
         }
         .sheet(isPresented: $isPresented) {
-            ShowDetail(showId: Int(show.tmdbId))
+            ShowDetail(show: show)
         }
     }
 }

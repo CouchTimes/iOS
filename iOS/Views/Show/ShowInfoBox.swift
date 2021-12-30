@@ -17,12 +17,9 @@ struct ShowInfoBox: View {
     var status: String
 
     var body: some View {
-        VStack(alignment: .center, spacing: 24) {
+        VStack(alignment: .center, spacing: 32) {
             ShowInfoCover(poster: poster)
-                .padding(.top, 16)
-            ShowInfoTitle(title: title, subtitle: subtitle)
-                .padding(.horizontal, 16)
-            ShowInfo(genre: genre, rating: rating, status: status)
+            ShowInfoTitle(title: title, subtitle: "2018 • 40m • 3 seasons • Drama")
         }
     }
 }

@@ -13,7 +13,7 @@ struct ShowInfoTitle: View {
     var subtitle: String?
 
     var body: some View {
-        VStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .center, spacing: 4) {
             Text(title)
                 .font(.largeTitle)
                 .fontWeight(.bold)
@@ -25,6 +25,10 @@ struct ShowInfoTitle: View {
             if subtitle != nil {
                 Text(subtitle!)
                     .font(.subheadline)
+                    .fontWeight(.medium)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                    .truncationMode(.tail)
                     .foregroundColor(Color("captionColor"))
             }
         }

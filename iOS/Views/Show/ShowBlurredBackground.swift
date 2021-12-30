@@ -25,7 +25,7 @@ struct ShowBlurredBackground: View {
                     Rectangle()
                         .fill(colorScheme == .dark ?
                             LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.08), Color.black.opacity(0.32), Color.black.opacity(0.64), Color.black.opacity(1)]), startPoint: .top, endPoint: .bottom) :
-                            LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.48), Color.white.opacity(0.64), Color.white.opacity(1)]), startPoint: .top, endPoint: .bottom)
+                            LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.08), Color.white.opacity(0.64), Color.white.opacity(1)]), startPoint: .top, endPoint: .bottom)
                         )
                         .frame(width: geometry.size.width, height: UIScreen.main.bounds.size.height / 1.65)
 
