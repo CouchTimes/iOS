@@ -15,7 +15,7 @@ struct SearchContent: View {
     var body: some View {
         VStack {
             if query.isEmpty {
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack {
                         SearchRecommendations()
                     }

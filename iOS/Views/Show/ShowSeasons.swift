@@ -1,5 +1,5 @@
 //
-//  ShowSeasonsList.swift
+//  ShowSeasons.swift
 //  CouchTimes
 //
 //  Created by Jan Früchtl on 07.08.20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ShowSeasonsList: View {
+struct ShowSeasons: View {
     var show: Show
     @State private var currentSeason: Season?
     @State private var currentSeasonNumber = 0
@@ -31,7 +31,7 @@ struct ShowSeasonsList: View {
             }
             VStack {
                 if currentSeason != nil {
-                    ShowSeason(season: currentSeason!)
+                    ShowEpisodesList(season: currentSeason!)
                 }
             }
         }.onAppear {
@@ -40,7 +40,7 @@ struct ShowSeasonsList: View {
     }
 }
 
-extension ShowSeasonsList {
+extension ShowSeasons {
     private func getCurrentSeason(_ seasonNumber: Int) {
         self.currentSeasonNumber = seasonNumber
         self.currentSeason = show.getSingleSeason(seasonNumber)

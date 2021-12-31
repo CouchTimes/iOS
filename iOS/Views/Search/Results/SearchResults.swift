@@ -21,7 +21,7 @@ struct SearchResults: View {
             }
         } else {
             if searchViewModel.searchedShows.count > 0 && !query.isEmpty  {
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
                         ForEach(searchViewModel.searchedShows, id: \.id) { show in
                             SearchResultItem(show: show, savedShowIds: searchViewModel.savedShows)

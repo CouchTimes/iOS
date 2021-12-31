@@ -1,5 +1,5 @@
 //
-//  ShowDetail.swift
+//  ShowDetailsView.swift
 //  CouchTimes
 //
 //  Created by Jan Früchtl on 05.10.19.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ShowDetail: View {
+struct ShowDetailsView: View {
     var show: Show
     
     @State private var viewMode = 0
@@ -19,11 +19,11 @@ struct ShowDetail: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 ShowBlurredBackground(poster: Image(uiImage: showImage))
                 VStack(spacing: 32) {
                     VStack(spacing: 32) {
-                        ShowInfoBox(poster: Image(uiImage: showImage), title: show.title, genre: show.wrappedGenre, rating: show.wrappedRating, status: show.wrappedStatus)
+                        ShowInfoBox(show: show)
                             .padding(.top, 96)
                         
                         Picker(selection: $viewMode, label: Text("What is your favorite color?")) {
@@ -33,10 +33,9 @@ struct ShowDetail: View {
                                 .tag(1)
                         }.pickerStyle(SegmentedPickerStyle())
                     }
-                    
                     Group {
                         if viewMode == 0 {
-                            ShowSeasonsList(show: show)
+                            ShowSeasons(show: show)
                         }
                         
                         if viewMode == 1 {
@@ -112,8 +111,8 @@ struct ShowDetail: View {
     }
 }
 
-extension ShowDetail {
-    var showImage: UIImage {
+extension ShowDetailsView {
+    private var showImage: UIImage {
         if let poster = show.poster {
             return UIImage(data: poster)!
         }

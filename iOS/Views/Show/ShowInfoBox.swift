@@ -9,23 +9,42 @@
 import SwiftUI
 
 struct ShowInfoBox: View {
-    var poster: Image
-    var title: String
-    var subtitle: String?
-    var genre: String
-    var rating: String
-    var status: String
+    var show: Show
 
     var body: some View {
         VStack(alignment: .center, spacing: 32) {
-            ShowInfoCover(poster: poster)
-            ShowInfoTitle(title: title, subtitle: "2018 • 40m • 3 seasons • Drama")
+            ShowInfoCover(poster: Image(uiImage: showImage))
+            ShowInfoTitle(title: show.title, subtitle: subtitle)
         }
     }
 }
 
-struct ShowInfoBox_Previews: PreviewProvider {
-    static var previews: some View {
-        ShowInfoBox(poster: Image("cover_placeholder"), title: "Insecure", subtitle: "2017", genre: "Drama", rating: "9.0", status: "Returning")
+extension ShowInfoBox {
+    var showImage: UIImage {
+        if let poster = show.poster {
+            return UIImage(data: poster)!
+        }
+
+        return UIImage(named: "cover_placeholder")!
+    }
+    
+    var subtitle: String {
+        let count = show.seasons!.count
+        
+        if let genres = show.genres {
+            guard let genre = genres.first else { return "No genre set" }
+            
+            if count > 1 {
+                return "\(show.year) • \(count) seasons • \(genre)"
+            } else {
+                return "\(show.year) • \(count) season • \(genre)"
+            }
+        }
+        
+        if count > 1 {
+            return "\(show.year) • \(count) seasons"
+        } else {
+            return "\(show.year) • \(count) season"
+        }
     }
 }

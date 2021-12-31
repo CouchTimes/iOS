@@ -39,7 +39,7 @@ struct Library: View {
         NavigationView {
             Group {
                 if shows.count > 0 {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         LazyVGrid(columns: layout, alignment: .center) {
                             ForEach(shows, id: \.objectID) { show in
                                 LibraryItem(show: Binding.constant(show))

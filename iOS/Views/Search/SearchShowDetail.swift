@@ -24,7 +24,7 @@ struct SearchShowDetail: View {
     }
 
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             ZStack(alignment: .topLeading) {
                 ShowBlurredBackground(poster: poster)
                 VStack {
@@ -57,7 +57,6 @@ struct SearchShowDetail: View {
                             .padding(.horizontal)
                             .foregroundColor(Color("titleColor"))
                         }
-                        ShowInfoBox(poster: poster, title: show.name, subtitle: show.wrappedYearString, genre: show.wrappedGenre, rating: show.wrappedRatingString, status: show.wrappedStatus)
                     }
 
                     Button(action: {

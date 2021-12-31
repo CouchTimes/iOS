@@ -1,5 +1,5 @@
 //
-//  ShowSeason.swift
+//  ShowEpisodesList.swift
 //  CouchTimes
 //
 //  Created by Jan Früchtl on 12.07.20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ShowSeason: View {
+struct ShowEpisodesList: View {
     var season: Season
     
     var episodes: [Episode] {
@@ -16,14 +16,11 @@ struct ShowSeason: View {
         return episodes.sorted(by: { $0.episodeNumber < $1.episodeNumber })
     }
 
-    @Environment(\.managedObjectContext) var managedObjectContext
-
     var body: some View {
         LazyVStack(alignment: .leading) {
             ForEach(episodes, id: \.self) { episode in
                 Button(action: {
                     episode.toggleWatchedStatus()
-                    
 //                    self.isThisSeasonWatched()
 //                    WidgetCenter.shared.reloadAllTimelines()
                 }) {

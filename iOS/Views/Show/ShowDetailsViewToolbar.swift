@@ -1,5 +1,5 @@
 //
-//  ShowToolbar.swift
+//  ShowDetailsViewToolbar.swift
 //  CouchTimes
 //
 //  Created by Jan Früchtl on 02.08.20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ShowToolbar: View {
+struct ShowDetailsViewToolbar: View {
     @State private var showShareSheet = false
     @Binding var presentationMode: PresentationMode
     @Binding var showViewModel: ShowViewModel
@@ -82,9 +82,3 @@ struct ShowToolbar: View {
         }
     }
 }
-
-// struct ShowToolbar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ShowToolbar()
-//    }
-// }

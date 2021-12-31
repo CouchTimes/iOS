@@ -22,7 +22,7 @@ struct WatchlistCell: View {
                 Spacer()
                 WatchlistCellEpisodeCounter(text: count)
             }
-            NavigationLink(destination: ShowDetail(show: show)) {
+            NavigationLink(destination: ShowDetailsView(show: show)) {
                 EmptyView()
             }.buttonStyle(PlainButtonStyle())
         }
