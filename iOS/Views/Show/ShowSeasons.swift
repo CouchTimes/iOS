@@ -25,9 +25,16 @@ struct ShowSeasons: View {
             } label: {
                 HStack(alignment: .center, spacing: 8) {
                     Text("Season \(currentSeasonNumber)")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                    Spacer()
                     Image(systemName: "chevron.down")
+                        .padding(.trailing, 4)
                 }
                 .foregroundColor(Color("textColor"))
+                .padding()
+                .background(Color("cardBackground"))
+                .cornerRadius(8)
             }
             VStack {
                 if currentSeason != nil {

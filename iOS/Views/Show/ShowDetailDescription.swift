@@ -12,18 +12,12 @@ struct ShowDetailDescription: View {
     var description: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10.0) {
+        VStack(alignment: .leading, spacing: 8) {
             SectionTitle(text: "Description")
             Text(description)
                 .lineLimit(nil)
                 .font(.body)
                 .foregroundColor(Color("textColor"))
         }
-    }
-}
-
-struct ShowDetailDescription_Previews: PreviewProvider {
-    static var previews: some View {
-        ShowDetailDescription(description: "Test")
     }
 }

@@ -34,9 +34,3 @@ struct ShowInfoTitle: View {
         }
     }
 }
-
-struct ShowInfoTitle_Previews: PreviewProvider {
-    static var previews: some View {
-        ShowInfoTitle(title: "Killing Eve", subtitle: "2018")
-    }
-}

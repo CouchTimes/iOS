@@ -18,9 +18,3 @@ struct ShowInfoCover: View {
             .cornerRadius(6)
     }
 }
-
-struct ShowInfoCover_Previews: PreviewProvider {
-    static var previews: some View {
-        ShowInfoCover(poster: Image("cover_placeholder"))
-    }
-}

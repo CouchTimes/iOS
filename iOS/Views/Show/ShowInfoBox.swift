@@ -35,16 +35,16 @@ extension ShowInfoBox {
             guard let genre = genres.first else { return "No genre set" }
             
             if count > 1 {
-                return "\(show.year) • \(count) seasons • \(genre)"
+                return "\(show.year) • \(count) Seasons • \(genre)"
             } else {
-                return "\(show.year) • \(count) season • \(genre)"
+                return "\(show.year) • \(count) Season • \(genre)"
             }
         }
         
         if count > 1 {
-            return "\(show.year) • \(count) seasons"
+            return "\(show.year) • \(count) Seasons"
         } else {
-            return "\(show.year) • \(count) season"
+            return "\(show.year) • \(count) Season"
         }
     }
 }

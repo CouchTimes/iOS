@@ -50,12 +50,5 @@ struct ShowInformation: View {
                 }
             }
         }
-        .padding(.top, 16)
     }
 }
-
-// struct ShowInformation_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ShowInformation()
-//    }
-// }
