@@ -52,7 +52,6 @@
 		B24E78132358F24A0015025F /* SectionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24E78122358F24A0015025F /* SectionValue.swift */; };
 		B250AF4A2544B01200012027 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250AF492544B01200012027 /* Library.swift */; };
 		B250AF522544B18B00012027 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250AF512544B18B00012027 /* LibraryViewModel.swift */; };
-		B250AF5A2544B25E00012027 /* LibraryCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250AF592544B25E00012027 /* LibraryCover.swift */; };
 		B257313E23BF9C56006AD477 /* SearchResultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B257313D23BF9C56006AD477 /* SearchResultItem.swift */; };
 		B257314D23C0CDE1006AD477 /* CouchTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B257314B23C0CDE1006AD477 /* CouchTimes.xcdatamodeld */; };
 		B25818FB2774E2A0005B51C0 /* SearchContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25818FA2774E2A0005B51C0 /* SearchContent.swift */; };
@@ -252,7 +251,6 @@
 		B24E78122358F24A0015025F /* SectionValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionValue.swift; sourceTree = "<group>"; };
 		B250AF492544B01200012027 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		B250AF512544B18B00012027 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
-		B250AF592544B25E00012027 /* LibraryCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCover.swift; sourceTree = "<group>"; };
 		B257313D23BF9C56006AD477 /* SearchResultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItem.swift; sourceTree = "<group>"; };
 		B257314C23C0CDE1006AD477 /* CouchTimes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CouchTimes.xcdatamodel; sourceTree = "<group>"; };
 		B25818FA2774E2A0005B51C0 /* SearchContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContent.swift; sourceTree = "<group>"; };
@@ -529,7 +527,6 @@
 			children = (
 				B250AF492544B01200012027 /* Library.swift */,
 				B2B09666254B3EC800C41EA0 /* LibraryItem.swift */,
-				B250AF592544B25E00012027 /* LibraryCover.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1055,7 +1052,6 @@
 				B2790210251FC63B00DEC814 /* ShareSheet.swift in Sources */,
 				B2CE949725D70774001D25EC /* ShowSeasonResponse.swift in Sources */,
 				B21B0E8A24DC7A3200FDFDC8 /* WatchlistViewModel.swift in Sources */,
-				B250AF5A2544B25E00012027 /* LibraryCover.swift in Sources */,
 				B25827C224B258AE00EBC009 /* ShowDetailDescription.swift in Sources */,
 				B2D5112E259F2F530026606D /* ShowViewModel.swift in Sources */,
 				B2EEF6A225D5148B00B2E896 /* ShowResponse.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct ShowEpisodesList: View {
     var season: Season
@@ -21,8 +22,7 @@ struct ShowEpisodesList: View {
             ForEach(episodes, id: \.self) { episode in
                 Button(action: {
                     episode.toggleWatchedStatus()
-//                    self.isThisSeasonWatched()
-//                    WidgetCenter.shared.reloadAllTimelines()
+                    WidgetCenter.shared.reloadAllTimelines()
                 }) {
                     HStack(alignment: .center, spacing: 16) {
                         VStack(alignment: .leading, spacing: 4) {
@@ -54,8 +54,7 @@ struct ShowEpisodesList: View {
             }
         }
         .background(Color("backgroundColor").edgesIgnoringSafeArea(.all))
-        .onAppear {
-        }
+        .onAppear {}
     }
 }
 

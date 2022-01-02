@@ -42,7 +42,9 @@ struct Library: View {
                     ScrollView(showsIndicators: false) {
                         LazyVGrid(columns: layout, alignment: .center) {
                             ForEach(shows, id: \.objectID) { show in
-                                LibraryItem(show: Binding.constant(show))
+                                NavigationLink(destination: ShowDetailsView(show: show)) {
+                                    LibraryItem(show: Binding.constant(show))
+                                }.buttonStyle(PlainButtonStyle())
                             }
                         }
                     }
@@ -79,14 +81,5 @@ struct Library: View {
             viewModel.fetchAllShows()
             viewModel.fetchFavoriteShows()
         }
-        .sheet(isPresented: $showingSettings) {
-            Settings().tint(Color("titleColor"))
-        }
-    }
-}
-
-struct Library_Previews: PreviewProvider {
-    static var previews: some View {
-        Library()
     }
 }

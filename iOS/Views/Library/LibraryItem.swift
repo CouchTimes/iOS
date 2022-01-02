@@ -9,23 +9,22 @@
 import SwiftUI
 
 struct LibraryItem: View {
-    @State private var isPresented = false
     @Binding var show: Show
     
     var body: some View {
-        Button(action: {
-            self.isPresented.toggle()
-        }) {
-            LibraryCover(cover: show.poster)
-        }
-        .sheet(isPresented: $isPresented) {
-            ShowDetailsView(show: show)
-        }
+        Image(uiImage: imageData)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .cornerRadius(8)
     }
 }
 
-//struct LibraryItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LibraryItem()
-//    }
-//}
+extension LibraryItem {
+    var imageData: UIImage {
+        if let data = show.poster {
+            return UIImage(data: data)!
+        }
+
+        return UIImage(named: "cover_placeholder")!
+    }
+}
