@@ -74,6 +74,7 @@ struct ShowSeasons: View {
                                 .frame(width: 44, height: 44, alignment: .center)
                                 .disabled(episode.watchable ? false : true)
                             }
+                            .padding(.vertical, 4)
                         }
                     }
                     .background(Color("backgroundColor").edgesIgnoringSafeArea(.all))
