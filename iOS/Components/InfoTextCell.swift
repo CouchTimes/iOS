@@ -13,7 +13,7 @@ struct InfoTextCell: View {
     var value: String
 
     var body: some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(alignment: .center, spacing: 16) {
             SectionTitle(text: label)
             Spacer()
             SectionValue(text: value)

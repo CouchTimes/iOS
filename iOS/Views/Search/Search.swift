@@ -19,9 +19,6 @@ struct Search: View {
             .navigationTitle("Search")
         }
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for new shows")
-        .sheet(isPresented: $viewModel.showDetailsPresented) {
-            SearchShowDetail(show: viewModel.selectedShow!, savedShowIds: viewModel.savedShows)
-        }
         .onSubmit(of: .search) {
             self.viewModel.isLoading = true
             self.viewModel.searchShowByName(query)

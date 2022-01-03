@@ -23,8 +23,7 @@ struct ShowDetailsView: View {
                 ShowBlurredBackground(poster: Image(uiImage: showImage))
                 VStack(spacing: 32) {
                     VStack(spacing: 32) {
-                        ShowInfoBox(show: show)
-                            .padding(.top, 96)
+                        ShowInformationHero(cover: showImage, title: show.title, year: Int(show.year), genres: show.genres, seasonCount: show.seasons!.count)
                         
                         Picker(selection: $viewMode, label: Text("What is your favorite color?")) {
                             Image(systemName: "list.bullet")
@@ -39,7 +38,7 @@ struct ShowDetailsView: View {
                         }
                         
                         if viewMode == 1 {
-                            ShowInformation(show: show)
+                            ShowInformation(description: show.wrappedOverview, airs: show.wrappedAirs, runtime: show.wrappedRuntime, network: show.wrappedNetwork, firstAired: show.wrappedFirstAirDate)
                         }
                     }
                 }

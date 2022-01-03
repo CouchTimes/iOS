@@ -1,5 +1,5 @@
 //
-//  ShowInfoTitle.swift
+//  ShowInformationTitle.swift
 //  CouchTimes
 //
 //  Created by Jan Früchtl on 14.06.20.
@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct ShowInfoTitle: View {
+struct ShowInformationTitle: View {
     var title: String
-    var subtitle: String?
+    var subtitle: String
 
     var body: some View {
         VStack(alignment: .center, spacing: 4) {
@@ -21,16 +21,14 @@ struct ShowInfoTitle: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
                 .truncationMode(.tail)
-
-            if subtitle != nil {
-                Text(subtitle!)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .truncationMode(.tail)
-                    .foregroundColor(Color("captionColor"))
-            }
+            
+            Text(subtitle)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+                .truncationMode(.tail)
+                .foregroundColor(Color("captionColor"))
         }
     }
 }

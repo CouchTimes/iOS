@@ -20,14 +20,11 @@ struct SearchRecommendationListItem: View {
     }
     
     var body: some View {
-        Button(action: {
-            searchViewModel.selectedShow = show
-            searchViewModel.showDetailsPresented.toggle()
-        }) {
+        NavigationLink(destination: SearchShowDetail(show: show, savedShowIds: searchViewModel.savedShows)) {
             ZStack(alignment: .topTrailing) {
                 SearchRecommendationListItemCover(show: show)
                     .opacity(searchResultItemViewModel.isAlreadySaved ? 0.3 : 1.0)
-
+                
                 if searchResultItemViewModel.isAlreadySaved {
                     Image(systemName: "checkmark")
                         .font(Font.system(size: 16, weight: .bold))
@@ -41,9 +38,3 @@ struct SearchRecommendationListItem: View {
         }
     }
 }
-
-// struct SearchRecommendationListItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchRecommendationListItem()
-//    }
-// }

@@ -11,11 +11,10 @@ import SwiftUI
 struct SearchShowDetail: View {
     var show: ShowDetailsResponse
 
+    @State private var viewMode = 0
     @State private var showShareSheet = false
     @ObservedObject var searchItemViewModel: SearchListItemViewModel
 
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var searchViewModel: SearchViewModel
 
     init(show: ShowDetailsResponse, savedShowIds: [Int]) {
@@ -24,41 +23,14 @@ struct SearchShowDetail: View {
     }
 
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            ZStack(alignment: .topLeading) {
-                ShowBlurredBackground(poster: poster)
-                VStack {
-                    Group {
-                        SheetDragHandle()
-                        Group {
-                            HStack(alignment: .center) {
-                                Button(action: {
-                                    searchViewModel.showDetailsPresented = false
-                                }) {
-                                    Image(systemName: "chevron.down")
-                                        .font(Font.system(size: 20, weight: .bold))
-                                        .frame(minWidth: 96.0, minHeight: 48.0, alignment: .leading)
-                                }
-                                Spacer()
-                                Menu {
-                                    Section {
-                                        Button(action: {
-                                            self.showShareSheet = true
-                                        }) {
-                                            Label("Share", systemImage: "square.and.arrow.up")
-                                        }
-                                    }
-                                } label: {
-                                    Image(systemName: "ellipsis")
-                                        .font(Font.system(size: 20, weight: .bold))
-                                        .frame(minWidth: 96.0, minHeight: 48.0, alignment: .trailing)
-                                }
-                            }
-                            .padding(.horizontal)
-                            .foregroundColor(Color("titleColor"))
-                        }
+        ZStack(alignment: .bottom) {
+            ScrollView(showsIndicators: false) {
+                ShowBlurredBackground(poster: Image(uiImage: showImage))
+                VStack(spacing: 32) {
+                    VStack(spacing: 32) {
+                        ShowInformationHero(cover: showImage, title: show.name, year: show.wrappedYear, genres: genres, seasonCount: show.seasons.count)
                     }
-
+                    
                     Button(action: {
                         self.searchViewModel.saveShow(show: searchItemViewModel.show) { result in
                             switch result {
@@ -74,72 +46,69 @@ struct SearchShowDetail: View {
                                 .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
                         } else {
                             if searchItemViewModel.isAlreadySaved {
-                                HStack(alignment: .center, spacing: 10) {
-                                    Image(systemName: "checkmark")
-                                    Text("Added")
-                                }
+                                Label("Added", systemImage: "checkmark")
                             } else {
-                                Text("Add To Watchlist")
+                                Label("Add To Watchlist", systemImage: "plus")
                             }
                         }
                     }
                     .buttonStyle(AddToWatchlistButtonStyle())
                     .disabled(searchItemViewModel.isAlreadySaved)
                     .opacity(searchItemViewModel.isAlreadySaved ? 0.5 : 1.0)
-
-                    VStack(alignment: .leading, spacing: 20) {
-                        ShowDetailDescription(description: show.overview!)
-                        Divider()
-                        VStack(alignment: .leading, spacing: 20) {
-                            InfoTextCell(label: "Runtime", value: show.wrappedRuntime)
-                            InfoTextCell(label: "Network", value: show.wrappedNetwork)
-                            InfoTextCell(label: "First Aired", value: show.wrappedFirstAired)
-                        }
-                        Divider()
-                        Group {
-                            VStack(alignment: .leading, spacing: 20) {
-                                SectionTitle(text: "Open In")
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(alignment: .center, spacing: 20) {
-                                        if show.homepage != nil {
-                                            if !show.homepage!.isEmpty {
-                                                OpenIn(label: "Homepage", url: URL(string: show.homepage!)!)
-                                            }
-                                        }
-
-                                        if show.wrappedTrailer != nil {
-                                            if !show.wrappedTrailer!.isEmpty {
-                                                OpenIn(label: "Trailer", url: URL(string: show.wrappedTrailer!)!)
-                                            }
-                                        }
-
-                                        OpenIn(label: "TMDb", url: URL(string: "https://www.themoviedb.org/tv/\(show.id)")!)
-                                    }
-                                }
-                            }
-                        }
-                    }.padding()
+                    
+                    ShowInformation(description: show.wrappedOverview, airs: "Airs", runtime: show.wrappedRuntime, network: show.wrappedNetwork, firstAired: show.wrappedFirstAired)
                 }
-                .padding(.top, 16)
-                .padding(.bottom, 48)
+                .padding(.horizontal)
+                .padding(.bottom, 112)
             }
-            .navigationBarTitle(show.name)
-            .sheet(isPresented: $showShareSheet) {
-                ShareSheet(activityItems: [URL(string: "https://www.themoviedb.org/tv/\(show.id)")!])
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("backgroundColor"))
+            .edgesIgnoringSafeArea(.all)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Section {
+                        Button(action: {
+                            self.showShareSheet = true
+                        }) {
+                            Label("Share", systemImage: "square.and.arrow.up")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .font(Font.system(size: 20, weight: .bold))
+                        .frame(minWidth: 96.0, minHeight: 48.0, alignment: .trailing)
+                }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("backgroundColor"))
-        .edgesIgnoringSafeArea(.all)
+        .sheet(isPresented: $showShareSheet) {
+            ShareSheet(activityItems: [URL(string: "https://www.themoviedb.org/tv/\(show.id)")!])
+        }
+
     }
 }
 
 extension SearchShowDetail {
-    var poster: Image {
+    private var showImage: UIImage {
         if let poster = show.poster_data {
-            return Image(uiImage: UIImage(data: poster)!)
+            return UIImage(data: poster)!
         }
 
-        return Image("cover_placeholder")
+        return UIImage(named: "cover_placeholder")!
+    }
+    
+    private var genres: [String]? {
+        var transformedGenre = [String]()
+        
+        if let genres = show.genres {
+            genres.forEach { genre in
+                transformedGenre.append(genre.name)
+            }
+            
+            return transformedGenre
+        }
+        
+        return nil
     }
 }

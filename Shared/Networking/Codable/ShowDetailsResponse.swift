@@ -84,6 +84,10 @@ extension ShowDetailsResponse {
         return "Unknown year"
     }
     
+    public var wrappedOverview: String {
+        overview ?? "Unknown overview"
+    }
+    
     var wrappedGenre: String {
         if let genreList = genres {
             if let genre = genreList.first {
