@@ -13,6 +13,7 @@ struct WatchlistList: View {
     var shows: [Show]
     var showsCount: Int
     
+    @State private var showingAlert = false
     @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
@@ -23,14 +24,18 @@ struct WatchlistList: View {
                 .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button {
-                        managedObjectContext.performAndWait {
-                            show.nextEpisode!.watched = true
-                            do {
-                                try managedObjectContext.save()
-                                WidgetCenter.shared.reloadAllTimelines()
-                            } catch {
-                                print(error)
+                        if show.nextEpisode != nil {
+                            managedObjectContext.performAndWait {
+                                show.nextEpisode!.watched = true
+                                do {
+                                    try managedObjectContext.save()
+                                    WidgetCenter.shared.reloadAllTimelines()
+                                } catch {
+                                    print(error)
+                                }
                             }
+                        } else {
+                            showingAlert = true
                         }
                     } label: {
                         Image(systemName: "checkmark.circle.fill")
@@ -39,6 +44,9 @@ struct WatchlistList: View {
                 }
             }
             .listStyle(.plain)
+            .alert("You already watched all availabe episodes", isPresented: $showingAlert) {
+                Button("OK", role: .cancel) { }
+            }
         } else {
             EmptyState(title: "Keep track for your shows",
                        text: "Add shows to your Watchlist for quick access. Freshly added shows will automatically also appear in your Watchlist.",
