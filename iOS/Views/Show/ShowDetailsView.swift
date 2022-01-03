@@ -35,7 +35,7 @@ struct ShowDetailsView: View {
                     }
                     Group {
                         if viewMode == 0 {
-                            ShowSeasons(show: show)
+                            ShowSeasons()
                         }
                         
                         if viewMode == 1 {
@@ -108,6 +108,7 @@ struct ShowDetailsView: View {
         .onAppear {
             self.getWatchedStatus()
         }
+        .environmentObject(show)
     }
 }
 
