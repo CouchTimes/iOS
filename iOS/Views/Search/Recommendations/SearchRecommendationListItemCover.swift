@@ -27,9 +27,3 @@ struct SearchRecommendationListItemCover: View {
             .cornerRadius(6)
     }
 }
-
-// struct SearchRecommendationListItemCover_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchRecommendationListItemCover()
-//    }
-// }

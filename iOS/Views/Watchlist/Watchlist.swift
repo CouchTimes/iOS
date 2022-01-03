@@ -6,17 +6,14 @@
 //  Copyright © 2019 Jan Früchtl. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 import CoreData
 
 struct Watchlist: View {
     @State private var searchText: String = ""
-    @State private var isPresented = false
     @State private var showSorting: ShowFilter = .episodesAscending
-    @ObservedObject var viewModel = WatchlistViewModel()
+    @ObservedObject private var viewModel = WatchlistViewModel()
     
-    @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.isSearching) private var isSearching: Bool
     
     private var didManagedObjectContextSave = NotificationCenter.default

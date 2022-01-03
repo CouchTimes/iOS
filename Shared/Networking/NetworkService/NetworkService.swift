@@ -108,7 +108,7 @@ extension NetworkService {
     }
     
     private func downloadShowImages(filePath: String, completion: @escaping (Result<Data, Error>) -> Void) {
-        AF.download("https://image.tmdb.org/t/p/w500\(filePath)").responseData { response in
+        AF.download("https://image.tmdb.org/t/p/w342\(filePath)").responseData { response in
             if let data = response.value {
                 completion(.success(data))
             } else {
