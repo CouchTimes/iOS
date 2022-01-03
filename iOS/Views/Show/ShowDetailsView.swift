@@ -12,93 +12,99 @@ struct ShowDetailsView: View {
     var show: Show
     
     @State private var viewMode = 0
+    @State private var showEmptyView = false
     @State private var watchedStatus = true
     @State private var showShareSheet = false
     
+    @Environment(\.presentationMode) private var presentationMode
     @Environment(\.managedObjectContext) private var managedObjectContext
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            ScrollView(showsIndicators: false) {
-                ShowBlurredBackground(poster: Image(uiImage: showImage))
-                VStack(spacing: 32) {
+            if (!showEmptyView) {
+                ScrollView(showsIndicators: false) {
+                    ShowBlurredBackground(poster: Image(uiImage: showImage))
                     VStack(spacing: 32) {
-                        ShowInformationHero(cover: showImage, title: show.title, year: Int(show.year), genres: show.genres, seasonCount: show.seasons!.count)
-                        
-                        Picker(selection: $viewMode, label: Text("What is your favorite color?")) {
-                            Image(systemName: "list.bullet")
-                                .tag(0)
-                            Image(systemName: "info.circle")
-                                .tag(1)
-                        }.pickerStyle(SegmentedPickerStyle())
-                    }
-                    Group {
-                        if viewMode == 0 {
-                            ShowSeasons()
+                        VStack(spacing: 32) {
+                            ShowInformationHero(cover: showImage, title: show.title, year: Int(show.year), genres: show.genres, seasonCount: seasonsCount)
+                            
+                            Picker(selection: $viewMode, label: Text("What is your favorite color?")) {
+                                Image(systemName: "list.bullet")
+                                    .tag(0)
+                                Image(systemName: "info.circle")
+                                    .tag(1)
+                            }.pickerStyle(SegmentedPickerStyle())
                         }
-                        
-                        if viewMode == 1 {
-                            ShowInformation(description: show.wrappedOverview, airs: show.wrappedAirs, runtime: show.wrappedRuntime, network: show.wrappedNetwork, firstAired: show.wrappedFirstAirDate)
+                        Group {
+                            if viewMode == 0 {
+                                ShowSeasons()
+                            }
+                            
+                            if viewMode == 1 {
+                                ShowInformation(description: show.wrappedOverview, airs: show.wrappedAirs, runtime: show.wrappedRuntime, network: show.wrappedNetwork, firstAired: show.wrappedFirstAirDate)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 112)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("backgroundColor"))
+                .edgesIgnoringSafeArea(.all)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+                            if !watchedStatus {
+                                Section {
+                                    Button(action: {
+                                        self.markAllEpisodesAsWatched()
+                                        self.getWatchedStatus()
+                                    }) {
+                                        Label("All Episodes Watched", systemImage: "checkmark.seal")
+                                    }
+                                }
+                            }
+                            Section {
+                                Button(action: {
+                                    self.toggleWatchlistStatus()
+                                }) {
+                                    if show.isActive {
+                                        Label("Remove from Watchlist", systemImage: "minus.square")
+                                    } else {
+                                        Label("Add to Watchlist", systemImage: "plus.square")
+                                    }
+                                }
+                                Button(action: {
+                                    self.toggleFavoriteStatus()
+                                }) {
+                                    if show.isFavorite {
+                                        Label("Remove from Favorites", systemImage: "star.slash.fill")
+                                    } else {
+                                        Label("Add to Favorites", systemImage: "star")
+                                    }
+                                }
+                            }
+                            Section {
+                                Button(action: {
+                                    self.showShareSheet = true
+                                }) {
+                                    Label("Share", systemImage: "square.and.arrow.up")
+                                }
+                                Button(role: .destructive, action: {
+                                    self.deleteShow()
+                                }) {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .font(Font.system(size: 20, weight: .bold))
+                                .frame(minWidth: 96.0, minHeight: 48.0, alignment: .trailing)
                         }
                     }
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 112)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("backgroundColor"))
-            .edgesIgnoringSafeArea(.all)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    if !watchedStatus {
-                        Section {
-                            Button(action: {
-                                self.markAllEpisodesAsWatched()
-                                self.getWatchedStatus()
-                            }) {
-                                Label("All Episodes Watched", systemImage: "checkmark.seal")
-                            }
-                        }
-                    }
-                    Section {
-                        Button(action: {
-                            self.toggleWatchlistStatus()
-                        }) {
-                            if show.isActive {
-                                Label("Remove from Watchlist", systemImage: "minus.square")
-                            } else {
-                                Label("Add to Watchlist", systemImage: "plus.square")
-                            }
-                        }
-                        Button(action: {
-                            self.toggleFavoriteStatus()
-                        }) {
-                            if show.isFavorite {
-                                Label("Remove from Favorites", systemImage: "star.slash.fill")
-                            } else {
-                                Label("Add to Favorites", systemImage: "star")
-                            }
-                        }
-                    }
-                    Section {
-                        Button(action: {
-                            self.showShareSheet = true
-                        }) {
-                            Label("Share", systemImage: "square.and.arrow.up")
-                        }
-                        Button(role: .destructive, action: {
-                            self.deleteShow()
-                        }) {
-                            Label("Delete", systemImage: "trash")
-                        }
-                    }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .font(Font.system(size: 20, weight: .bold))
-                        .frame(minWidth: 96.0, minHeight: 48.0, alignment: .trailing)
-                }
+            } else {
+                EmptyView()
             }
         }
         .sheet(isPresented: $showShareSheet) {
@@ -118,6 +124,14 @@ extension ShowDetailsView {
         }
 
         return UIImage(named: "cover_placeholder")!
+    }
+    
+    private var seasonsCount: Int {
+        if let seasons = show.seasons {
+            return seasons.count
+        }
+        
+        return 0
     }
     
     private func getWatchedStatus() {
@@ -148,6 +162,8 @@ extension ShowDetailsView {
     }
     
     private func deleteShow() -> Void {
+        self.showEmptyView = true
+        self.presentationMode.wrappedValue.dismiss()
         show.deleteShow(managedObjectContext: managedObjectContext)
     }
 }

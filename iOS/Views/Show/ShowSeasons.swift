@@ -18,11 +18,13 @@ struct ShowSeasons: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Menu {
-                ForEach(orderedSeasons, id: \.id) { season in
-                    Button("Season \(season.number)", action: {
-                        let number = Int(season.number)
-                        getCurrentSeason(number)
-                    })
+                if (orderedSeasons != nil) {
+                    ForEach(orderedSeasons!, id: \.id) { season in
+                        Button("Season \(season.number)", action: {
+                            let number = Int(season.number)
+                            getCurrentSeason(number)
+                        })
+                    }
                 }
             } label: {
                 HStack(alignment: .center, spacing: 8) {
@@ -39,9 +41,9 @@ struct ShowSeasons: View {
                 .cornerRadius(8)
             }
             VStack {
-                if currentSeason != nil {
+                if (currentSeason != nil && episodes != nil) {
                     LazyVStack(alignment: .leading) {
-                        ForEach(episodes, id: \.self) { episode in
+                        ForEach(episodes!, id: \.self) { episode in
                             HStack(alignment: .center, spacing: 16) {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text("\(episode.episodeNumber). \(episode.title)")
@@ -92,13 +94,21 @@ extension ShowSeasons {
         self.currentSeason = show.getSingleSeason(seasonNumber)
     }
     
-    private var orderedSeasons: [Season] {
-        let seasons = show.getAllSeasons()
-        return seasons!.sorted(by: { $0.number > $1.number })
+    private var orderedSeasons: [Season]? {
+        if let seasons = show.getAllSeasons() {
+            return seasons.sorted(by: { $0.number > $1.number })
+        }
+        
+        return nil
     }
     
-    private var episodes: [Episode] {
-        let episodes = currentSeason!.episodes!.allObjects as! [Episode]
-        return episodes.sorted(by: { $0.episodeNumber < $1.episodeNumber })
+    private var episodes: [Episode]? {
+        if let season = currentSeason {
+            if let episodes = season.episodes?.allObjects as? [Episode] {
+                return episodes.sorted(by: { $0.episodeNumber < $1.episodeNumber })
+            }
+        }
+        
+        return nil
     }
 }
