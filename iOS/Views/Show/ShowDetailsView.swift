@@ -24,17 +24,8 @@ struct ShowDetailsView: View {
             if (!showEmptyView) {
                 ScrollView(showsIndicators: false) {
                     ShowBlurredBackground(poster: Image(uiImage: showImage))
-                    VStack(spacing: 32) {
-                        VStack(spacing: 32) {
-                            ShowInformationHero(cover: showImage, title: show.title, year: Int(show.year), genres: show.genres, seasonCount: seasonsCount)
-                            
-                            Picker(selection: $viewMode, label: Text("What is your favorite color?")) {
-                                Image(systemName: "list.bullet")
-                                    .tag(0)
-                                Image(systemName: "info.circle")
-                                    .tag(1)
-                            }.pickerStyle(SegmentedPickerStyle())
-                        }
+                    VStack(spacing: 24) {
+                        ShowInformationHero(cover: showImage, title: show.title, year: Int(show.year), genres: show.genres, seasonCount: seasonsCount)
                         Group {
                             if viewMode == 0 {
                                 ShowSeasons()
@@ -46,7 +37,7 @@ struct ShowDetailsView: View {
                         }
                     }
                     .padding(.horizontal)
-                    .padding(.bottom, 112)
+                    .padding(.bottom, 160)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("backgroundColor"))
@@ -103,6 +94,16 @@ struct ShowDetailsView: View {
                         }
                     }
                 }
+                Picker(selection: $viewMode, label: Text("What is your favorite color?")) {
+                    Image(systemName: "list.bullet")
+                        .tag(0)
+                    Image(systemName: "info.circle")
+                        .tag(1)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .background(Color.white)
+                .padding(.horizontal)
+                .padding(.bottom, 16)
             } else {
                 EmptyView()
             }

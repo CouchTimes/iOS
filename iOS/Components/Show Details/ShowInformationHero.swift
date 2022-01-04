@@ -16,7 +16,7 @@ struct ShowInformationHero: View {
     var seasonCount: Int
 
     var body: some View {
-        VStack(alignment: .center, spacing: 32) {
+        VStack(alignment: .center, spacing: 24) {
             Image(uiImage: cover)
                 .resizable()
                 .frame(width: 170, height: 256)

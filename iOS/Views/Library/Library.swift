@@ -37,7 +37,7 @@ struct Library: View {
     
     var body: some View {
         NavigationView {
-            Group {
+            ZStack(alignment: .bottom) {
                 if shows.count > 0 {
                     ScrollView(showsIndicators: false) {
                         LazyVGrid(columns: layout, alignment: .center) {
@@ -47,9 +47,9 @@ struct Library: View {
                                 }.buttonStyle(PlainButtonStyle())
                             }
                         }
+                        .padding(.top, 8)
+                        .padding(.horizontal)
                     }
-                    .padding(.top, 10)
-                    .padding(.horizontal, 20)
                 } else {
                     if libraryViewState == 0 {
                         EmptyState(title: "All your shows in one place",
@@ -61,17 +61,15 @@ struct Library: View {
                                    iconName: "star.fill")
                     }
                 }
-            }
-            .navigationBarTitle("Library", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Picker(selection: $libraryViewState, label: Text("What filter do you want to apply to the library?")) {
-                        Text("All").tag(0)
-                        Text("Favorites").tag(1)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
+                Picker(selection: $libraryViewState, label: Text("What filter do you want to apply to the library?")) {
+                    Text("All").tag(0)
+                    Text("Favorites").tag(1)
                 }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
+                .padding(.bottom, 32)
             }
+            .navigationBarTitle("Library")
         }
         .onReceive(self.didManagedObjectContextSave) { _ in
             viewModel.fetchAllShows()

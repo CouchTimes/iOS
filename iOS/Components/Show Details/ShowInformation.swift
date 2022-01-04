@@ -17,13 +17,10 @@ struct ShowInformation: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
-            VStack(alignment: .leading, spacing: 8) {
-                SectionTitle(text: "Description")
-                Text(description)
-                    .lineLimit(nil)
-                    .font(.body)
-                    .foregroundColor(Color("textColor"))
-            }
+            Text(description)
+                .lineLimit(nil)
+                .font(.body)
+                .foregroundColor(Color("textColor"))
             Divider()
             VStack(alignment: .leading, spacing: 16) {
                 InfoTextCell(label: "Airs", value: airs)
