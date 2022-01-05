@@ -1,5 +1,5 @@
 //
-//  SearchRecommendationListItem.swift
+//  SearchRecommendationItem.swift
 //  CouchTimes
 //
 //  Created by Jan Früchtl on 27.08.20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SearchRecommendationListItem: View {
+struct SearchRecommendationItem: View {
     var show: ShowDetailsResponse
 
     @ObservedObject var searchResultItemViewModel: SearchListItemViewModel
@@ -22,8 +22,18 @@ struct SearchRecommendationListItem: View {
     var body: some View {
         NavigationLink(destination: SearchShowDetail(show: show, savedShowIds: searchViewModel.savedShows)) {
             ZStack(alignment: .topTrailing) {
-                SearchRecommendationListItemCover(show: show)
-                    .opacity(searchResultItemViewModel.isAlreadySaved ? 0.3 : 1.0)
+                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w154\(show.poster_path)")) { phase in
+                    if let image = phase.image {
+                        image.resizable()
+                    } else if phase.error != nil {
+                        Color.red
+                    } else {
+                        ProgressView()
+                    }
+                }
+                .frame(width: 128, height: 192)
+                .cornerRadius(6)
+                .opacity(searchResultItemViewModel.isAlreadySaved ? 0.3 : 1.0)
                 
                 if searchResultItemViewModel.isAlreadySaved {
                     Image(systemName: "checkmark")

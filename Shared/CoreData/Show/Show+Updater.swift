@@ -197,17 +197,17 @@ extension Show {
             return
         }
         
-        if let path = showResponse.poster_path, let data = showResponse.poster_data {
+        if let data = showResponse.poster_data {
             if images.count == 0 {
                 let coreDataShowImage = ShowImage(context: managedObjectContext)
-                coreDataShowImage.updateShowImageFromResponse(path: path, data: data)
+                coreDataShowImage.updateShowImageFromResponse(path: showResponse.poster_path, data: data)
                 self.addToShowImages(coreDataShowImage)
             } else {
                 if let oldShowImage = self.showImages?.allObjects.first {
                     self.removeFromShowImages(oldShowImage as! ShowImage)
                     
                     let coreDataShowImage = ShowImage(context: managedObjectContext)
-                    coreDataShowImage.updateShowImageFromResponse(path: path, data: data)
+                    coreDataShowImage.updateShowImageFromResponse(path: showResponse.poster_path, data: data)
                     self.addToShowImages(coreDataShowImage)
                 }
             }

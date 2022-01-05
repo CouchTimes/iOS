@@ -88,22 +88,16 @@ extension NetworkService {
     }
     
     func getShowImageData(show: ShowDetailsResponse, completion: @escaping (Result<ShowDetailsResponse, Error>) -> Void) {
-        if let posterPath = show.poster_path {
-            downloadShowImages(filePath: posterPath) { downloadResult in
-                switch downloadResult {
-                case let .success(imageData):
-                    var showWithImage = show
-                    showWithImage.poster_data = imageData
-                    completion(.success(showWithImage))
-                case let .failure(error):
-                    completion(.failure(error))
-                    // TODO: Add error handling
-                }
+        downloadShowImages(filePath: show.poster_path) { downloadResult in
+            switch downloadResult {
+            case let .success(imageData):
+                var showWithImage = show
+                showWithImage.poster_data = imageData
+                completion(.success(showWithImage))
+            case let .failure(error):
+                completion(.failure(error))
+                // TODO: Add error handling
             }
-        } else {
-            completion(.failure(ImageDownloadError.noPosterPath))
-            
-            // TODO: Add error handling
         }
     }
     

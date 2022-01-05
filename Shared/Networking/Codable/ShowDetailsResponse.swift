@@ -42,7 +42,7 @@ struct ShowDetailsResponse: Decodable {
     var original_name: String?
     var overview: String?
     var popularity: Double
-    var poster_path: String?
+    var poster_path: String
     var poster_data: Data?
     var seasons: [ShowSeasonResponse]
 //    "spoken_languages": [

@@ -13,8 +13,8 @@ struct SearchRecommendations: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack {
-                VStack(alignment: .leading, spacing: 24) {
+            LazyVStack {
+                LazyVStack(alignment: .leading, spacing: 24) {
                     SearchRecommendationList(title: "Popular Shows", shows: searchViewModel.popularShows)
                     SearchRecommendationList(title: "Top Rated Shows", shows: searchViewModel.topRatedShows)
                     SearchRecommendationList(title: "Netlifx", shows: searchViewModel.netflixShows)
@@ -25,11 +25,5 @@ struct SearchRecommendations: View {
                 }.padding(.bottom, 24)
             }
         }
-    }
-}
-
-struct SearchRecommendation_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchRecommendations()
     }
 }

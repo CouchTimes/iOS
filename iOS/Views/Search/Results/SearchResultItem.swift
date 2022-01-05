@@ -27,7 +27,17 @@ struct SearchResultItem: View {
             searchViewModel.showDetailsPresented.toggle()
         }) {
             HStack(alignment: .center, spacing: 20) {
-                SearchResultItemPoster(poster: poster)
+                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w92\(show.poster_path)")) { phase in
+                    if let image = phase.image {
+                        image.resizable()
+                    } else if phase.error != nil {
+                        Color.red
+                    } else {
+                        ProgressView()
+                    }
+                }
+                .frame(width: 48, height: 72)
+                .cornerRadius(6)
                 VStack(alignment: .leading, spacing: 2.0) {
                     ItemTitle(text: title)
                         .lineLimit(2)

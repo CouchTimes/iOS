@@ -17,7 +17,7 @@ extension NetworkService {
                     let filteredResponse = try moyaResponse.filterSuccessfulStatusCodes()
                     let shows = try filteredResponse.map(SearchResponse.self)
                     
-                    self.getFullShowData(shows: shows.results) { result in
+                    self.getShowDetails(shows: shows.results) { result in
                         switch result {
                         case let .success(shows):
                             completion(.success(shows))
@@ -44,7 +44,7 @@ extension NetworkService {
                     let filteredResponse = try moyaResponse.filterSuccessfulStatusCodes()
                     let shows = try filteredResponse.map(SearchResponse.self)
                     
-                    self.getFullShowData(shows: shows.results) { result in
+                    self.getShowDetails(shows: shows.results) { result in
                         switch result {
                         case let .success(shows):
                             completion(.success(shows))
@@ -71,7 +71,7 @@ extension NetworkService {
                     let filteredResponse = try moyaResponse.filterSuccessfulStatusCodes()
                     let shows = try filteredResponse.map(SearchResponse.self)
                     
-                    self.getFullShowData(shows: shows.results) { result in
+                    self.getShowDetails(shows: shows.results) { result in
                         switch result {
                         case let .success(shows):
                             completion(.success(shows))
@@ -98,7 +98,7 @@ extension NetworkService {
                     let filteredResponse = try moyaResponse.filterSuccessfulStatusCodes()
                     let shows = try filteredResponse.map(SearchResponse.self)
                     
-                    self.getFullShowData(shows: shows.results) { result in
+                    self.getShowDetails(shows: shows.results) { result in
                         switch result {
                         case let .success(shows):
                             completion(.success(shows))
