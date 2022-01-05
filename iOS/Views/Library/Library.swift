@@ -61,13 +61,7 @@ struct Library: View {
                                    iconName: "star.fill")
                     }
                 }
-                Picker(selection: $libraryViewState, label: Text("What filter do you want to apply to the library?")) {
-                    Text("All").tag(0)
-                    Text("Favorites").tag(1)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.horizontal)
-                .padding(.bottom, 32)
+                FloatingSegmentedControl(pickerLabel: "What filter do you want to apply to the library?", pickerItems: ["All", "Favorites"], pickerSelection: $libraryViewState)
             }
             .navigationBarTitle("Library")
         }

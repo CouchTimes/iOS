@@ -23,7 +23,6 @@ struct ShowBlurredBackground: View {
                 
                 DispatchQueue.main.async {
                     self.offset = minY
-                    print(self.offset)
                 }
                 
                 return AnyView (
@@ -31,8 +30,8 @@ struct ShowBlurredBackground: View {
                         poster
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width, height: minY > 0 ? backgroundHeight + minY : backgroundHeight, alignment: .center)
-                            .blur(radius: 16.0, opaque: true)
+                            .frame(width: geometry.size.width, height: minY > 0 ? backgroundHeight + minY : backgroundHeight)
+                            .blur(radius: 16, opaque: true)
 
                         VStack(spacing: 0) {
                             Rectangle()
@@ -40,7 +39,7 @@ struct ShowBlurredBackground: View {
                                     LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.08), Color.black.opacity(0.32), Color.black.opacity(1)]), startPoint: .top, endPoint: .bottom) :
                                     LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.08), Color.white.opacity(0.32), Color.white.opacity(1)]), startPoint: .top, endPoint: .bottom)
                                 )
-                                .frame(width: geometry.size.width, height: backgroundHeight)
+                                .frame(width: geometry.size.width, height: backgroundHeight, alignment: .center)
 
                             Rectangle()
                                 .fill(Color("backgroundColor"))

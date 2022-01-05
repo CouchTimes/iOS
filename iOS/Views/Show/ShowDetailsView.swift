@@ -94,16 +94,7 @@ struct ShowDetailsView: View {
                         }
                     }
                 }
-                Picker(selection: $viewMode, label: Text("What is your favorite color?")) {
-                    Image(systemName: "list.bullet")
-                        .tag(0)
-                    Image(systemName: "info.circle")
-                        .tag(1)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .background(Color("cardBackground"))
-                .padding(.horizontal)
-                .padding(.bottom, 16)
+                FloatingSegmentedControl(pickerLabel: "What filter do you want to apply to the library?", pickerItems: ["Seasons", "Details"], pickerSelection: $viewMode)
             } else {
                 EmptyView()
             }

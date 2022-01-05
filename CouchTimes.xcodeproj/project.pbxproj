@@ -59,6 +59,7 @@
 		B25B12FF269DF2870033622C /* SettingsAbout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B12FE269DF2870033622C /* SettingsAbout.swift */; };
 		B25ED06D24BCD78100AA42E3 /* SeasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25ED06C24BCD78100AA42E3 /* SeasonViewModel.swift */; };
 		B268D692259CAAF100125E78 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B268D691259CAAF100125E78 /* Themes.swift */; };
+		B269079F2785C9D900BADF63 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269079E2785C9D900BADF63 /* CustomSegmentedControl.swift */; };
 		B26A0B16259B7FD400FBDA6A /* Show+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B271021A251D29D8002681CD /* Show+Helpers.swift */; };
 		B26A0B17259B7FD400FBDA6A /* Show+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B271021C251D29D8002681CD /* Show+CoreDataProperties.swift */; };
 		B26A0B18259B7FD400FBDA6A /* Show+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B271023C251D2A3E002681CD /* Show+CoreDataClass.swift */; };
@@ -253,6 +254,7 @@
 		B25B12FE269DF2870033622C /* SettingsAbout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAbout.swift; sourceTree = "<group>"; };
 		B25ED06C24BCD78100AA42E3 /* SeasonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewModel.swift; sourceTree = "<group>"; };
 		B268D691259CAAF100125E78 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
+		B269079E2785C9D900BADF63 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		B26A0B1F259B842E00FBDA6A /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
 		B26A0B3B259B84DE00FBDA6A /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
 		B26A0B4A259B852B00FBDA6A /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				B2C8D83424B387FB00F24765 /* InfoTextCell.swift */,
 				B279020F251FC63B00DEC814 /* ShareSheet.swift */,
 				B24A3495254D8FCF00A5F08E /* EmptyState.swift */,
+				B269079E2785C9D900BADF63 /* CustomSegmentedControl.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				B2B09667254B3EC800C41EA0 /* LibraryItem.swift in Sources */,
 				B24A3496254D8FCF00A5F08E /* EmptyState.swift in Sources */,
 				B22ABAC7261B2BFB0002EF41 /* Season+CRUD.swift in Sources */,
+				B269079F2785C9D900BADF63 /* CustomSegmentedControl.swift in Sources */,
 				B22ABAC026199A9A0002EF41 /* ShowChangesItem.swift in Sources */,
 				B2371CCC244729D4003D2631 /* Search.swift in Sources */,
 				B2EEF6A025D5148B00B2E896 /* SearchResponse.swift in Sources */,
