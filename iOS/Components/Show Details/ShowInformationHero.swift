@@ -19,7 +19,7 @@ struct ShowInformationHero: View {
         VStack(alignment: .center, spacing: 24) {
             Image(uiImage: cover)
                 .resizable()
-                .frame(width: 170, height: 256)
+                .frame(width: 212, height: 320)
                 .cornerRadius(6)
             ShowInformationTitle(title: title, subtitle: subtitle)
         }.padding(.top, 96)

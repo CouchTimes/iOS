@@ -10,38 +10,44 @@ import SwiftUI
 import WidgetKit
 
 struct ShowSeasons: View {
-    @State private var currentSeason: Season?
+    var show: Show
+    var seasonCount: Int
+    
+    @State private var seasonSheet = false
+    @State private var currentSeason: Season
     @State private var currentSeasonNumber = 0
     
-    @EnvironmentObject var show: Show
+    init(show: Show, seasonCount: Int) {
+        self.show = show
+        self.seasonCount = seasonCount
+        
+        let season = show.getSingleSeason(1)!
+        self._currentSeason = State(initialValue: season)
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Menu {
-                if (orderedSeasons != nil) {
-                    ForEach(orderedSeasons!, id: \.id) { season in
-                        Button("Season \(season.number)", action: {
-                            let number = Int(season.number)
-                            getCurrentSeason(number)
-                        })
+            if seasonCount > 1 {
+                Button {
+                    print("Test")
+                    seasonSheet = true
+                } label: {
+                    HStack(alignment: .center, spacing: 8) {
+                        Text("Season \(currentSeason.number)")
+                            .font(.callout)
+                            .fontWeight(.semibold)
+                        Image(systemName: "chevron.down")
+                            .padding(.trailing, 4)
                     }
+                    .foregroundColor(Color("textColor"))
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 12)
+                    .background(Color("cardBackground"))
+                    .cornerRadius(8)
                 }
-            } label: {
-                HStack(alignment: .center, spacing: 8) {
-                    Text("Season \(currentSeasonNumber)")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                    Spacer()
-                    Image(systemName: "chevron.down")
-                        .padding(.trailing, 4)
-                }
-                .foregroundColor(Color("textColor"))
-                .padding()
-                .background(Color("cardBackground"))
-                .cornerRadius(8)
             }
             VStack {
-                if (currentSeason != nil && episodes != nil) {
+                if (episodes != nil) {
                     LazyVStack(alignment: .leading) {
                         ForEach(episodes!, id: \.self) { episode in
                             HStack(alignment: .center, spacing: 16) {
@@ -82,18 +88,17 @@ struct ShowSeasons: View {
                     .background(Color("backgroundColor").edgesIgnoringSafeArea(.all))
                 }
             }
-        }.onAppear {
-            self.getCurrentSeason(1)
+        }
+        .halfSheet(isPresented: $seasonSheet) {
+            ShowSeasonsPicker(seasons: orderedSeasons!, currentSeason: $currentSeason)
+        } onEnd: {
+            print(seasonSheet)
+            print("Test")
         }
     }
 }
 
 extension ShowSeasons {
-    private func getCurrentSeason(_ seasonNumber: Int) {
-        self.currentSeasonNumber = seasonNumber
-        self.currentSeason = show.getSingleSeason(seasonNumber)
-    }
-    
     private var orderedSeasons: [Season]? {
         if let seasons = show.getAllSeasons() {
             return seasons.sorted(by: { $0.number > $1.number })
@@ -103,10 +108,8 @@ extension ShowSeasons {
     }
     
     private var episodes: [Episode]? {
-        if let season = currentSeason {
-            if let episodes = season.episodes?.allObjects as? [Episode] {
-                return episodes.sorted(by: { $0.episodeNumber < $1.episodeNumber })
-            }
+        if let episodes = currentSeason.episodes?.allObjects as? [Episode] {
+            return episodes.sorted(by: { $0.episodeNumber < $1.episodeNumber })
         }
         
         return nil

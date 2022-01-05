@@ -17,6 +17,7 @@
 		B202D1A123492C0A00A31A2A /* CouchTimesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B202D1A023492C0A00A31A2A /* CouchTimesUITests.swift */; };
 		B202D1B2234930FB00A31A2A /* WatchlistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B202D1B1234930FB00A31A2A /* WatchlistCell.swift */; };
 		B202D1B42349387800A31A2A /* ShowDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B202D1B32349387800A31A2A /* ShowDetailsView.swift */; };
+		B20ECC1E2784CEC900DC4379 /* ShowSeasonsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20ECC1D2784CEC900DC4379 /* ShowSeasonsSheet.swift */; };
 		B20F84E224F8F892007B729D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20F84E124F8F892007B729D /* NetworkService.swift */; };
 		B20F84E424F8F8EA007B729D /* NetworkService+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20F84E324F8F8EA007B729D /* NetworkService+Search.swift */; };
 		B21B0E8A24DC7A3200FDFDC8 /* WatchlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21B0E8924DC7A3200FDFDC8 /* WatchlistViewModel.swift */; };
@@ -107,6 +108,7 @@
 		B2B3AE6724B2599E006AE84F /* ShowInformationHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B3AE6624B2599E006AE84F /* ShowInformationHero.swift */; };
 		B2BA826924E9B2F700246B8D /* SearchRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BA826824E9B2F700246B8D /* SearchRecommendations.swift */; };
 		B2BA826B24E9B39E00246B8D /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BA826A24E9B39E00246B8D /* SearchResults.swift */; };
+		B2BD279F278580C5008A2265 /* ShowSeasonsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD279E278580C5008A2265 /* ShowSeasonsPicker.swift */; };
 		B2BE9D96259B68A800511DE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE9D95259B68A800511DE7 /* AppDelegate.swift */; };
 		B2BE9E13259B6CA000511DE7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BE9DF1259B6C6300511DE7 /* WidgetKit.framework */; };
 		B2BE9E14259B6CA000511DE7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BE9DF3259B6C6300511DE7 /* SwiftUI.framework */; };
@@ -214,6 +216,7 @@
 		B202D1A223492C0A00A31A2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B202D1B1234930FB00A31A2A /* WatchlistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistCell.swift; sourceTree = "<group>"; };
 		B202D1B32349387800A31A2A /* ShowDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsView.swift; sourceTree = "<group>"; };
+		B20ECC1D2784CEC900DC4379 /* ShowSeasonsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSeasonsSheet.swift; sourceTree = "<group>"; };
 		B20F84E124F8F892007B729D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B20F84E324F8F8EA007B729D /* NetworkService+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Search.swift"; sourceTree = "<group>"; };
 		B21B0E8924DC7A3200FDFDC8 /* WatchlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewModel.swift; sourceTree = "<group>"; };
@@ -283,6 +286,7 @@
 		B2B3AE6624B2599E006AE84F /* ShowInformationHero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInformationHero.swift; sourceTree = "<group>"; };
 		B2BA826824E9B2F700246B8D /* SearchRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecommendations.swift; sourceTree = "<group>"; };
 		B2BA826A24E9B39E00246B8D /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		B2BD279E278580C5008A2265 /* ShowSeasonsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSeasonsPicker.swift; sourceTree = "<group>"; };
 		B2BE9D95259B68A800511DE7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2BE9DF1259B6C6300511DE7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B2BE9DF3259B6C6300511DE7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -591,6 +595,7 @@
 				B2B3AE6624B2599E006AE84F /* ShowInformationHero.swift */,
 				B22A750B249684AA000EDEF4 /* ShowInformationTitle.swift */,
 				B25827BF24B249D200EBC009 /* ShowBlurredBackground.swift */,
+				B20ECC1D2784CEC900DC4379 /* ShowSeasonsSheet.swift */,
 			);
 			path = "Show Details";
 			sourceTree = "<group>";
@@ -600,6 +605,7 @@
 			children = (
 				B202D1B32349387800A31A2A /* ShowDetailsView.swift */,
 				B2900B9624DDAA5B00276812 /* ShowSeasons.swift */,
+				B2BD279E278580C5008A2265 /* ShowSeasonsPicker.swift */,
 			);
 			path = Show;
 			sourceTree = "<group>";
@@ -1046,6 +1052,7 @@
 				B2D5112E259F2F530026606D /* ShowViewModel.swift in Sources */,
 				B2EEF6A225D5148B00B2E896 /* ShowResponse.swift in Sources */,
 				B25818FB2774E2A0005B51C0 /* SearchContent.swift in Sources */,
+				B2BD279F278580C5008A2265 /* ShowSeasonsPicker.swift in Sources */,
 				B22ABAAE26199A390002EF41 /* NetworkService+Updates.swift in Sources */,
 				B2710237251D2A09002681CD /* ShowImage+CoreDataProperties.swift in Sources */,
 				B2E870C624B1F20E005D6BD2 /* SearchNoResult.swift in Sources */,
@@ -1066,6 +1073,7 @@
 				B24A34B2254DA70A00A5F08E /* OnboardingItem.swift in Sources */,
 				B22A750C249684AA000EDEF4 /* ShowInformationTitle.swift in Sources */,
 				B2900B9724DDAA5B00276812 /* ShowSeasons.swift in Sources */,
+				B20ECC1E2784CEC900DC4379 /* ShowSeasonsSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

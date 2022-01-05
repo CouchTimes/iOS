@@ -28,7 +28,7 @@ struct ShowDetailsView: View {
                         ShowInformationHero(cover: showImage, title: show.title, year: Int(show.year), genres: show.genres, seasonCount: seasonsCount)
                         Group {
                             if viewMode == 0 {
-                                ShowSeasons()
+                                ShowSeasons(show: show, seasonCount: seasonsCount)
                             }
                             
                             if viewMode == 1 {
@@ -101,7 +101,7 @@ struct ShowDetailsView: View {
                         .tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                .background(Color.white)
+                .background(Color("cardBackground"))
                 .padding(.horizontal)
                 .padding(.bottom, 16)
             } else {
