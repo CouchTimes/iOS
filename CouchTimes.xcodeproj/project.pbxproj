@@ -59,6 +59,7 @@
 		B25ED06D24BCD78100AA42E3 /* SeasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25ED06C24BCD78100AA42E3 /* SeasonViewModel.swift */; };
 		B268D692259CAAF100125E78 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B268D691259CAAF100125E78 /* Themes.swift */; };
 		B269079F2785C9D900BADF63 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269079E2785C9D900BADF63 /* CustomSegmentedControl.swift */; };
+		B26907A12785E07D00BADF63 /* AsyncCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26907A02785E07D00BADF63 /* AsyncCover.swift */; };
 		B26A0B16259B7FD400FBDA6A /* Show+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B271021A251D29D8002681CD /* Show+Helpers.swift */; };
 		B26A0B17259B7FD400FBDA6A /* Show+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B271021C251D29D8002681CD /* Show+CoreDataProperties.swift */; };
 		B26A0B18259B7FD400FBDA6A /* Show+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B271023C251D2A3E002681CD /* Show+CoreDataClass.swift */; };
@@ -251,6 +252,7 @@
 		B25ED06C24BCD78100AA42E3 /* SeasonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewModel.swift; sourceTree = "<group>"; };
 		B268D691259CAAF100125E78 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		B269079E2785C9D900BADF63 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		B26907A02785E07D00BADF63 /* AsyncCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCover.swift; sourceTree = "<group>"; };
 		B26A0B1F259B842E00FBDA6A /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
 		B26A0B3B259B84DE00FBDA6A /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
 		B26A0B4A259B852B00FBDA6A /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 				B279020F251FC63B00DEC814 /* ShareSheet.swift */,
 				B24A3495254D8FCF00A5F08E /* EmptyState.swift */,
 				B269079E2785C9D900BADF63 /* CustomSegmentedControl.swift */,
+				B26907A02785E07D00BADF63 /* AsyncCover.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				B20F84E424F8F8EA007B729D /* NetworkService+Search.swift in Sources */,
 				B22A75112496A423000EDEF4 /* AddToWatchlistButtonStyle.swift in Sources */,
 				B2909D6E248D21FA004BD25B /* WatchlistCover.swift in Sources */,
+				B26907A12785E07D00BADF63 /* AsyncCover.swift in Sources */,
 				B2CE5928259A42EF00370ECF /* StorageProvider.swift in Sources */,
 				B2D82CC32494DF7200E774B1 /* TMDbService.swift in Sources */,
 				B2D7F02D2616287800476A96 /* VideoResponse.swift in Sources */,

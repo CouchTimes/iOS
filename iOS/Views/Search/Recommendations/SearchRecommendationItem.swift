@@ -22,18 +22,10 @@ struct SearchRecommendationItem: View {
     var body: some View {
         NavigationLink(destination: SearchShowDetail(show: show, savedShowIds: searchViewModel.savedShows)) {
             ZStack(alignment: .topTrailing) {
-                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w154\(show.poster_path)")) { phase in
-                    if let image = phase.image {
-                        image.resizable()
-                    } else if phase.error != nil {
-                        Color.red
-                    } else {
-                        ProgressView()
-                    }
-                }
-                .frame(width: 128, height: 192)
-                .cornerRadius(6)
-                .opacity(searchResultItemViewModel.isAlreadySaved ? 0.3 : 1.0)
+                AsyncCover(imagePath: show.poster_path, imageSize: .small)
+                    .frame(width: 128, height: 192)
+                    .cornerRadius(6)
+                    .opacity(searchResultItemViewModel.isAlreadySaved ? 0.3 : 1.0)
                 
                 if searchResultItemViewModel.isAlreadySaved {
                     Image(systemName: "checkmark")
