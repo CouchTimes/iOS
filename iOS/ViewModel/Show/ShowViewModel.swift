@@ -39,9 +39,8 @@ extension ShowViewModel {
     
     func getAllSeasons() {
         guard let wrappedShow = show else { return }
-        guard let seasonArray = wrappedShow.getAllSeasons() else { return }
 
-        seasons = seasonArray
+        seasons = wrappedShow.getAllSeasons()
     }
     
     func getAllEpisodes() {

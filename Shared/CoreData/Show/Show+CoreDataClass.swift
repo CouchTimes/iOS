@@ -11,8 +11,8 @@ import CoreData
 import Foundation
 
 public class Show: NSManagedObject, Identifiable {
-    public func getAllSeasons() -> [Season]? {
-        guard let seasons = self.seasons else { return nil }
+    public func getAllSeasons() -> [Season] {
+        guard let seasons = self.seasons else { return [] }
         
         var seasonsArray = seasons.allObjects as! [Season]
         seasonsArray = seasonsArray.sorted { $0.number < $1.number }
