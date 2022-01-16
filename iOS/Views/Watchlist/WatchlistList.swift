@@ -10,7 +10,7 @@ import SwiftUI
 import WidgetKit
 
 struct WatchlistList: View {
-    var shows: [Show]
+    @Binding var shows: [Show]
     var showsCount: Int
     
     @State private var showingAlert = false
@@ -29,6 +29,7 @@ struct WatchlistList: View {
                                 show.nextEpisode!.watched = true
                                 do {
                                     try managedObjectContext.save()
+                                    show.objectWillChange.send()
                                     WidgetCenter.shared.reloadAllTimelines()
                                 } catch {
                                     print(error)

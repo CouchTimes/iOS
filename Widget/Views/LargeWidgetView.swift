@@ -29,7 +29,20 @@ struct LargeWidgetView: View {
                             .truncationMode(.tail)
                     }
                     Spacer()
-                    WatchlistCellEpisodeCounter(text: String(describing: show.episodeCount))
+                    ZStack {
+                        Text(String(describing: show.episodeCount))
+                            .font(.system(.footnote))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("titleColor"))
+                            .frame(width: 40, height: 32)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .strokeBorder(Color("borderColor"), lineWidth: 2)
+                            )
+                    }
                 }
             }
             

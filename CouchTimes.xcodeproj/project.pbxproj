@@ -73,7 +73,6 @@
 		B26A0B5B259B89BF00FBDA6A /* ItemTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24E780B2358EEB10015025F /* ItemTitle.swift */; };
 		B26A0B5C259B89BF00FBDA6A /* Caption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E7E0982493F79C008B2EC5 /* Caption.swift */; };
 		B26A0B5D259B89BF00FBDA6A /* SectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24E78102358F0450015025F /* SectionTitle.swift */; };
-		B26A0B66259B8D3700FBDA6A /* WatchlistCellEpisodeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E7E09A2493F80A008B2EC5 /* WatchlistCellEpisodeCounter.swift */; };
 		B26EF21225D5153D00420DA5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B26EF21125D5153D00420DA5 /* Alamofire */; };
 		B26EF21925D515B400420DA5 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = B26EF21825D515B400420DA5 /* Moya */; };
 		B26EF21F25D515BE00420DA5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B26EF21E25D515BE00420DA5 /* Alamofire */; };
@@ -148,8 +147,6 @@
 		B2D82CC32494DF7200E774B1 /* TMDbService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D82CC22494DF7200E774B1 /* TMDbService.swift */; };
 		B2DC078E269EED8A004C6B7B /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B268D691259CAAF100125E78 /* Themes.swift */; };
 		B2E7E0992493F79C008B2EC5 /* Caption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E7E0982493F79C008B2EC5 /* Caption.swift */; };
-		B2E7E09B2493F80A008B2EC5 /* WatchlistCellEpisodeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E7E09A2493F80A008B2EC5 /* WatchlistCellEpisodeCounter.swift */; };
-		B2E7E09D2493F8BC008B2EC5 /* WatchlistCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E7E09C2493F8BC008B2EC5 /* WatchlistCellContent.swift */; };
 		B2EEF6A025D5148B00B2E896 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EEF69C25D5148B00B2E896 /* SearchResponse.swift */; };
 		B2EEF6A125D5148B00B2E896 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EEF69C25D5148B00B2E896 /* SearchResponse.swift */; };
 		B2EEF6A225D5148B00B2E896 /* ShowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EEF69D25D5148B00B2E896 /* ShowResponse.swift */; };
@@ -310,8 +307,6 @@
 		B2D82CC22494DF7200E774B1 /* TMDbService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbService.swift; sourceTree = "<group>"; };
 		B2D82CC62494E02700E774B1 /* showImages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = showImages.json; sourceTree = "<group>"; };
 		B2E7E0982493F79C008B2EC5 /* Caption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caption.swift; sourceTree = "<group>"; };
-		B2E7E09A2493F80A008B2EC5 /* WatchlistCellEpisodeCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistCellEpisodeCounter.swift; sourceTree = "<group>"; };
-		B2E7E09C2493F8BC008B2EC5 /* WatchlistCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistCellContent.swift; sourceTree = "<group>"; };
 		B2EEF69C25D5148B00B2E896 /* SearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		B2EEF69D25D5148B00B2E896 /* ShowResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowResponse.swift; sourceTree = "<group>"; };
 		B2EEF69F25D5148B00B2E896 /* ShowDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDetailsResponse.swift; sourceTree = "<group>"; };
@@ -529,8 +524,6 @@
 				B202D18223492C0900A31A2A /* Watchlist.swift */,
 				B29995B5277B371D00671A8D /* WatchlistList.swift */,
 				B202D1B1234930FB00A31A2A /* WatchlistCell.swift */,
-				B2E7E09C2493F8BC008B2EC5 /* WatchlistCellContent.swift */,
-				B2E7E09A2493F80A008B2EC5 /* WatchlistCellEpisodeCounter.swift */,
 				B2909D6D248D21FA004BD25B /* WatchlistCover.swift */,
 			);
 			path = Watchlist;
@@ -1008,7 +1001,6 @@
 				B22ABAC026199A9A0002EF41 /* ShowChangesItem.swift in Sources */,
 				B2371CCC244729D4003D2631 /* Search.swift in Sources */,
 				B2EEF6A025D5148B00B2E896 /* SearchResponse.swift in Sources */,
-				B2E7E09B2493F80A008B2EC5 /* WatchlistCellEpisodeCounter.swift in Sources */,
 				B2710236251D2A09002681CD /* ShowImage+CoreDataClass.swift in Sources */,
 				B202D1B2234930FB00A31A2A /* WatchlistCell.swift in Sources */,
 				B202D18123492C0900A31A2A /* SceneDelegate.swift in Sources */,
@@ -1062,7 +1054,6 @@
 				B2900B9924DDABAE00276812 /* ShowInformation.swift in Sources */,
 				B202D1B42349387800A31A2A /* ShowDetailsView.swift in Sources */,
 				B21B2F2F256689F500925E06 /* SettingsAppearance.swift in Sources */,
-				B2E7E09D2493F8BC008B2EC5 /* WatchlistCellContent.swift in Sources */,
 				B24E78132358F24A0015025F /* SectionValue.swift in Sources */,
 				B2028083247E837B002F29B4 /* SearchListItemViewModel.swift in Sources */,
 				B2C10459255C5B6700F2677B /* SettingsAppIcon.swift in Sources */,
@@ -1134,7 +1125,6 @@
 				B22ABAAF26199A390002EF41 /* NetworkService+Updates.swift in Sources */,
 				B22ABAD3261B2D110002EF41 /* Episode+CRUD.swift in Sources */,
 				B2BE9E77259B76E500511DE7 /* Season+CoreDataProperties.swift in Sources */,
-				B26A0B66259B8D3700FBDA6A /* WatchlistCellEpisodeCounter.swift in Sources */,
 				B2BE9E83259B76EF00511DE7 /* ShowImage+CoreDataProperties.swift in Sources */,
 				B2D7F0012615D40000476A96 /* GenreResponse.swift in Sources */,
 			);

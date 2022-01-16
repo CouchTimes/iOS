@@ -47,7 +47,7 @@ struct Watchlist: View {
 
     var body: some View {
         NavigationView {
-            WatchlistList(shows: shows, showsCount: viewModel.shows.count)
+            WatchlistList(shows: Binding.constant(shows), showsCount: viewModel.shows.count)
             .navigationBarTitle("Watchlist", displayMode: .large)
             .navigationBarItems(leading: NavigationLink(destination: Settings().tint(Color("titleColor"))) {
                 Image(systemName: "gearshape")
