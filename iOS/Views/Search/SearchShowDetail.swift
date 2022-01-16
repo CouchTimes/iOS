@@ -25,14 +25,14 @@ struct SearchShowDetail: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
-                ShowBlurredBackground(poster: Image(uiImage: showImage))
+                ShowBlurredBackground(poster: Image(uiImage: showImage), posterColor: showImageColor)
                 VStack(spacing: 32) {
                     VStack(spacing: 32) {
                         ShowInformationHero(cover: showImage, title: show.name, year: show.wrappedYear, genres: genres, seasonCount: show.seasons.count)
                     }
                     
                     Button(action: {
-                        self.searchViewModel.saveShow(show: searchItemViewModel.show) { result in
+                        self.searchViewModel.saveShow(show: searchViewModel.selectedShow!) { result in
                             switch result {
                             case .success(_):
                                 print("Wow")
@@ -85,17 +85,27 @@ struct SearchShowDetail: View {
         .sheet(isPresented: $showShareSheet) {
             ShareSheet(activityItems: [URL(string: "https://www.themoviedb.org/tv/\(show.id)")!])
         }
-
+        .onAppear {
+            searchViewModel.getFullShowData(show: show)
+        }
     }
 }
 
 extension SearchShowDetail {
     private var showImage: UIImage {
-        if let poster = show.poster_data {
+        if let poster = searchViewModel.selectedShow?.poster_data {
             return UIImage(data: poster)!
         }
 
         return UIImage(named: "cover_placeholder")!
+    }
+    
+    private var showImageColor: Color {
+        if let poster = show.poster_data, let color = UIImage(data: poster)!.averageColor {
+            return Color(color)
+        }
+        
+        return Color(.clear)
     }
     
     private var genres: [String]? {

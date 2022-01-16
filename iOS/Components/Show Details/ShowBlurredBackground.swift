@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ShowBlurredBackground: View {
     var poster: Image
+    var posterColor: Color
 
     @State private var offset: CGFloat = 0
     @Environment(\.colorScheme) var colorScheme
@@ -27,19 +28,17 @@ struct ShowBlurredBackground: View {
                 
                 return AnyView (
                     ZStack(alignment: .top) {
-                        poster
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
+                        Rectangle()
+                            .fill(posterColor)
                             .frame(width: geometry.size.width, height: minY > 0 ? backgroundHeight + minY : backgroundHeight)
-                            .blur(radius: 16, opaque: true)
 
                         VStack(spacing: 0) {
                             Rectangle()
                                 .fill(colorScheme == .dark ?
-                                    LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.08), Color.black.opacity(0.32), Color.black.opacity(1)]), startPoint: .top, endPoint: .bottom) :
-                                    LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.08), Color.white.opacity(0.32), Color.white.opacity(1)]), startPoint: .top, endPoint: .bottom)
+                                    LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.32), Color.black.opacity(1)]), startPoint: .top, endPoint: .bottom) :
+                                    LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0), Color.white.opacity(0.32), Color.white.opacity(1)]), startPoint: .top, endPoint: .bottom)
                                 )
-                                .frame(width: geometry.size.width, height: backgroundHeight, alignment: .center)
+                                .frame(width: geometry.size.width, height: backgroundHeight, alignment: .bottom)
 
                             Rectangle()
                                 .fill(Color("backgroundColor"))

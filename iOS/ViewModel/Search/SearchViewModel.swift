@@ -144,29 +144,41 @@ class SearchViewModel: ObservableObject {
             }
         }
     }
+    
+    func getFullShowData(show: ShowDetailsResponse) {
+        NetworkService.shared.getShowImageData(show: show) { result in
+            switch result {
+            case let .success(show):
+                self.selectedShow = show
+                
+                NetworkService.shared.getAllSeasons(show: show) { result in
+                    switch result {
+                    case let .success(seasons):
+                        self.selectedShow?.seasons = seasons
+                    case let .failure(error):
+                        print(error)
+                    }
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
 
     func saveShow(show: ShowDetailsResponse, completion: @escaping (Result<Show, Error>) -> Void) {
         let managedContext = StorageProvider.shared.persistentContainer.viewContext
         
         self.isSavingShow = true
-
-        NetworkService.shared.getAllSeasons(show: show) { result in
+        
+        Show.createShowForCoreData(managedObjectContext: managedContext, showResponse: show, seasons: show.seasons) { result in
             switch result {
-            case let .success(seasons):
-                Show.createShowForCoreData(managedObjectContext: managedContext, showResponse: show, seasons: seasons) { result in
-                    switch result {
-                    case let .success(coreDataShow):
-                        completion(.success(coreDataShow))
-                        print("Successfully saved!")
-                    case let .failure(error):
-                        print("Error while saving")
-                        print(error)
-                        completion(.failure(error))
-                    }
-                }
+            case let .success(coreDataShow):
+                completion(.success(coreDataShow))
+                print("Successfully saved!")
             case let .failure(error):
                 print("Error while saving")
                 print(error)
+                completion(.failure(error))
             }
             
             self.isSavingShow = false

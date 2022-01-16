@@ -23,7 +23,7 @@ struct ShowDetailsView: View {
         ZStack(alignment: .bottom) {
             if (!showEmptyView) {
                 ScrollView(showsIndicators: false) {
-                    ShowBlurredBackground(poster: Image(uiImage: showImage))
+                    ShowBlurredBackground(poster: Image(uiImage: showImage), posterColor: showImageColor)
                     VStack(spacing: 24) {
                         ShowInformationHero(cover: showImage, title: show.title, year: Int(show.year), genres: show.genres, seasonCount: seasonsCount)
                         Group {
@@ -82,6 +82,7 @@ struct ShowDetailsView: View {
                                     Label("Share", systemImage: "square.and.arrow.up")
                                 }
                                 Button(role: .destructive, action: {
+                                    self.showEmptyView = true
                                     self.deleteShow()
                                 }) {
                                     Label("Delete", systemImage: "trash")
@@ -116,6 +117,14 @@ extension ShowDetailsView {
         }
 
         return UIImage(named: "cover_placeholder")!
+    }
+    
+    private var showImageColor: Color {
+        if let poster = show.poster, let color = UIImage(data: poster)!.averageColor {
+            return Color(color)
+        }
+        
+        return Color(.clear)
     }
     
     private var seasonsCount: Int {
@@ -154,7 +163,6 @@ extension ShowDetailsView {
     }
     
     private func deleteShow() -> Void {
-        self.showEmptyView = true
         self.presentationMode.wrappedValue.dismiss()
         show.deleteShow(managedObjectContext: managedObjectContext)
     }
