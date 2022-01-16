@@ -18,7 +18,7 @@ struct AsyncCover: View {
         case .small:
             imageURL = URL(string: "https://image.tmdb.org/t/p/w154\(imagePath)")!
         case .medium:
-            imageURL = URL(string: "https://image.tmdb.org/t/p/w300\(imagePath)")!
+            imageURL = URL(string: "https://image.tmdb.org/t/p/w342\(imagePath)")!
         case .big:
             imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(imagePath)")!
         case .original:

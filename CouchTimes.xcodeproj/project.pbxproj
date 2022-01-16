@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B2028083247E837B002F29B4 /* SearchListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2028082247E837B002F29B4 /* SearchListItemViewModel.swift */; };
+		B2028083247E837B002F29B4 /* SearchItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2028082247E837B002F29B4 /* SearchItemViewModel.swift */; };
 		B202D18123492C0900A31A2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B202D18023492C0900A31A2A /* SceneDelegate.swift */; };
 		B202D18323492C0900A31A2A /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B202D18223492C0900A31A2A /* Watchlist.swift */; };
 		B202D18523492C0A00A31A2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B202D18423492C0A00A31A2A /* Assets.xcassets */; };
@@ -197,7 +197,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B2028082247E837B002F29B4 /* SearchListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListItemViewModel.swift; sourceTree = "<group>"; };
+		B2028082247E837B002F29B4 /* SearchItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemViewModel.swift; sourceTree = "<group>"; };
 		B202D17B23492C0900A31A2A /* CouchTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CouchTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B202D18023492C0900A31A2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B202D18223492C0900A31A2A /* Watchlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watchlist.swift; sourceTree = "<group>"; };
@@ -793,7 +793,7 @@
 			children = (
 				B2D4C3D32476E341000AD496 /* SearchViewModel.swift */,
 				B2FAA2D32476FD4C002ED042 /* SearchListViewModel.swift */,
-				B2028082247E837B002F29B4 /* SearchListItemViewModel.swift */,
+				B2028082247E837B002F29B4 /* SearchItemViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1067,7 +1067,7 @@
 				B202D1B42349387800A31A2A /* ShowDetailsView.swift in Sources */,
 				B21B2F2F256689F500925E06 /* SettingsAppearance.swift in Sources */,
 				B24E78132358F24A0015025F /* SectionValue.swift in Sources */,
-				B2028083247E837B002F29B4 /* SearchListItemViewModel.swift in Sources */,
+				B2028083247E837B002F29B4 /* SearchItemViewModel.swift in Sources */,
 				B2C10459255C5B6700F2677B /* SettingsAppIcon.swift in Sources */,
 				B24A34B2254DA70A00A5F08E /* OnboardingItem.swift in Sources */,
 				B22A750C249684AA000EDEF4 /* ShowInformationTitle.swift in Sources */,

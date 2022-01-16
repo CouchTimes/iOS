@@ -9,35 +9,30 @@
 import SwiftUI
 
 struct SearchResultItem: View {
-    var show: ShowDetailsResponse
     @State var isSavingAShow = false
-    @ObservedObject var searchResultItemViewModel: SearchListItemViewModel
+    @ObservedObject var searchItemViewModel: SearchItemViewModel
 
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var searchViewModel: SearchViewModel
 
     init(show: ShowDetailsResponse, savedShowIds: [Int]) {
-        self.show = show
-        searchResultItemViewModel = SearchListItemViewModel(show: show, savedShowIds: savedShowIds)
+        searchItemViewModel = SearchItemViewModel(show: show, savedShowIds: savedShowIds)
     }
 
     var body: some View {
-        Button(action: {
-            searchViewModel.selectedShow = show
-            searchViewModel.showDetailsPresented.toggle()
-        }) {
+        NavigationLink(destination: SearchShowDetail(show: searchItemViewModel.show, savedShowIds: searchViewModel.savedShows)) {
             HStack(alignment: .center, spacing: 20) {
-                AsyncCover(imagePath: show.poster_path, imageSize: .tiny)
+                AsyncCover(imagePath: searchItemViewModel.show.poster_path, imageSize: .tiny)
                     .frame(width: 48, height: 72)
                     .cornerRadius(6)
                 VStack(alignment: .leading, spacing: 2.0) {
                     ItemTitle(text: title)
                         .lineLimit(2)
-                    ItemCaption(text: show.wrappedYearString)
+                    ItemCaption(text: searchItemViewModel.show.wrappedYearString)
                 }
                 Spacer()
                 Group {
-                    if searchResultItemViewModel.isAlreadySaved {
+                    if searchItemViewModel.isAlreadySaved {
                         Image(systemName: "checkmark")
                             .font(Font.system(size: 16, weight: .bold))
                             .foregroundColor(Color.white)
@@ -50,7 +45,7 @@ struct SearchResultItem: View {
                     } else {
                         Button(action: {
                             isSavingAShow = true
-                            self.searchViewModel.saveShow(show: searchResultItemViewModel.show) { result in
+                            self.searchItemViewModel.saveShow() { result in
                                 switch result {
                                 case .success(_):
                                     isSavingAShow = false
@@ -84,20 +79,14 @@ struct SearchResultItem: View {
 
 extension SearchResultItem {
     var title: String {
-        searchResultItemViewModel.show.name
+        searchItemViewModel.show.name
     }
 
     var poster: Image {
-        if let poster = show.poster_data {
+        if let poster = searchItemViewModel.show.poster_data {
             return Image(uiImage: UIImage(data: poster)!)
         }
 
         return Image("cover_placeholder")
     }
 }
-
-// struct SearchResultItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchResultItem(show: ShowResponse())
-//    }
-// }

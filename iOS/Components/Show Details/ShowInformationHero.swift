@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct ShowInformationHero: View {    
-    var cover: UIImage
+    var cover: UIImage?
+    var asyncCover: String?
     var title: String
     var year: Int?
     var genres: [String]?
@@ -17,10 +18,16 @@ struct ShowInformationHero: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 24) {
-            Image(uiImage: cover)
-                .resizable()
-                .frame(width: 212, height: 320)
-                .cornerRadius(6)
+            if cover != nil {
+                Image(uiImage: cover!)
+                    .resizable()
+                    .frame(width: 212, height: 320)
+                    .cornerRadius(6)
+            } else {
+                AsyncCover(imagePath: asyncCover!, imageSize: .medium)
+                    .frame(width: 212, height: 320)
+                    .cornerRadius(6)
+            }
             ShowInformationTitle(title: title, subtitle: subtitle)
         }.padding(.top, 96)
     }

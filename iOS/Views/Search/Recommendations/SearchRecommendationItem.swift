@@ -9,25 +9,22 @@
 import SwiftUI
 
 struct SearchRecommendationItem: View {
-    var show: ShowDetailsResponse
-
-    @ObservedObject var searchResultItemViewModel: SearchListItemViewModel
+    @ObservedObject var searchItemViewModel: SearchItemViewModel
     @EnvironmentObject var searchViewModel: SearchViewModel
 
     init(show: ShowDetailsResponse, savedShowIds: [Int]) {
-        self.show = show
-        searchResultItemViewModel = SearchListItemViewModel(show: show, savedShowIds: savedShowIds)
+        searchItemViewModel = SearchItemViewModel(show: show, savedShowIds: savedShowIds)
     }
     
     var body: some View {
-        NavigationLink(destination: SearchShowDetail(show: show, savedShowIds: searchViewModel.savedShows)) {
+        NavigationLink(destination: SearchShowDetail(show: searchItemViewModel.show, savedShowIds: searchViewModel.savedShows)) {
             ZStack(alignment: .topTrailing) {
-                AsyncCover(imagePath: show.poster_path, imageSize: .small)
+                AsyncCover(imagePath: searchItemViewModel.show.poster_path, imageSize: .small)
                     .frame(width: 128, height: 192)
                     .cornerRadius(6)
-                    .opacity(searchResultItemViewModel.isAlreadySaved ? 0.3 : 1.0)
+                    .opacity(searchItemViewModel.isAlreadySaved ? 0.3 : 1.0)
                 
-                if searchResultItemViewModel.isAlreadySaved {
+                if searchItemViewModel.isAlreadySaved {
                     Image(systemName: "checkmark")
                         .font(Font.system(size: 16, weight: .bold))
                         .frame(width: 32, height: 32, alignment: .center)

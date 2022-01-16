@@ -9,30 +9,29 @@
 import SwiftUI
 
 struct SearchShowDetail: View {
-    var show: ShowDetailsResponse
-
-    @State private var viewMode = 0
     @State private var showShareSheet = false
-    @ObservedObject var searchItemViewModel: SearchListItemViewModel
-
+    @ObservedObject var searchItemViewModel: SearchItemViewModel
+    
     @EnvironmentObject var searchViewModel: SearchViewModel
 
     init(show: ShowDetailsResponse, savedShowIds: [Int]) {
-        self.show = show
-        searchItemViewModel = SearchListItemViewModel(show: show, savedShowIds: savedShowIds)
+        searchItemViewModel = SearchItemViewModel(show: show, savedShowIds: savedShowIds)
+        searchItemViewModel.getFullShowData()
     }
 
     var body: some View {
-        ZStack(alignment: .bottom) {
+        Self._printChanges()
+        
+        return ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
                 ShowBlurredBackground(poster: Image(uiImage: showImage), posterColor: showImageColor)
                 VStack(spacing: 32) {
                     VStack(spacing: 32) {
-                        ShowInformationHero(cover: showImage, title: show.name, year: show.wrappedYear, genres: genres, seasonCount: show.seasons.count)
+                        ShowInformationHero(asyncCover: searchItemViewModel.show.poster_path, title: searchItemViewModel.show.name, year: searchItemViewModel.show.wrappedYear, genres: genres, seasonCount: searchItemViewModel.show.seasons.count)
                     }
                     
                     Button(action: {
-                        self.searchViewModel.saveShow(show: searchViewModel.selectedShow!) { result in
+                        self.searchItemViewModel.saveShow() { result in
                             switch result {
                             case .success(_):
                                 print("Wow")
@@ -41,7 +40,7 @@ struct SearchShowDetail: View {
                             }
                         }
                     }) {
-                        if searchViewModel.isSavingShow {
+                        if searchItemViewModel.isSavingShow {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
                         } else {
@@ -56,7 +55,7 @@ struct SearchShowDetail: View {
                     .disabled(searchItemViewModel.isAlreadySaved)
                     .opacity(searchItemViewModel.isAlreadySaved ? 0.5 : 1.0)
                     
-                    ShowInformation(description: show.wrappedOverview, airs: "Airs", runtime: show.wrappedRuntime, network: show.wrappedNetwork, firstAired: show.wrappedFirstAired)
+                    ShowInformation(description: searchItemViewModel.show.wrappedOverview, airs: "Airs", runtime: searchItemViewModel.show.wrappedRuntime, network: searchItemViewModel.show.wrappedNetwork, firstAired: searchItemViewModel.show.wrappedFirstAired)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 112)
@@ -83,17 +82,14 @@ struct SearchShowDetail: View {
             }
         }
         .sheet(isPresented: $showShareSheet) {
-            ShareSheet(activityItems: [URL(string: "https://www.themoviedb.org/tv/\(show.id)")!])
-        }
-        .onAppear {
-            searchViewModel.getFullShowData(show: show)
+            ShareSheet(activityItems: [URL(string: "https://www.themoviedb.org/tv/\(searchItemViewModel.show.id)")!])
         }
     }
 }
 
 extension SearchShowDetail {
     private var showImage: UIImage {
-        if let poster = searchViewModel.selectedShow?.poster_data {
+        if let poster = searchItemViewModel.show.poster_data {
             return UIImage(data: poster)!
         }
 
@@ -101,7 +97,7 @@ extension SearchShowDetail {
     }
     
     private var showImageColor: Color {
-        if let poster = show.poster_data, let color = UIImage(data: poster)!.averageColor {
+        if let poster = searchItemViewModel.show.poster_data, let color = UIImage(data: poster)!.averageColor {
             return Color(color)
         }
         
@@ -111,7 +107,7 @@ extension SearchShowDetail {
     private var genres: [String]? {
         var transformedGenre = [String]()
         
-        if let genres = show.genres {
+        if let genres = searchItemViewModel.show.genres {
             genres.forEach { genre in
                 transformedGenre.append(genre.name)
             }

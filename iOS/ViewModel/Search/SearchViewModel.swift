@@ -13,12 +13,11 @@ import UIKit
 
 class SearchViewModel: ObservableObject {
     private var cancellables = [AnyCancellable]()
-
+    
     @Published var isLoading = false
-    @Published var isSavingShow = false
-
-    @Published var selectedShow: ShowDetailsResponse?
-    @Published var showDetailsPresented = false
+    
+    @Published var savedShows = [Int]()
+    @Published var searchedShows = [ShowDetailsResponse]()
 
     @Published var popularShows = [ShowDetailsResponse]()
     @Published var topRatedShows = [ShowDetailsResponse]()
@@ -27,10 +26,6 @@ class SearchViewModel: ObservableObject {
     @Published var disneyShows = [ShowDetailsResponse]()
     @Published var amazonShows = [ShowDetailsResponse]()
     @Published var hboShows = [ShowDetailsResponse]()
-    
-    @Published var searchedShows = [ShowDetailsResponse]()
-
-    @Published var savedShows = [Int]()
 
     init() {
         let moc = StorageProvider.shared.persistentContainer.viewContext
@@ -142,46 +137,6 @@ class SearchViewModel: ObservableObject {
             case let .failure(error):
                 print(error)
             }
-        }
-    }
-    
-    func getFullShowData(show: ShowDetailsResponse) {
-        NetworkService.shared.getShowImageData(show: show) { result in
-            switch result {
-            case let .success(show):
-                self.selectedShow = show
-                
-                NetworkService.shared.getAllSeasons(show: show) { result in
-                    switch result {
-                    case let .success(seasons):
-                        self.selectedShow?.seasons = seasons
-                    case let .failure(error):
-                        print(error)
-                    }
-                }
-            case let .failure(error):
-                print(error)
-            }
-        }
-    }
-
-    func saveShow(show: ShowDetailsResponse, completion: @escaping (Result<Show, Error>) -> Void) {
-        let managedContext = StorageProvider.shared.persistentContainer.viewContext
-        
-        self.isSavingShow = true
-        
-        Show.createShowForCoreData(managedObjectContext: managedContext, showResponse: show, seasons: show.seasons) { result in
-            switch result {
-            case let .success(coreDataShow):
-                completion(.success(coreDataShow))
-                print("Successfully saved!")
-            case let .failure(error):
-                print("Error while saving")
-                print(error)
-                completion(.failure(error))
-            }
-            
-            self.isSavingShow = false
         }
     }
 }
