@@ -60,8 +60,6 @@ struct ShowSeasons: View {
                                     Button(action: {
                                         episode.toggleWatchedStatus()
                                         show.objectWillChange.send()
-                                        currentSeason.objectWillChange.send()
-                                        episode.objectWillChange.send()
                                         WidgetCenter.shared.reloadAllTimelines()
                                     }) {
                                         if episode.watched {
