@@ -156,6 +156,8 @@
 		B2EEF6A725D5148B00B2E896 /* ShowDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EEF69F25D5148B00B2E896 /* ShowDetailsResponse.swift */; };
 		B2F4FF4D2551CCB6009B3719 /* Show+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4FF4C2551CCB6009B3719 /* Show+Updater.swift */; };
 		B2FAA2D42476FD4C002ED042 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FAA2D32476FD4C002ED042 /* SearchListViewModel.swift */; };
+		B2FFE0D727AAE82400728C48 /* SettingsiCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFE0D627AAE82400728C48 /* SettingsiCloud.swift */; };
+		B2FFE0D927AAE86200728C48 /* SettingsSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFE0D827AAE86200728C48 /* SettingsSync.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -315,6 +317,8 @@
 		B2F4FF4C2551CCB6009B3719 /* Show+Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Show+Updater.swift"; sourceTree = "<group>"; };
 		B2FAA2D32476FD4C002ED042 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		B2FB4042259C9CD800D1C757 /* CouchTimesWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CouchTimesWidgetExtension.entitlements; sourceTree = "<group>"; };
+		B2FFE0D627AAE82400728C48 /* SettingsiCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsiCloud.swift; sourceTree = "<group>"; };
+		B2FFE0D827AAE86200728C48 /* SettingsSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -568,6 +572,8 @@
 			isa = PBXGroup;
 			children = (
 				B274D71F24F7C68700BD7623 /* Settings.swift */,
+				B2FFE0D827AAE86200728C48 /* SettingsSync.swift */,
+				B2FFE0D627AAE82400728C48 /* SettingsiCloud.swift */,
 				B21B2F2E256689F500925E06 /* SettingsAppearance.swift */,
 				B2C10458255C5B6700F2677B /* SettingsAppIcon.swift */,
 				B25B12FE269DF2870033622C /* SettingsAbout.swift */,
@@ -1020,6 +1026,7 @@
 				B271023F251D2A3E002681CD /* Show+CoreDataClass.swift in Sources */,
 				B2BA826924E9B2F700246B8D /* SearchRecommendations.swift in Sources */,
 				B22ABAD9261B2DA50002EF41 /* ShowImage+CRUD.swift in Sources */,
+				B2FFE0D927AAE86200728C48 /* SettingsSync.swift in Sources */,
 				B2D7F0222615F02A00476A96 /* ShowEpisodeResponse.swift in Sources */,
 				B20F84E224F8F892007B729D /* NetworkService.swift in Sources */,
 				B20F84E424F8F8EA007B729D /* NetworkService+Search.swift in Sources */,
@@ -1034,6 +1041,7 @@
 				B268D692259CAAF100125E78 /* Themes.swift in Sources */,
 				B22A750624966D91000EDEF4 /* SearchShowDetail.swift in Sources */,
 				B27901D5251F854E00DEC814 /* SettingsViewModel.swift in Sources */,
+				B2FFE0D727AAE82400728C48 /* SettingsiCloud.swift in Sources */,
 				B2849D14261B915100308E4F /* Show+CRUD.swift in Sources */,
 				B24A34A4254DA1AD00A5F08E /* OnboardingView.swift in Sources */,
 				B2710220251D29D8002681CD /* Show+Helpers.swift in Sources */,

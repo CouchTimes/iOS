@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct Library: View {
+    @State private var searchText: String = ""
     @State private var libraryViewState = 0
-    @State private var showingSettings = false
     @ObservedObject var viewModel = LibraryViewModel()
     
     private var didManagedObjectContextSave = NotificationCenter.default
@@ -29,9 +29,17 @@ struct Library: View {
     
     var shows: [Show] {
         if libraryViewState == 0 {
-            return viewModel.allShows
+            if searchText.isEmpty {
+                return viewModel.allShows
+            } else {
+                return viewModel.allShows.filter { $0.title.contains(searchText) }
+            }
         } else {
-            return viewModel.favoriteShows
+            if searchText.isEmpty {
+                return viewModel.favoriteShows
+            } else {
+                return viewModel.favoriteShows.filter { $0.title.contains(searchText) }
+            }
         }
     }
     
@@ -64,6 +72,7 @@ struct Library: View {
                 FloatingSegmentedControl(pickerLabel: "What filter do you want to apply to the library?", pickerItems: ["All", "Favorites"], pickerSelection: $libraryViewState)
             }
             .navigationBarTitle("Library")
+            .searchable(text: $searchText, placement: .automatic, prompt: "Search")
         }
         .onReceive(self.didManagedObjectContextSave) { _ in
             viewModel.fetchAllShows()

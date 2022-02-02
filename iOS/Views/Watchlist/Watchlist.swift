@@ -12,6 +12,7 @@ import CoreData
 struct Watchlist: View {
     @State private var searchText: String = ""
     @State private var showSorting: ShowFilter = .episodesAscending
+    @State private var showSettings: Bool = false
     @ObservedObject private var viewModel = WatchlistViewModel()
     
     @Environment(\.isSearching) private var isSearching: Bool
@@ -49,11 +50,13 @@ struct Watchlist: View {
         NavigationView {
             WatchlistList(shows: Binding.constant(shows), showsCount: viewModel.shows.count)
             .navigationBarTitle("Watchlist", displayMode: .large)
-            .navigationBarItems(leading: NavigationLink(destination: Settings().tint(Color("titleColor"))) {
+            .navigationBarItems(leading: Button(action: {
+                self.showSettings = true
+            }, label: {
                 Image(systemName: "gearshape")
                     .font(Font.system(size: 16, weight: .bold))
                     .foregroundColor(Color("captionColor"))
-            }, trailing: Menu {
+            }), trailing: Menu {
                 Menu {
                     Button(action: sortShowsByAscendingEpisodes) {
                         if showSorting == .episodesAscending {
@@ -106,12 +109,14 @@ struct Watchlist: View {
                 await viewModel.updateShows()
             }
         }
-        
         .onReceive(self.didManagedObjectContextSave) { _ in
             viewModel.fetchAllShows()
         }
         .onReceive(self.didStoreRemoteChange) { _ in
             viewModel.fetchAllShows()
+        }
+        .sheet(isPresented: $showSettings) {
+            Settings()
         }
     }
 

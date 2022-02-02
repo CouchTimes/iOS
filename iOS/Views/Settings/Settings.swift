@@ -18,20 +18,8 @@ struct Settings: View {
     @State private var selectedAppIconMode = 0
 
     var body: some View {
+        NavigationView {
             Form {
-                Section(footer: Text("Last updated \(viewModel.lastUpdatedDateHuman)")) {
-                    HStack {
-                        Button("Sync") {
-                            updateShows()
-                        }
-                        
-                        if viewModel.syncing == true {
-                            Spacer()
-                            ProgressView()
-                        }
-                    }
-                }
-                
                 Section(header: Text("General")) {
                     NavigationLink(destination: SettingsAppearance()) {
                         Text("Appearance")
@@ -40,6 +28,15 @@ struct Settings: View {
 
                     NavigationLink(destination: SettingsAppIcon()) {
                         Text("App Icon")
+                    }
+                }
+                
+                Section(header: Text("Sync")) {
+                    NavigationLink(destination: SettingsiCloud()) {
+                        Text("iCloud")
+                    }
+                    NavigationLink(destination: SettingsSync()) {
+                        Text("Update Shows")
                     }
                 }
                 
@@ -62,6 +59,12 @@ struct Settings: View {
                 }
             }
             .navigationBarTitle("Settings", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("Done")
+                    .fontWeight(.medium)
+            }))
             .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
                 self.showingAlert = true
             }
@@ -72,6 +75,7 @@ struct Settings: View {
                     primaryButton: .default(Text("Update"), action: forceUpdateAllShows),
                     secondaryButton: .destructive(Text("Cancel"))
                 )
+            }
         }
     }
 }

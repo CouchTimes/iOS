@@ -11,6 +11,8 @@ import SwiftUI
 struct AppView: View {
     let storageProvider: StorageProvider
     
+    @State private var showSettings: Bool = false
+    
     @AppStorage("showOnboarding") var showOnboarding: Bool = true
     @AppStorage("selectedAppearanceMode", store: UserDefaults(suiteName: "group.com.fruechtl.couchtimes")) var selectedAppearanceMode: Themes = .System
     
@@ -34,7 +36,8 @@ struct AppView: View {
                         .imageScale(.large)
                     Text("Library")
                 }.tag(2)
-        }.accentColor(Color("titleColor"))
+        }
+        .accentColor(Color("titleColor"))
         .fullScreenCover(isPresented: $showOnboarding) {
             OnboardingView()
         }

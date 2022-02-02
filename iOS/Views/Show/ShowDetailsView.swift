@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct ShowDetailsView: View {
     var show: Show
@@ -50,6 +51,8 @@ struct ShowDetailsView: View {
                                     Button(action: {
                                         self.markAllEpisodesAsWatched()
                                         self.getWatchedStatus()
+                                        show.objectWillChange.send()
+                                        WidgetCenter.shared.reloadAllTimelines()
                                     }) {
                                         Label("All Episodes Watched", systemImage: "checkmark.seal")
                                     }
