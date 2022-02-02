@@ -156,8 +156,8 @@
 		B2EEF6A725D5148B00B2E896 /* ShowDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EEF69F25D5148B00B2E896 /* ShowDetailsResponse.swift */; };
 		B2F4FF4D2551CCB6009B3719 /* Show+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4FF4C2551CCB6009B3719 /* Show+Updater.swift */; };
 		B2FAA2D42476FD4C002ED042 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FAA2D32476FD4C002ED042 /* SearchListViewModel.swift */; };
-		B2FFE0D727AAE82400728C48 /* SettingsiCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFE0D627AAE82400728C48 /* SettingsiCloud.swift */; };
 		B2FFE0D927AAE86200728C48 /* SettingsSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFE0D827AAE86200728C48 /* SettingsSync.swift */; };
+		B2FFE0DC27AAE8F500728C48 /* CloudKitSyncMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = B2FFE0DB27AAE8F500728C48 /* CloudKitSyncMonitor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -317,7 +317,6 @@
 		B2F4FF4C2551CCB6009B3719 /* Show+Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Show+Updater.swift"; sourceTree = "<group>"; };
 		B2FAA2D32476FD4C002ED042 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		B2FB4042259C9CD800D1C757 /* CouchTimesWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CouchTimesWidgetExtension.entitlements; sourceTree = "<group>"; };
-		B2FFE0D627AAE82400728C48 /* SettingsiCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsiCloud.swift; sourceTree = "<group>"; };
 		B2FFE0D827AAE86200728C48 /* SettingsSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -329,6 +328,7 @@
 				B21D11AF254BE79800E461C7 /* CloudKit.framework in Frameworks */,
 				B26EF21225D5153D00420DA5 /* Alamofire in Frameworks */,
 				B26EF21925D515B400420DA5 /* Moya in Frameworks */,
+				B2FFE0DC27AAE8F500728C48 /* CloudKitSyncMonitor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,7 +573,6 @@
 			children = (
 				B274D71F24F7C68700BD7623 /* Settings.swift */,
 				B2FFE0D827AAE86200728C48 /* SettingsSync.swift */,
-				B2FFE0D627AAE82400728C48 /* SettingsiCloud.swift */,
 				B21B2F2E256689F500925E06 /* SettingsAppearance.swift */,
 				B2C10458255C5B6700F2677B /* SettingsAppIcon.swift */,
 				B25B12FE269DF2870033622C /* SettingsAbout.swift */,
@@ -834,6 +833,7 @@
 			packageProductDependencies = (
 				B26EF21125D5153D00420DA5 /* Alamofire */,
 				B26EF21825D515B400420DA5 /* Moya */,
+				B2FFE0DB27AAE8F500728C48 /* CloudKitSyncMonitor */,
 			);
 			productName = CouchTimes;
 			productReference = B202D17B23492C0900A31A2A /* CouchTimes.app */;
@@ -934,6 +934,7 @@
 			packageReferences = (
 				B26EF21025D5153D00420DA5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B26EF21725D515B400420DA5 /* XCRemoteSwiftPackageReference "Moya" */,
+				B2FFE0DA27AAE8F500728C48 /* XCRemoteSwiftPackageReference "CloudKitSyncMonitor" */,
 			);
 			productRefGroup = B202D17C23492C0900A31A2A /* Products */;
 			projectDirPath = "";
@@ -1041,7 +1042,6 @@
 				B268D692259CAAF100125E78 /* Themes.swift in Sources */,
 				B22A750624966D91000EDEF4 /* SearchShowDetail.swift in Sources */,
 				B27901D5251F854E00DEC814 /* SettingsViewModel.swift in Sources */,
-				B2FFE0D727AAE82400728C48 /* SettingsiCloud.swift in Sources */,
 				B2849D14261B915100308E4F /* Show+CRUD.swift in Sources */,
 				B24A34A4254DA1AD00A5F08E /* OnboardingView.swift in Sources */,
 				B2710220251D29D8002681CD /* Show+Helpers.swift in Sources */,
@@ -1553,6 +1553,14 @@
 				minimumVersion = 14.0.0;
 			};
 		};
+		B2FFE0DA27AAE8F500728C48 /* XCRemoteSwiftPackageReference "CloudKitSyncMonitor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ggruen/CloudKitSyncMonitor";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1575,6 +1583,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B26EF21725D515B400420DA5 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		B2FFE0DB27AAE8F500728C48 /* CloudKitSyncMonitor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2FFE0DA27AAE8F500728C48 /* XCRemoteSwiftPackageReference "CloudKitSyncMonitor" */;
+			productName = CloudKitSyncMonitor;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -7,36 +7,93 @@
 //
 
 import SwiftUI
+import CloudKitSyncMonitor
 
 struct Settings: View {
     @State private var showingAlert = false
     @StateObject private var viewModel = SettingsViewModel()
+    @ObservedObject var syncMonitor = SyncMonitor.shared
+    @AppStorage("lastiCloudSyncDateString") var lastiCloudSyncDateString: String = ""
     @Environment(\.presentationMode) var presentationMode
     
     // App Icon
     var appIconMode = ["Beautiful", "Old", "Retro", "Dark"]
     @State private var selectedAppIconMode = 0
+    
+    var lastiCloudSyncTime: String {
+        if lastiCloudSyncDateString.isEmpty {
+            return "No iCoud sync happend"
+        }
+        return "Last sync: \(lastiCloudSyncDateString)"
+    }
+    
+    var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        return dateFormatter
+    }()
 
     var body: some View {
         NavigationView {
             Form {
+                Section(header: Text("iCloud Sync")) {
+                    VStack(alignment: .leading, spacing: 16) {
+                        // Network Status
+                        if case .noNetwork = syncMonitor.syncStateSummary {
+                            Label(title: {
+                                Text("Please check your network connection")
+                            }, icon: {
+                                Image(systemName: "wifi.slash")
+                                    .foregroundColor(Color.red)
+                            })
+                        } else {
+                            Label(title: {
+                                Text("Network connection available")
+                            }, icon: {
+                                Image(systemName: "wifi")
+                                    .foregroundColor(Color.green)
+                            })
+                        }
+                        
+                        // iCloud Logged In Status
+                        if case .accountNotAvailable = syncMonitor.syncStateSummary {
+                            Label(title: {
+                                Text("Log into your iCloud account if you want to sync")
+                            }, icon: {
+                                Image(systemName: "icloud.slash.fill")
+                                    .foregroundColor(Color.yellow)
+                            })
+                        } else {
+                            Label(title: {
+                                Text("Logged into iCloud")
+                            }, icon: {
+                                Image(systemName: "icloud.fill")
+                                    .foregroundColor(Color.green)
+                            })
+                        }
+                        
+                        // Last Synced
+                        Label(title: {
+                            Text(lastiCloudSyncTime)
+                        }, icon: {
+                            Image(systemName: "checkmark.icloud.fill")
+                                .foregroundColor(Color.green)
+                        })
+                    }.padding(.vertical, 12)
+                }
+                
                 Section(header: Text("General")) {
                     NavigationLink(destination: SettingsAppearance()) {
                         Text("Appearance")
                     }
-
-
+                    
                     NavigationLink(destination: SettingsAppIcon()) {
                         Text("App Icon")
                     }
-                }
-                
-                Section(header: Text("Sync")) {
-                    NavigationLink(destination: SettingsiCloud()) {
-                        Text("iCloud")
-                    }
+                    
                     NavigationLink(destination: SettingsSync()) {
-                        Text("Update Shows")
+                        Text("Force Update Shows")
                     }
                 }
                 
@@ -44,6 +101,7 @@ struct Settings: View {
                     HStack {
                         Link("Send Feedback", destination: URL(string: "mailto:support@couchtim.es")!)
                     }
+                    
                     HStack {
                         Link("Please Rate CouchTimes", destination: URL(string: "https://www.youtube.com/watch?v=oHg5SJYRHA0")!)
                     }
@@ -65,16 +123,18 @@ struct Settings: View {
                 Text("Done")
                     .fontWeight(.medium)
             }))
-            .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
-                self.showingAlert = true
-            }
-            .alert(isPresented: $showingAlert) {
-                Alert(
-                    title: Text("Update all shows"),
-                    message: Text("Do you want to force update all your saved shows? This can take a while..."),
-                    primaryButton: .default(Text("Update"), action: forceUpdateAllShows),
-                    secondaryButton: .destructive(Text("Cancel"))
-                )
+        }
+        .onAppear {
+            switch syncMonitor.exportState {
+            case .notStarted:
+                print("iCloud Sync not started")
+            case .inProgress(started: _):
+                print("iCloud Sync in progress")
+            case let .succeeded(started: _, ended: endDate):
+                print("iCloud Sync succeeded")
+                self.lastiCloudSyncDateString = dateFormatter.string(from: endDate)
+            case .failed(started: _, ended: _, error: _):
+                print("Faild iCloud Sync")
             }
         }
     }
@@ -83,21 +143,5 @@ struct Settings: View {
 extension Settings {
     private func forceUpdateAllShows() {
         viewModel.updateShows(forceUpdateAllShows: true)
-    }
-    
-    private func updateShows() {
-        print("updateShows")
-        viewModel.updateShows(forceUpdateAllShows: false)
-    }
-}
-
-extension NSNotification.Name {
-    public static let deviceDidShakeNotification = NSNotification.Name("MyDeviceDidShakeNotification")
-}
-
-extension UIWindow {
-    open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        super.motionEnded(motion, with: event)
-        NotificationCenter.default.post(name: .deviceDidShakeNotification, object: event)
     }
 }

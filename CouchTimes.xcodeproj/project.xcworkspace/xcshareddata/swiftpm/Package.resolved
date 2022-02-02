@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "CloudKitSyncMonitor",
+        "repositoryURL": "https://github.com/ggruen/CloudKitSyncMonitor",
+        "state": {
+          "branch": "main",
+          "revision": "88a954d3712a94fef6fe7108e037099b485530a1",
+          "version": null
+        }
+      },
+      {
         "package": "Moya",
         "repositoryURL": "https://github.com/Moya/Moya",
         "state": {
