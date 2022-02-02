@@ -85,7 +85,7 @@ struct Settings: View {
                 
                 Section(header: Text("Show Library"), footer: Text("Last updated \(viewModel.lastUpdatedDateHuman)")) {
                     HStack {
-                        Button("Update Library Data", action: forceUpdateAllShows)
+                        Button("Update Library", action: forceUpdateAllShows)
                         
                         if viewModel.syncing == true {
                             Spacer()
