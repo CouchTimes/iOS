@@ -24,13 +24,13 @@ struct Settings: View {
         if lastiCloudSyncDateString.isEmpty {
             return "No iCoud sync happend"
         }
-        return "Last sync: \(lastiCloudSyncDateString)"
+        return "Last updated \(lastiCloudSyncDateString)"
     }
     
     var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
-        dateFormatter.timeStyle = DateFormatter.Style.short
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        
         return dateFormatter
     }()
 
@@ -83,6 +83,17 @@ struct Settings: View {
                     }.padding(.vertical, 12)
                 }
                 
+                Section(header: Text("Show Library"), footer: Text("Last updated \(viewModel.lastUpdatedDateHuman)")) {
+                    HStack {
+                        Button("Update Library Data", action: forceUpdateAllShows)
+                        
+                        if viewModel.syncing == true {
+                            Spacer()
+                            ProgressView()
+                        }
+                    }
+                }
+                
                 Section(header: Text("General")) {
                     NavigationLink(destination: SettingsAppearance()) {
                         Text("Appearance")
@@ -90,10 +101,6 @@ struct Settings: View {
                     
                     NavigationLink(destination: SettingsAppIcon()) {
                         Text("App Icon")
-                    }
-                    
-                    NavigationLink(destination: SettingsSync()) {
-                        Text("Force Update Shows")
                     }
                 }
                 
@@ -132,7 +139,8 @@ struct Settings: View {
                 print("iCloud Sync in progress")
             case let .succeeded(started: _, ended: endDate):
                 print("iCloud Sync succeeded")
-                self.lastiCloudSyncDateString = dateFormatter.string(from: endDate)
+                let date = dateFormatter.string(from: endDate)
+                self.lastiCloudSyncDateString = date
             case .failed(started: _, ended: _, error: _):
                 print("Faild iCloud Sync")
             }
