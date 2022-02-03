@@ -21,74 +21,74 @@ struct ShowSeasons: View {
     init(show: Show, seasonCount: Int) {
         self.seasonCount = seasonCount
         
-        let season = show.getSingleSeason(1)
-        self._currentSeason = State(initialValue: season ?? Season())
+        if let nextEpisode = show.nextEpisode, let seasonOfNextEpisode = nextEpisode.season {
+            self._currentSeason = State(initialValue: seasonOfNextEpisode)
+        } else {
+            self._currentSeason = State(initialValue: Season())
+        }
     }
 
     var body: some View {
-            VStack(alignment: .leading, spacing: 16) {
-                if seasonCount > 1 {
-                    Button {
-                        seasonSheet = true
-                    } label: {
-                        HStack(alignment: .center, spacing: 8) {
-                            Text("Season \(currentSeason.number)")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                            Image(systemName: "chevron.down")
-                                .padding(.trailing, 4)
-                        }
-                        .foregroundColor(Color("textColor"))
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 12)
-                        .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        VStack(alignment: .leading, spacing: 16) {
+            if seasonCount > 1 {
+                Button {
+                    seasonSheet = true
+                } label: {
+                    HStack(alignment: .center, spacing: 8) {
+                        Text("Season \(currentSeason.number)")
+                            .font(.callout)
+                            .fontWeight(.semibold)
+                        Image(systemName: "chevron.down")
+                            .padding(.trailing, 4)
                     }
+                    .foregroundColor(Color("textColor"))
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 12)
+                    .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                 }
-                VStack {
-                    if (episodes != nil) {
-                        LazyVStack(alignment: .leading) {
-                            ForEach(episodes!, id: \.self) { episode in
-                                HStack(alignment: .center, spacing: 16) {
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text("\(episode.episodeNumber). \(episode.title)")
-                                            .font(.headline)
-                                            .foregroundColor(Color("titleColor"))
-                                        ItemCaption(text: "\(episode.wrappedFirstAirDate)")
-                                    }
-                                    Spacer()
-                                    Button(action: {
-                                        episode.toggleWatchedStatus()
-                                        show.objectWillChange.send()
-                                        WidgetCenter.shared.reloadAllTimelines()
-                                    }) {
-                                        if episode.watched {
-                                            Image(systemName: "checkmark")
-                                                .frame(width: 32, height: 32, alignment: .center)
-                                                .font(Font.system(size: 16, weight: .bold))
-                                                .foregroundColor(Color.white)
-                                                .background (
-                                                    RoundedRectangle(cornerRadius: 8)
-                                                        .fill(Color("tintColor"))
-                                                )
-                                        } else {
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .strokeBorder(Color("borderColor"), lineWidth: 2)
-                                                .frame(width: 32, height: 32, alignment: .center)
-                                                .opacity(episode.watchable ? 1.0 : 0.4)
-                                        }
-                                    }
-                                    .frame(width: 44, height: 44, alignment: .center)
-                                    .disabled(episode.watchable ? false : true)
-                                }
-                                .padding(.vertical, 4)
-                            }
-                        }
-                        .background(Color("backgroundColor").edgesIgnoringSafeArea(.all))
-                    }
-                }
-            }.fullScreenCover(isPresented: $seasonSheet) {
-                ShowSeasonsPicker(seasons: orderedSeasons!, currentSeason: $currentSeason)
             }
+            VStack {
+                if (episodes != nil) {
+                    LazyVStack(alignment: .leading) {
+                        ForEach(episodes!, id: \.self) { episode in
+                            HStack(alignment: .center, spacing: 16) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("\(episode.episodeNumber). \(episode.title)")
+                                        .font(.headline)
+                                        .foregroundColor(Color("titleColor"))
+                                    ItemCaption(text: "\(episode.wrappedFirstAirDate)")
+                                }
+                                Spacer()
+                                Button(action: {
+                                    episode.toggleWatchedStatus()
+                                    show.objectWillChange.send()
+                                    WidgetCenter.shared.reloadAllTimelines()
+                                }) {
+                                    if episode.watched {
+                                        Image(systemName: "checkmark")
+                                            .frame(width: 32, height: 32, alignment: .center)
+                                            .font(Font.system(size: 16, weight: .bold))
+                                            .foregroundColor(Color.white)
+                                            .background (RoundedRectangle(cornerRadius: 8).fill(Color("tintColor")))
+                                    } else {
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .strokeBorder(Color("borderColor"), lineWidth: 2)
+                                            .frame(width: 32, height: 32, alignment: .center)
+                                            .opacity(episode.watchable ? 1.0 : 0.4)
+                                    }
+                                }
+                                .frame(width: 44, height: 44, alignment: .center)
+                                .disabled(episode.watchable ? false : true)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                    .background(Color("backgroundColor").edgesIgnoringSafeArea(.all))
+                }
+            }
+        }.fullScreenCover(isPresented: $seasonSheet) {
+            ShowSeasonsPicker(seasons: orderedSeasons!, currentSeason: $currentSeason)
+        }
     }
 }
 

@@ -24,28 +24,36 @@ struct ShowSeasonsPicker: View {
         ZStack {
             VStack {
                 GeometryReader { geometry in
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack {
-                            Rectangle()
-                                .fill(Color.clear)
-                                .frame(height: 48)
-                            VStack(alignment: .center, spacing: 24) {
-                                ForEach(sortedSeasons, id: \.self) { season in
-                                    Button(action: {
-                                        currentSeason = season
-                                        presentationMode.wrappedValue.dismiss()
-                                    }, label: {
-                                        Text("Season \(season.number)")
-                                            .font(season.number == currentSeason.number ? .title2 : .title3)
-                                            .fontWeight(season.number == currentSeason.number ? .bold : .regular)
-                                            .foregroundColor(season.number == currentSeason.number ? Color("titleColor") : Color("captionColor"))
-                                    })
+                    ScrollViewReader { scrollView in
+                        ScrollView(.vertical, showsIndicators: false) {
+                            VStack {
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .frame(height: 48)
+                                VStack(alignment: .center, spacing: 24) {
+                                    ForEach(sortedSeasons, id: \.self) { season in
+                                        Button(action: {
+                                            currentSeason = season
+                                            presentationMode.wrappedValue.dismiss()
+                                        }, label: {
+                                            Text("Season \(season.number)")
+                                                .font(season.number == currentSeason.number ? .title2 : .title3)
+                                                .fontWeight(season.number == currentSeason.number ? .bold : .regular)
+                                                .foregroundColor(season.number == currentSeason.number ? Color("titleColor") : Color("captionColor"))
+                                        })
+                                        .id(season.number)
+                                        .frame(minWidth: geometry.size.width)
+                                    }
                                 }
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .frame(height: 48)
                             }
-                            Rectangle()
-                                .fill(Color.clear)
-                                .frame(height: 48)
-                        }.frame(minWidth: geometry.size.width, minHeight: geometry.size.height, alignment: .center)
+                            .frame(minWidth: geometry.size.width, minHeight: geometry.size.height, alignment: .center)
+                            .onAppear {
+                                scrollView.scrollTo(currentSeason.number, anchor: .center)
+                            }
+                        }
                     }
                 }
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 192)
