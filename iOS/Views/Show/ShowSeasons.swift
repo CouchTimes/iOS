@@ -41,8 +41,7 @@ struct ShowSeasons: View {
                         .foregroundColor(Color("textColor"))
                         .padding(.vertical, 8)
                         .padding(.horizontal, 12)
-                        .background(Color("cardBackground"))
-                        .cornerRadius(8)
+                        .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                     }
                 }
                 VStack {
@@ -87,13 +86,9 @@ struct ShowSeasons: View {
                         .background(Color("backgroundColor").edgesIgnoringSafeArea(.all))
                     }
                 }
-            }
-            .halfSheet(isPresented: $seasonSheet) {
+            }.fullScreenCover(isPresented: $seasonSheet) {
                 ShowSeasonsPicker(seasons: orderedSeasons!, currentSeason: $currentSeason)
-            } onEnd: {
-                print(seasonSheet)
-                print("Test")
-        }
+            }
     }
 }
 
