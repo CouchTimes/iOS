@@ -24,7 +24,12 @@ struct ShowSeasons: View {
         if let nextEpisode = show.nextEpisode, let seasonOfNextEpisode = nextEpisode.season {
             self._currentSeason = State(initialValue: seasonOfNextEpisode)
         } else {
-            self._currentSeason = State(initialValue: Season())
+            if let season = show.getSingleSeason(1) {
+                self._currentSeason = State(initialValue: season)
+            } else {
+                self.seasonCount = 0
+                self._currentSeason = State(initialValue: Season())
+            }
         }
     }
 

@@ -51,7 +51,7 @@ struct ShowSeasonsPicker: View {
                             }
                             .frame(minWidth: geometry.size.width, minHeight: geometry.size.height, alignment: .center)
                             .onAppear {
-                                scrollView.scrollTo(currentSeason.number, anchor: .center)
+//                                scrollView.scrollTo(currentSeason.number, anchor: .center)
                             }
                         }
                     }
