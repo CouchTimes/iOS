@@ -69,7 +69,8 @@ struct Library: View {
                                    iconName: "star.fill")
                     }
                 }
-                FloatingSegmentedControl(pickerLabel: "What filter do you want to apply to the library?", pickerItems: ["All", "Favorites"], pickerSelection: $libraryViewState)
+                CustomSegmentedControl(selection: $libraryViewState, size: CGSize(width: UIScreen.main.bounds.width, height: 44), segmentLabels: ["All", "Favorites"])
+                    .padding(.bottom, 16)
             }
             .navigationBarTitle("Library")
             .searchable(text: $searchText, placement: .automatic, prompt: "Search")

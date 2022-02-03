@@ -98,7 +98,8 @@ struct ShowDetailsView: View {
                         }
                     }
                 }
-                FloatingSegmentedControl(pickerLabel: "What filter do you want to apply to the library?", pickerItems: ["Seasons", "Details"], pickerSelection: $viewMode)
+                CustomSegmentedControl(selection: $viewMode, size: CGSize(width: (UIScreen.main.bounds.width - 32), height: 44), segmentLabels: ["Seasons", "Details"])
+                    .padding(.bottom, 16)
             } else {
                 EmptyView()
             }
