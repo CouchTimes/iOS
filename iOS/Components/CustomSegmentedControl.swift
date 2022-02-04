@@ -24,13 +24,13 @@ struct CustomSegmentedControl: View {
             
             RoundedRectangle(cornerRadius: 100)
                 .frame(width: segmentWidth(size) - (segmentPadding * 2), height: size.height - (segmentPadding * 2))
-                .foregroundColor(Color(uiColor: UIColor(red: 0.388, green: 0.388, blue: 0.4, alpha: 1)))
+                .foregroundColor(Color("tintColor"))
                 .offset(x: calculateSegmentOffset(size) + segmentPadding)
-                .animation(.easeOut(duration: 0.4), value: calculateSegmentOffset(size) + segmentPadding)
+                .animation(.easeOut(duration: 0.2), value: calculateSegmentOffset(size) + segmentPadding)
             
             HStack(spacing: 0) {
                 ForEach(0..<segmentLabels.count) { idx in
-                    SegmentLabel(selection: $selection, id: idx, title: segmentLabels[idx], width: segmentWidth(size), textColour: Color("titleColor"))
+                    SegmentLabel(selection: $selection, id: idx, title: segmentLabels[idx], width: segmentWidth(size), textColor: Color.white)
                 }
             }
         }
@@ -60,7 +60,7 @@ struct SegmentLabel: View {
     let id: Int
     let title: String
     let width: CGFloat
-    let textColour: Color
+    let textColor: Color
     
     var body: some View {
         Button(action: {
@@ -71,7 +71,7 @@ struct SegmentLabel: View {
                 .fontWeight(.medium)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: false)
-                .foregroundColor(textColour)
+                .foregroundColor(selection == id ? textColor : Color("captionColor"))
                 .frame(width: width)
                 .contentShape(Rectangle())
         })
