@@ -55,37 +55,48 @@ struct ShowSeasons: View {
             VStack {
                 if (episodes != nil) {
                     LazyVStack(alignment: .leading) {
-                        ForEach(episodes!, id: \.self) { episode in
-                            HStack(alignment: .center, spacing: 16) {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("\(episode.episodeNumber). \(episode.title)")
-                                        .font(.headline)
-                                        .foregroundColor(Color("titleColor"))
-                                    ItemCaption(text: "\(episode.wrappedFirstAirDate)")
-                                }
-                                Spacer()
-                                Button(action: {
-                                    episode.toggleWatchedStatus()
-                                    show.objectWillChange.send()
-                                    WidgetCenter.shared.reloadAllTimelines()
-                                }) {
-                                    if episode.watched {
-                                        Image(systemName: "checkmark")
-                                            .frame(width: 32, height: 32, alignment: .center)
-                                            .font(Font.system(size: 16, weight: .bold))
-                                            .foregroundColor(Color.white)
-                                            .background (RoundedRectangle(cornerRadius: 8).fill(Color("tintColor")))
-                                    } else {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .strokeBorder(Color("borderColor"), lineWidth: 2)
-                                            .frame(width: 32, height: 32, alignment: .center)
-                                            .opacity(episode.watchable ? 1.0 : 0.4)
+                        if episodes!.count > 0 {
+                            ForEach(episodes!, id: \.self) { episode in
+                                HStack(alignment: .center, spacing: 16) {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("\(episode.episodeNumber). \(episode.title)")
+                                            .font(.headline)
+                                            .foregroundColor(Color("titleColor"))
+                                        ItemCaption(text: "\(episode.wrappedFirstAirDate)")
                                     }
+                                    Spacer()
+                                    Button(action: {
+                                        episode.toggleWatchedStatus()
+                                        show.objectWillChange.send()
+                                        WidgetCenter.shared.reloadAllTimelines()
+                                    }) {
+                                        if episode.watched {
+                                            Image(systemName: "checkmark")
+                                                .frame(width: 32, height: 32, alignment: .center)
+                                                .font(Font.system(size: 16, weight: .bold))
+                                                .foregroundColor(Color.white)
+                                                .background (RoundedRectangle(cornerRadius: 8).fill(Color("tintColor")))
+                                        } else {
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .strokeBorder(Color("borderColor"), lineWidth: 2)
+                                                .frame(width: 32, height: 32, alignment: .center)
+                                                .opacity(episode.watchable ? 1.0 : 0.4)
+                                        }
+                                    }
+                                    .frame(width: 44, height: 44, alignment: .center)
+                                    .disabled(episode.watchable ? false : true)
                                 }
-                                .frame(width: 44, height: 44, alignment: .center)
-                                .disabled(episode.watchable ? false : true)
+                                .padding(.vertical, 4)
                             }
-                            .padding(.vertical, 4)
+                        } else {
+                            HStack {
+                                Spacer()
+                                Text("No episodes announced yet")
+                                Spacer()
+                            }
+                            .padding()
+                            .cornerRadius(4)
+                            .background(Color("cardBackground"))
                         }
                     }
                     .background(Color("backgroundColor").edgesIgnoringSafeArea(.all))

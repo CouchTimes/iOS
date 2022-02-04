@@ -41,19 +41,19 @@ extension SearchRecommendationListItem {
         case .topRated:
             return Color("titleColor")
         case .netflix:
-            return Color("titleColor")
+            return Color.white
         case .apple:
             return Color("backgroundColor")
         case .hbo:
-            return Color("titleColor")
+            return Color.white
         case .disney:
-            return Color("titleColor")
+            return Color.white
         case .amazon:
-            return Color("titleColor")
+            return Color.white
         case .hulu:
-            return Color("backgroundColor")
+            return Color.black
         case .showtime:
-            return Color("titleColor")
+            return Color.white
         case .syfy:
             return Color("titleColor")
         }
