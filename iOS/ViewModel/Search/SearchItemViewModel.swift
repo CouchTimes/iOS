@@ -23,6 +23,7 @@ class SearchItemViewModel: ObservableObject {
         self.savedShowIds = savedShowIds
 
         alreadySaved()
+        getFullShowData()
     }
 }
 
@@ -79,6 +80,10 @@ extension SearchItemViewModel {
             switch result {
             case let .success(coreDataShow):
                 completion(.success(coreDataShow))
+                print(coreDataShow)
+                coreDataShow.seasons?.forEach { season in
+                    print(season)
+                }
                 print("Successfully saved!")
             case let .failure(error):
                 print("Error while saving")

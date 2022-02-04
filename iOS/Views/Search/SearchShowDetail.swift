@@ -16,7 +16,6 @@ struct SearchShowDetail: View {
 
     init(show: ShowDetailsResponse, savedShowIds: [Int]) {
         searchItemViewModel = SearchItemViewModel(show: show, savedShowIds: savedShowIds)
-        searchItemViewModel.getFullShowData()
     }
 
     var body: some View {

@@ -19,14 +19,6 @@ class SearchViewModel: ObservableObject {
     @Published var savedShows = [Int]()
     @Published var searchedShows = [ShowDetailsResponse]()
 
-    @Published var popularShows = [ShowDetailsResponse]()
-    @Published var topRatedShows = [ShowDetailsResponse]()
-    @Published var netflixShows = [ShowDetailsResponse]()
-    @Published var appleShows = [ShowDetailsResponse]()
-    @Published var disneyShows = [ShowDetailsResponse]()
-    @Published var amazonShows = [ShowDetailsResponse]()
-    @Published var hboShows = [ShowDetailsResponse]()
-
     init() {
         let moc = StorageProvider.shared.persistentContainer.viewContext
 
@@ -39,22 +31,40 @@ class SearchViewModel: ObservableObject {
             }
         cancellables.append(cancellable)
     }
-
-    func getInitialData() {
-        getPopularShows()
-        getRecommendedShows()
-        getNetflixSuggestions()
-        getAppleSuggestions()
-        getDisneySuggestions()
-        getAmazonSuggestions()
-        getHBOSuggestions()
+    
+    func getSearchRecommendations(type: SearchRecommendationType) {
+        self.isLoading = true
+        
+        switch type {
+        case .popular:
+            self.getPopularShows()
+        case .topRated:
+            self.getRecommendedShows()
+        case .netflix:
+            self.getNetflixSuggestions()
+        case .apple:
+            self.getAppleSuggestions()
+        case .hbo:
+            self.getHBOSuggestions()
+        case .disney:
+            self.getDisneySuggestions()
+        case .amazon:
+            self.getAmazonSuggestions()
+        case .hulu:
+            self.getHuluSuggestions()
+        case .showtime:
+            self.getShowtimeSuggestions()
+        case .syfy:
+            self.getSyfySuggestions()
+        }
     }
 
     private func getPopularShows() {
         NetworkService.shared.getPopularShows { result in
             switch result {
             case let .success(shows):
-                self.popularShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
             case let .failure(error):
                 print(error)
             }
@@ -65,7 +75,8 @@ class SearchViewModel: ObservableObject {
         NetworkService.shared.getTopRatedShows { result in
             switch result {
             case let .success(shows):
-                self.topRatedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
             case let .failure(error):
                 print(error)
             }
@@ -76,7 +87,8 @@ class SearchViewModel: ObservableObject {
         NetworkService.shared.getNetworkRecommendation(networkId: "213") { result in
             switch result {
             case let .success(shows):
-                self.netflixShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
             case let .failure(error):
                 print(error)
             }
@@ -87,7 +99,8 @@ class SearchViewModel: ObservableObject {
         NetworkService.shared.getNetworkRecommendation(networkId: "2552") { result in
             switch result {
             case let .success(shows):
-                self.appleShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
             case let .failure(error):
                 print(error)
             }
@@ -98,7 +111,8 @@ class SearchViewModel: ObservableObject {
         NetworkService.shared.getNetworkRecommendation(networkId: "2739") { result in
             switch result {
             case let .success(shows):
-                self.disneyShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
             case let .failure(error):
                 print(error)
             }
@@ -109,7 +123,8 @@ class SearchViewModel: ObservableObject {
         NetworkService.shared.getNetworkRecommendation(networkId: "1024") { result in
             switch result {
             case let .success(shows):
-                self.amazonShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
             case let .failure(error):
                 print(error)
             }
@@ -120,7 +135,44 @@ class SearchViewModel: ObservableObject {
         NetworkService.shared.getNetworkRecommendation(networkId: "49") { result in
             switch result {
             case let .success(shows):
-                self.hboShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    private func getHuluSuggestions() {
+        NetworkService.shared.getNetworkRecommendation(networkId: "453") { result in
+            switch result {
+            case let .success(shows):
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    private func getShowtimeSuggestions() {
+        NetworkService.shared.getNetworkRecommendation(networkId: "67") { result in
+            switch result {
+            case let .success(shows):
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    private func getSyfySuggestions() {
+        NetworkService.shared.getNetworkRecommendation(networkId: "77") { result in
+            switch result {
+            case let .success(shows):
+                self.searchedShows = shows.sorted(by: { $0.popularity > $1.popularity })
+                self.isLoading = false
             case let .failure(error):
                 print(error)
             }
@@ -141,9 +193,17 @@ class SearchViewModel: ObservableObject {
     }
 }
 
-enum ShowListType {
+enum SearchRecommendationType {
     case popular
-    case search
+    case topRated
+    case netflix
+    case apple
+    case hbo
+    case disney
+    case amazon
+    case hulu
+    case showtime
+    case syfy
 }
 
 extension SearchViewModel {

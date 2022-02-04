@@ -19,6 +19,7 @@ struct WatchlistCell: View {
                     WatchlistCover(cover: show.poster)
                     VStack(alignment: .leading, spacing: 4) {
                         ItemTitle(text: show.title)
+                            .foregroundColor(Color("titleColor"))
                             .lineLimit(2)
                             .truncationMode(.tail)
                         Caption(text: show.nextEpisodeToWatch)

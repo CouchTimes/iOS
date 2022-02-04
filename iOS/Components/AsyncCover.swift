@@ -27,13 +27,16 @@ struct AsyncCover: View {
     }
     
     var body: some View {
-        AsyncImage(url: imageURL) { phase in
-            if let image = phase.image {
-                image.resizable()
-            } else if phase.error != nil {
-                Color.red
-            } else {
-                ProgressView()
+        ZStack {
+            AsyncImage(url: imageURL) { phase in
+                if let image = phase.image {
+                    image.resizable()
+                } else if phase.error != nil {
+                    Text("The reason for the error : \(phase.error!.localizedDescription)")
+                                         .foregroundColor(.red)
+                } else {
+                    ProgressView()
+                }
             }
         }
     }

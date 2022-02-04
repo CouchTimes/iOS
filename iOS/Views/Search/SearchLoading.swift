@@ -19,9 +19,3 @@ struct SearchLoading: View {
         }
     }
 }
-
-struct SearchLoading_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchLoading()
-    }
-}

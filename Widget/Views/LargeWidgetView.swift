@@ -22,6 +22,7 @@ struct LargeWidgetView: View {
                         .cornerRadius(4)
                     VStack(alignment: .leading, spacing: 10) {
                         ItemTitle(text: show.title)
+                            .foregroundColor(Color("titleColor"))
                             .lineLimit(2)
                             .truncationMode(.tail)
                         Caption(text: show.nextEpisodeToWatch)

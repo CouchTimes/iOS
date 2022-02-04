@@ -27,6 +27,7 @@ struct SearchResultItem: View {
                     .cornerRadius(6)
                 VStack(alignment: .leading, spacing: 2.0) {
                     ItemTitle(text: title)
+                        .foregroundColor(Color("titleColor"))
                         .lineLimit(2)
                     ItemCaption(text: searchItemViewModel.show.wrappedYearString)
                 }

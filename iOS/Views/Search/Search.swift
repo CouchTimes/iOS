@@ -21,10 +21,6 @@ struct Search: View {
         .onSubmit(of: .search) {
             self.viewModel.isLoading = true
             self.viewModel.searchShowByName(query)
-        }
-        .onAppear {
-            viewModel.getInitialData()
-        }
-        .environmentObject(viewModel)
+        }.environmentObject(viewModel)
     }
 }
