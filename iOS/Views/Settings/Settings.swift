@@ -129,6 +129,7 @@ struct Settings: View {
             }, label: {
                 Text("Done")
                     .fontWeight(.medium)
+                    .foregroundColor(Color("captionColor"))
             }))
         }
         .onAppear {

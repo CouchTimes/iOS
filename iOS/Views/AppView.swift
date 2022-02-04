@@ -16,6 +16,11 @@ struct AppView: View {
     @AppStorage("showOnboarding") var showOnboarding: Bool = true
     @AppStorage("selectedAppearanceMode", store: UserDefaults(suiteName: "group.com.fruechtl.couchtimes")) var selectedAppearanceMode: Themes = .System
     
+    init(storageProvider: StorageProvider) {
+        self.storageProvider = storageProvider
+        UINavigationBar.appearance().tintColor = UIColor(Color("titleColor"))
+    }
+    
     var body: some View {
         TabView {
             Watchlist()
